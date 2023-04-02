@@ -25,12 +25,7 @@ bindkey '^ ' autosuggest-accept
 
 export PATH="$HOME/.local/bin":$PATH
 
-export FZF_DEFAULT_COMMAND='rg --hidden --no-ignore ""'
-# fzf's command
-# CTRL-T's command
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-# ALT-C's command
-export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND --type d"
+export FZF_ALT_C_COMMAND='find -type d -not \( -path "./.cache*" -prune \)'
 
 
 

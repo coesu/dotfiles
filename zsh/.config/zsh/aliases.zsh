@@ -29,6 +29,9 @@ alias cp="cp -i"
 alias mv='mv -i'
 alias rm='rm -i'
 
+alias :q="exit"
+alias :wq="exit"
+
 from_config_to_dotfiles() {
     mkdir -p $HOME/dotfiles/$1/.config/$1
     cp -r $HOME/.config/$1 $HOME/dotfiles/$1/.config
