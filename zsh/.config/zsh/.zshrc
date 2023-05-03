@@ -28,11 +28,9 @@ export PATH="$HOME/.local/bin":$PATH
 export FZF_ALT_C_COMMAND='find -type d -not \( -path "./.cache*" -prune \)'
 
 
-
 if command -v bat &> /dev/null; then
   alias cat="bat -pp --theme \"Visual Studio Dark+\"" 
   alias catt="bat --theme \"Visual Studio Dark+\"" 
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-

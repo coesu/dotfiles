@@ -15,12 +15,13 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
     {
-        'nvim-telescope/telescope.nvim', tag = '0.1.0',
+        'nvim-telescope/telescope.nvim',
+        tag = '0.1.0',
         -- or                            , branch = '0.1.x',
         dependencies = { { 'nvim-lua/plenary.nvim' } }
     },
     'folke/tokyonight.nvim',
-    { "nvim-treesitter/nvim-treesitter", lazy = false,}, --, build = ":TSUpdate"},
+    { "nvim-treesitter/nvim-treesitter", lazy = false, }, --, build = ":TSUpdate"},
     'theprimeagen/harpoon',
     'mbbill/undotree',
     'tpope/vim-fugitive',
@@ -51,7 +52,11 @@ local plugins = {
     'christoomey/vim-tmux-navigator',
     "nvim-lualine/lualine.nvim",
     "terrortylor/nvim-comment",
-    "folke/zen-mode.nvim"
+    "folke/zen-mode.nvim",
+    "ggandor/leap.nvim",
+    "ggandor/flit.nvim",
+    -- "willothy/nvim-cokeline"
+    "akinsho/bufferline.nvim"
 }
 
 local opts = {}

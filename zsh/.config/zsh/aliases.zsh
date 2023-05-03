@@ -2,7 +2,6 @@
 alias j='z'
 alias f='zi'
 alias zsh-update-plugins="find "$ZDOTDIR/plugins" -type d -exec test -e '{}/.git' ';' -print0 | xargs -I {} -0 git -C {} pull -q"
-alias nn='nvim ~/.config/nvim/'
 
 # alias lvim='nvim -u ~/.local/share/lunarvim/lvim/init.lua --cmd "set runtimepath+=~/.local/share/lunarvim/lvim"'
 
@@ -20,14 +19,20 @@ alias fgrep='fgrep --color=auto'
 alias nh='nvim ~/.config/hypr/hyprland.conf'
 alias nz='nvim ~/.config/zsh/.zshrc'
 alias na='nvim ~/.config/zsh/aliases.zsh'
+alias nt='$EDITOR ~/dotfiles/tmux/.config/tmux/tmux.conf'
+alias nn='nvim ~/dotfiles/nvim/.config/nvim/'
+alias nf='$EDITOR ~/dotfiles/foot/.config/foot/foot.ini'
 
 alias update='sudo pacman -Syyu'
 alias pacman='sudo pacman'
 
+alias vim='nvim'
+alias vi='nvim'
+
 # confirm before overwriting something
-alias cp="cp -i"
-alias mv='mv -i'
-alias rm='rm -i'
+alias cp="cp -iv"
+alias mv='mv -iv'
+alias rm='rm -iv'
 
 alias :q="exit"
 alias :wq="exit"

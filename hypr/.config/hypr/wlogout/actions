@@ -32,8 +32,8 @@ elif [[ "$1" == '--suspend' ]]; then
   if [[ "$?" == 0 ]]; then
     # mpc -q pause
     pamixer -m
-    ~/.config/hypr/scripts/lockscreen
     systemctl suspend
+    ~/.config/hypr/scripts/lockscreen
     else
     exit
     fi
