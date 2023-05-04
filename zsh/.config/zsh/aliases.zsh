@@ -36,6 +36,8 @@ alias rm='rm -iv'
 
 alias :q="exit"
 alias :wq="exit"
+alias cd..="cd .."
+alias cd.="cd .."
 
 from_config_to_dotfiles() {
     mkdir -p $HOME/dotfiles/$1/.config/$1
