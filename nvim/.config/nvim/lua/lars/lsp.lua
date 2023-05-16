@@ -33,6 +33,11 @@ cmp.setup({
     },
 })
 
+vim.diagnostic.config({
+    virtual_text = false,
+    signs = false,
+    underline = false
+})
 
 -- local lsp = require('lsp-zero').preset({
 --   name = 'recommended',

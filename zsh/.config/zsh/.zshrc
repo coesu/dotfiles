@@ -34,3 +34,4 @@ if command -v bat &> /dev/null; then
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# neofetch

@@ -15,6 +15,26 @@ return
       ),
       {condition = line_begin}
     ),
+    -- PLTSHOW
+    s({trig="plts", snippetType="autosnippet"},
+      fmta(
+        [[plt.show()<>]],
+        {
+          d(1, get_visual),
+        }
+      ),
+      {condition = line_begin}
+    ),
+    -- PLTPLOT
+    s({trig="pltp", snippetType="autosnippet"},
+      fmta(
+        [[plt.plot(<>)]],
+        {
+          d(1, get_visual),
+        }
+      ),
+      {condition = line_begin}
+    ),
     -- AXIS PLOT
     s({trig="xp", snippetType="autosnippet"},
       fmta(
