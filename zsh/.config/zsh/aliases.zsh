@@ -20,8 +20,12 @@ alias nh='nvim ~/.config/hypr/hyprland.conf'
 alias nz='nvim ~/.config/zsh/.zshrc'
 alias na='nvim ~/.config/zsh/aliases.zsh'
 alias nt='$EDITOR ~/dotfiles/tmux/.config/tmux/tmux.conf'
-alias nn='nvim ~/dotfiles/nvim/.config/nvim/'
-alias nf='$EDITOR ~/dotfiles/foot/.config/foot/foot.ini'
+# alias nn='nvim ~/dotfiles/nvim/.config/nvim/'
+
+nn() {
+    cd ~/dotfiles/nvim/.config/nvim
+    nvim .
+}
 
 alias update='sudo pacman -Syyu'
 alias pacman='sudo pacman'
@@ -38,6 +42,8 @@ alias :q="exit"
 alias :wq="exit"
 alias cd..="cd .."
 alias cd.="cd .."
+
+alias za="zathura"
 
 from_config_to_dotfiles() {
     mkdir -p $HOME/dotfiles/$1/.config/$1

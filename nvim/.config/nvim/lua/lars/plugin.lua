@@ -27,11 +27,15 @@ local plugins = {
     'tpope/vim-fugitive',
     {
         'VonHeikemen/lsp-zero.nvim',
-        branch = 'v1.x',
+        branch = 'v2.x',
         dependencies = {
             -- LSP Support
             { 'neovim/nvim-lspconfig' },
-            { 'williamboman/mason.nvim' },
+            { 'williamboman/mason.nvim',
+                build = function()
+                    pcall(vim.cmd, 'MasonUpdate')
+                end,
+            },
             { 'williamboman/mason-lspconfig.nvim' },
 
             -- Autocompletion
@@ -41,11 +45,13 @@ local plugins = {
             { 'saadparwaiz1/cmp_luasnip' },
             { 'hrsh7th/cmp-nvim-lsp' },
             { 'hrsh7th/cmp-nvim-lua' },
+            { 'hrsh7th/cmp-omni'},
 
             -- Snippets
             { 'L3MON4D3/LuaSnip' },
             { 'rafamadriz/friendly-snippets' },
         }
+        
     },
     'lervag/vimtex',
     'windwp/nvim-autopairs',
@@ -55,8 +61,8 @@ local plugins = {
     "folke/zen-mode.nvim",
     "ggandor/leap.nvim",
     "ggandor/flit.nvim",
-    -- "willothy/nvim-cokeline"
-    "akinsho/bufferline.nvim"
+    "akinsho/bufferline.nvim",
+    "alec-gibson/nvim-tetris",
 }
 
 local opts = {}
