@@ -10,7 +10,7 @@ export MANPAGER='nvim +Man!'
 export MANWIDTH=999
 export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$HOME/.local/share/go/bin:$PATH
-export XDG_CURRENT_DESKTOP="Wayland"
+# export XDG_CURRENT_DESKTOP="Wayland"
 #export PATH="$PATH:./node_modules/.bin"
 eval "$(zoxide init zsh)"
 # eval "`pip completion --zsh`"
