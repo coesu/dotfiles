@@ -173,10 +173,10 @@ return
     ),
     {condition = tex.in_mathzone}
   ),
-  -- UNIT VECTOR WITH HAT, i.e. \uvec{}
+  -- VECTOR WITH HAT, i.e. \uvec{}
   s({trig = "([^%a])uv", wordTrig = false, regTrig = true, snippetType="autosnippet"},
     fmta(
-      "<>\\uvec{<>}",
+      "<>\\hat{\\vec{<>}}",
       {
         f( function(_, snip) return snip.captures[1] end ),
         d(1, get_visual),
