@@ -24,7 +24,6 @@ local plugins = {
     { "nvim-treesitter/nvim-treesitter", lazy = false, }, --, build = ":TSUpdate"},
     'theprimeagen/harpoon',
     'mbbill/undotree',
-    'tpope/vim-fugitive',
     {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v2.x',
