@@ -59,10 +59,10 @@ local plugins = {
     "nvim-lualine/lualine.nvim",
     "terrortylor/nvim-comment",
     "folke/zen-mode.nvim",
-    "ggandor/leap.nvim",
-    "ggandor/flit.nvim",
+    -- "ggandor/leap.nvim",
+    -- "ggandor/flit.nvim",
     "akinsho/bufferline.nvim",
-    "alec-gibson/nvim-tetris",
+    "CRAG666/code_runner.nvim",
 }
 
 local opts = {}
