@@ -62,7 +62,7 @@ local plugins = {
     -- "ggandor/leap.nvim",
     -- "ggandor/flit.nvim",
     "akinsho/bufferline.nvim",
-    "CRAG666/code_runner.nvim",
+    "kdheepak/lazygit.nvim",
 }
 
 local opts = {}
