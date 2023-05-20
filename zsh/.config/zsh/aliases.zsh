@@ -24,7 +24,7 @@ alias nt='$EDITOR ~/dotfiles/tmux/.config/tmux/tmux.conf'
 
 nn() {
     cd ~/dotfiles/nvim/.config/nvim
-    nvim .
+    nvim
 }
 
 alias update='sudo pacman -Syyu'

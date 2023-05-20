@@ -30,7 +30,8 @@ local plugins = {
         dependencies = {
             -- LSP Support
             { 'neovim/nvim-lspconfig' },
-            { 'williamboman/mason.nvim',
+            {
+                'williamboman/mason.nvim',
                 build = function()
                     pcall(vim.cmd, 'MasonUpdate')
                 end,
@@ -44,13 +45,13 @@ local plugins = {
             { 'saadparwaiz1/cmp_luasnip' },
             { 'hrsh7th/cmp-nvim-lsp' },
             { 'hrsh7th/cmp-nvim-lua' },
-            { 'hrsh7th/cmp-omni'},
+            { 'hrsh7th/cmp-omni' },
 
             -- Snippets
             { 'L3MON4D3/LuaSnip' },
             { 'rafamadriz/friendly-snippets' },
         }
-        
+
     },
     'lervag/vimtex',
     'windwp/nvim-autopairs',
@@ -58,11 +59,25 @@ local plugins = {
     "nvim-lualine/lualine.nvim",
     "terrortylor/nvim-comment",
     "folke/zen-mode.nvim",
-    -- "ggandor/leap.nvim",
-    -- "ggandor/flit.nvim",
     "akinsho/bufferline.nvim",
     "kdheepak/lazygit.nvim",
+    {
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v2.x",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+            "MunifTanjim/nui.nvim",
+        },
+    },
+    {
+        "goolord/alpha-nvim",
+        config = function()
+            require('alpha').setup(require 'alpha.themes.startify'.config)
+        end
+    },
 }
+
 
 local opts = {}
 
