@@ -16,4 +16,15 @@ return
         }
       )
     ),
+    -- NP.LINSPACE
+    s({trig="nlp", snippetType="autosnippet"},
+      fmta(
+        [[
+          np.linspace(<>)
+        ]],
+        {
+          d(1, get_visual),
+        }
+      )
+    ),
   }

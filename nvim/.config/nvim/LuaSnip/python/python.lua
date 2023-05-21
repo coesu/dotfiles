@@ -121,4 +121,16 @@ return
     s({trig = ";S", snippetType = "autosnippet"},
       { t("self") }
     ),
+
+    -- IMPORTS
+    s({trig = "impn", snippetType = "autosnippet"},
+      { t("import numpy as np") }
+    ),
+    s({trig = "impm", snippetType = "autosnippet"},
+      { t("import matplotlib.pyplot as plt") }
+    ),
+    s({trig = "imps", snippetType = "autosnippet"},
+      { t("import scipy as sc") }
+    ),
+
   }
