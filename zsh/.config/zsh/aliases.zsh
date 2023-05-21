@@ -20,7 +20,7 @@ alias nh='nvim ~/.config/hypr/hyprland.conf'
 alias nz='nvim ~/.config/zsh/.zshrc'
 alias na='nvim ~/.config/zsh/aliases.zsh'
 alias nt='$EDITOR ~/dotfiles/tmux/.config/tmux/tmux.conf'
-# alias nn='nvim ~/dotfiles/nvim/.config/nvim/'
+alias ns='$EDITOR ~/dotfiles/sway/.config/sway/config'
 
 nn() {
     cd ~/dotfiles/nvim/.config/nvim
