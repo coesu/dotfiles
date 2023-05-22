@@ -5,7 +5,7 @@
     // "width": 1280, // Waybar width
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces", "pulseaudio", "backlight", "network", "custom/updates"],
+    "modules-left": ["wlr/workspaces", "pulseaudio", "backlight", "network", "custom/updates"],
     "modules-center": ["hyprland/window"],
     "modules-right": ["cpu", "memory", "temperature", "battery", "tray", "clock"],
     // Modules configuration
