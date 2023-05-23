@@ -5,7 +5,7 @@
 THEME='Arc-Dark'
 ICONS='arc-icon-theme'
 FONT='Noto Sans 11'
-CURSOR='Bibata-Modern-Ice'
+# CURSOR='Bibata-Modern-Ice'
 
 SCHEMA='gsettings set org.gnome.desktop.interface'
 

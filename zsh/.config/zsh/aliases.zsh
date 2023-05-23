@@ -21,10 +21,15 @@ alias nz='nvim ~/.config/zsh/.zshrc'
 alias na='nvim ~/.config/zsh/aliases.zsh'
 alias nt='$EDITOR ~/dotfiles/tmux/.config/tmux/tmux.conf'
 alias ns='$EDITOR ~/dotfiles/sway/.config/sway/config'
+alias nq='$EDITOR ~/dotfiles/qtile/.config/qtile/config.py'
 
 nn() {
     cd ~/dotfiles/nvim/.config/nvim
     nvim
+}
+
+scp_hpc() {
+    scp -r nv340616@login18-2.hpc.itc.rwth-aachen.de:/home/nv340616/tbg-30/scripts/TBG/$1 .
 }
 
 alias update='sudo pacman -Syyu'
