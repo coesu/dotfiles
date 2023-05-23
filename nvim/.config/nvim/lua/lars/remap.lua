@@ -78,3 +78,5 @@ vim.keymap.set("n", "<leader>gs", "<cmd>LazyGit<CR>", {silent = true})
 
 vim.keymap.set("n", "<leader>e", "<cmd>NeoTreeShowToggle<CR>", {silent = true})
 
+
+vim.keymap.set("n", "<leader>ru", "<cmd>!python %<CR>", {silent = true})
