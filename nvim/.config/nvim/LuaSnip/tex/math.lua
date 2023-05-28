@@ -184,6 +184,18 @@ return
     ),
     {condition = tex.in_mathzone}
   ),
+  -- MATRIX,
+  s({trig = "([^%a])ma", wordTrig = false, regTrig = true, snippetType="autosnippet"},
+    fmta(
+      "\\begin{<>matrix} <> \\end{<>matrix}",
+      {
+        i(1),
+        d(2, get_visual),
+        rep(1)
+      }
+    ),
+    {condition = tex.in_mathzone}
+  ),
   -- MATRIX, i.e. \vec
   s({trig = "([^%a])mt", wordTrig = false, regTrig = true, snippetType="autosnippet"},
     fmta(
