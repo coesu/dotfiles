@@ -2,8 +2,8 @@
 
 ## Set GTK Themes, Icons, Cursor and Fonts
 
-THEME='Arc-Dark'
-ICONS='arc-icon-theme'
+THEME='Dracula'
+ICONS='Dracula'
 FONT='Noto Sans 11'
 # CURSOR='Bibata-Modern-Ice'
 
