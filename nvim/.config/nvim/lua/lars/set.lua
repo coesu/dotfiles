@@ -32,4 +32,4 @@ vim.opt.textwidth=100
 
 vim.opt.spelllang="en"
 
-vim.api.nvim_set_option("clipboard", "unnamed")
+vim.api.nvim_set_option("clipboard", "unnamedplus")
