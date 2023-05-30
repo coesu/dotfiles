@@ -28,9 +28,13 @@ nn() {
     nvim
 }
 
+#rwth cluster
 scp_hpc() {
     scp -r nv340616@login18-2.hpc.itc.rwth-aachen.de:/home/nv340616/tbg-30/scripts/TBG/$1 .
 }
+alias sshfs_hpc='sshfs nv340616@login18-2.hpc.itc.rwth-aachen.de:/home/nv340616 hpc'
+
+
 
 alias update='sudo pacman -Syyu'
 alias pacman='sudo pacman'
@@ -82,4 +86,8 @@ bindkey -s ^a "nvims\n"
 # For when keys break
 alias archlinx-fix-keys="sudo pacman-key --init && sudo pacman-key --populate archlinux && sudo pacman-key --refresh-keys"
 
+# python envs
+#
+alias env-tbg="source ~/Nextcloud/uni/6.Semester/BA/tbg-30/.venv/bin/activate"
+alias env-ai="source ~/Nextcloud/Dateien/programming/fastai/.venv/bin/activate"
 
