@@ -74,9 +74,11 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 --     vim.cmd("so")
 -- end)
 --
-vim.keymap.set("n", "<leader>gs", "<cmd>LazyGit<CR>", {silent = true})
+-- vim.keymap.set("n", "<leader>gs", "<cmd>LazyGit<CR>", {silent = true})
 
 vim.keymap.set("n", "<leader>e", "<cmd>NeoTreeShowToggle<CR>", {silent = true})
 
 
 vim.keymap.set("n", "<leader>ru", "<cmd>!python %<CR>", {silent = true})
+
+vim.keymap.set("n", "<leader>g", "<cmd>ChatGPT<CR>", {silent = true})

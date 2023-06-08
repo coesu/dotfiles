@@ -1,0 +1,16 @@
+-- vim.g.vimwiki_global_ext = 0
+--
+-- print("test")
+-- vim.g.vimwiki_list = {
+--     {
+--         path   = '~/Nextcloud/',
+--         syntax = 'markdown',
+--         ext    = '.md',
+--     }
+-- }
+-- vim.g.vimwiki_ext2syntax = {
+--     ['.md'] = 'markdown',
+--     ['.markdown'] = 'markdown',
+--     ['.mdown'] = 'markdown',
+-- }
+--
