@@ -21,6 +21,8 @@ local plugins = {
         dependencies = { { 'nvim-lua/plenary.nvim' } }
     },
     'folke/tokyonight.nvim',
+    'rebelot/kanagawa.nvim',
+    { "catppuccin/nvim", name = "catppuccin" },
     { "nvim-treesitter/nvim-treesitter", lazy = false, }, --, build = ":TSUpdate"},
     'theprimeagen/harpoon',
     'mbbill/undotree',
@@ -60,7 +62,6 @@ local plugins = {
     "terrortylor/nvim-comment",
     "folke/zen-mode.nvim",
     "akinsho/bufferline.nvim",
-    "kdheepak/lazygit.nvim",
     {
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v2.x",
@@ -70,11 +71,47 @@ local plugins = {
             "MunifTanjim/nui.nvim",
         },
     },
+    -- {
+    --     "goolord/alpha-nvim",
+    --     config = function()
+    --         require('alpha').setup(require 'alpha.themes.startify'.config)
+    --     end
+    -- },
+    { 'luk400/vim-jukit',                lazy = true },
     {
-        "goolord/alpha-nvim",
-        config = function()
-            require('alpha').setup(require 'alpha.themes.startify'.config)
+        'vimwiki/vimwiki',
+        event = "BufEnter *.md",
+        init = function()
+            vim.g.vimwiki_global_ext = 0
+            vim.g.vimwiki_list = {
+                {
+                    path             = '~/Nextcloud/vimwiki',
+                    syntax           = 'markdown',
+                    ext              = '.md',
+                    auto_diary_index = 1,
+                }
+            }
+            vim.g.vimwiki_ext2syntax = {
+                ['.md'] = 'markdown',
+                ['.markdown'] = 'markdown',
+                ['.mdown'] = 'markdown',
+            }
+            vim.g.vimwiki_filetypes = { "md" }
         end
+    },
+    {
+        "jackMort/ChatGPT.nvim",
+        event = "VeryLazy",
+        config = function()
+            require("chatgpt").setup({
+                popup_input = { submit = "<Enter>"}
+            })
+        end,
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope.nvim"
+        }
     },
 }
 

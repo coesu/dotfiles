@@ -22,14 +22,14 @@ local cmp_select_opts = { behavior = cmp.SelectBehavior.Select }
 
 local cmp_mappings = lsp.defaults.cmp_mappings({
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    ['<C-p>'] = cmp.mapping(function()
+    ['<S-Tab>'] = cmp.mapping(function()
         if cmp.visible() then
             cmp.select_prev_item(cmp_select_opts)
         else
             cmp.complete()
         end
     end),
-    ['<C-n>'] = cmp.mapping(function()
+    ['<Tab>'] = cmp.mapping(function()
         if cmp.visible() then
             cmp.select_next_item(cmp_select_opts)
         else
@@ -38,8 +38,8 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
     end),
 })
 
-cmp_mappings['<Tab>'] = nil
-cmp_mappings['<S-Tab>'] = nil
+-- cmp_mappings['<Tab>'] = nil
+-- cmp_mappings['<S-Tab>'] = nil
 
 lsp.setup_nvim_cmp({
     mapping = cmp_mappings
