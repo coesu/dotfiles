@@ -96,10 +96,21 @@ return
     ),
     {condition = tex.in_mathzone}
   ),
+  -- DAGGER SUPERSCRIPT
+  s({trig = '([%a%)%]%}])dd', regTrig = true, wordTrig = false, snippetType="autosnippet"},
+    fmta(
+      "<>^{<>}",
+      {
+        f( function(_, snip) return snip.captures[1] end ),
+        t("\\dag")
+      }
+    ),
+    {condition = tex.in_mathzone}
+  ),
   -- MINUS ONE SUPERSCRIPT SHORTCUT
   s({trig = '([%a%)%]%}])11', regTrig = true, wordTrig = false, snippetType="autosnippet"},
     fmta(
-      "<>_{<>}",
+      "<>^{<>}",
       {
         f( function(_, snip) return snip.captures[1] end ),
         t("-1")
@@ -185,7 +196,7 @@ return
     {condition = tex.in_mathzone}
   ),
   -- MATRIX,
-  s({trig = "([^%a])ma", wordTrig = false, regTrig = true, snippetType="autosnippet"},
+  s({trig = "ma", wordTrig = false, regTrig = true},
     fmta(
       "\\begin{<>matrix} <> \\end{<>matrix}",
       {
@@ -443,6 +454,13 @@ return
   s({trig = "gdd", snippetType="autosnippet"},
     {
       t("\\grad "),
+    },
+    {condition = tex.in_mathzone}
+  ),
+  -- PRIME
+  s({trig = "pp", snippetType="autosnippet"},
+    {
+      t("^{\\prime}"),
     },
     {condition = tex.in_mathzone}
   ),

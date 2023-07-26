@@ -28,11 +28,16 @@ nn() {
     nvim
 }
 
+mvplots() {
+    mv -iv ~/Nextcloud/uni/6.Semester/BA/tbg-30/scripts/plot_scripts/plots/* ~/Nextcloud/uni/6.Semester/BA/thesis/plots/
+}
+
 #rwth cluster
 scp_hpc() {
     scp -r nv340616@login18-2.hpc.itc.rwth-aachen.de:/home/nv340616/tbg-30/scripts/TBG/$1 .
 }
 alias sshfs_hpc='sshfs nv340616@login18-2.hpc.itc.rwth-aachen.de:/home/nv340616 hpc'
+alias sshfs_hpc3='sshfs nv340616@login18-3.hpc.itc.rwth-aachen.de:/home/nv340616 hpc'
 
 
 
@@ -41,6 +46,7 @@ alias pacman='sudo pacman'
 
 alias vim='nvim'
 alias vi='nvim'
+alias hx='helix'
 
 # confirm before overwriting something
 alias cp="cp -iv"

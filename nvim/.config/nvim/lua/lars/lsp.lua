@@ -3,7 +3,7 @@ local lsp = require('lsp-zero')
 lsp.preset("recommended")
 
 lsp.ensure_installed({
-    'pyright',
+    -- 'pyright',
     'rust_analyzer'
 })
 
@@ -38,8 +38,8 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
     end),
 })
 
--- cmp_mappings['<Tab>'] = nil
--- cmp_mappings['<S-Tab>'] = nil
+cmp_mappings['<Tab>'] = nillsp
+cmp_mappings['<S-Tab>'] = nil
 
 lsp.setup_nvim_cmp({
     mapping = cmp_mappings
@@ -78,7 +78,7 @@ end)
 
 lsp.setup()
 vim.diagnostic.config({
-    virtual_text = false,
+    virtual_text = true,
     signs = false,
     underline = false
 })
