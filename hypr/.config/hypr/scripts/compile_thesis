@@ -1,0 +1,3 @@
+#!/bin/sh
+cd  ~/Nextcloud/uni/6.Semester/BA/thesis
+lualatex bachelor_thesis

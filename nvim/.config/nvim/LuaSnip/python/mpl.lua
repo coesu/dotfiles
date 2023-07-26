@@ -16,9 +16,19 @@ return
       {condition = line_begin}
     ),
     -- PLTSHOW
-    s({trig="plts", snippetType="autosnippet"},
+    s({trig="pltsh", snippetType="autosnippet"},
       fmta(
         [[plt.show()<>]],
+        {
+          d(1, get_visual),
+        }
+      ),
+      {condition = line_begin}
+    ),
+    -- PLTSAVEFIG
+    s({trig="pltsv", snippetType="autosnippet"},
+      fmta(
+        [[plt.savefig("<>.pdf", bbox_inches='tight')]],
         {
           d(1, get_visual),
         }

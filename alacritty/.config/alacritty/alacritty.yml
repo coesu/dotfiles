@@ -787,4 +787,4 @@ import:
 
 key_bindings:
   -  { key: F11, action: ToggleFullscreen }
-  # -  { key: N,              mods: Alt,                    action: SpawnNewInstance      }
+  -  { key: N,              mods: Alt,                    action: SpawnNewInstance      }

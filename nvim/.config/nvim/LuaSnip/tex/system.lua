@@ -23,8 +23,41 @@ return
         }
       )
     ),
+    -- CITATION
+    s({trig = "CC", snippetType="autosnippet", wordTrig=false},
+      fmta(
+        [[
+       \cite{<>}
+      ]],
+        {
+          d(1, get_visual),
+        }
+      )
+    ),
     -- REFERENCE
-    s({trig = " RR", snippetType="autosnippet", wordTrig=false},
+    s({trig = "RF", snippetType="autosnippet", wordTrig=false},
+      fmta(
+        [[
+       (Fig. \ref{<>})
+      ]],
+        {
+          d(1, get_visual),
+        }
+      )
+    ),
+    -- REFERENCE
+    s({trig = "RE", snippetType="autosnippet", wordTrig=false},
+      fmta(
+        [[
+      (Eq. \ref{<>})
+      ]],
+        {
+          d(1, get_visual),
+        }
+      )
+    ),
+    -- REFERENCE
+    s({trig = "RR", snippetType="autosnippet", wordTrig=false},
       fmta(
         [[
       ~\ref{<>}
@@ -115,6 +148,22 @@ return
     s({trig="sii", snippetType="autosnippet"},
       fmta(
         [[\si{<>}]],
+        {
+          i(1),
+        }
+      )
+    ),
+    s({trig="SIG"},
+      fmta(
+        [[\SI{<>}{GPa}]],
+        {
+          i(1),
+        }
+      )
+    ),
+    s({trig="SIV"},
+      fmta(
+        [[\SI{<>}{eV}]],
         {
           i(1),
         }

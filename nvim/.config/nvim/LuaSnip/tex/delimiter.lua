@@ -19,6 +19,17 @@ return
       }
     )
   ),
+  -- LEFT/RIGHT ANGLE
+  s({trig = "([^%a])l%<", regTrig = true, wordTrig = false, snippetType="autosnippet"},
+    fmta(
+      "<>\\left\\langle<>\\right\\rangle",
+      {
+        f( function(_, snip) return snip.captures[1] end ),
+        d(1, get_visual),
+      }
+    )
+  ),
+
   -- LEFT/RIGHT SQUARE BRACES
   s({trig = "([^%a])l%[", regTrig = true, wordTrig = false, snippetType="autosnippet"},
     fmta(

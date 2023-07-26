@@ -37,6 +37,47 @@ return {
   ),
 
   -- Figure environment
+  s({trig="fig", dscr="Use 'fig' for figure environmennt, with options"},
+    fmta(
+      [[
+        \begin{figure}[<>]
+          \centering
+          \includegraphics[width=<>\textwidth]{<>}
+          \caption{<>}
+          \label{fig:<>}
+        \end{figure}
+      ]],
+      { 
+        -- Optional [htbp] field
+        c(1, 
+            {
+              t([[]]),      -- Choice 1, empty
+              t("[htbp]"),  -- Choice 2, this may be turned into a snippet
+            },
+            {}
+          ),
+        -- Options for includegraphics
+        c(2, 
+            {
+              t([[]]), -- Choice 1, empty
+              sn(3,    -- Choice 2, this may be turned into a snippet
+                {
+                  t("[width="),
+                  i(1),
+                  t("\\textwidth]"),
+                }
+              ),
+            },
+            {}
+        ),
+        i(3, "filename"),
+        i(4, "text"), 
+        i(5, "label"), 
+      }
+    ),
+    {condition = line_begin}
+  ),
+  -- Figure environment
   s({trig="foofig", dscr="Use 'fig' for figure environmennt, with options"},
     fmta(
       [[

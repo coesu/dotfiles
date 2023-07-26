@@ -27,6 +27,21 @@ return
       ),
       {condition = line_begin}
     ),
+    -- FRAME
+    s({trig="nf", snippetType="autosnippet"},
+      fmta(
+        [[
+        \begin{frame}{<>}
+            <>
+        \end{frame}
+      ]],
+        {
+          i(1),
+          d(2, get_visual),
+        }
+      ),
+      { condition = line_begin }
+    ),
     -- ENVIRONMENT WITH ONE EXTRA ARGUMENT
     s({trig="n2", snippetType="autosnippet"},
       fmta(
