@@ -39,8 +39,6 @@ scp_hpc() {
 alias sshfs_hpc='sshfs nv340616@login18-2.hpc.itc.rwth-aachen.de:/home/nv340616 hpc'
 alias sshfs_hpc3='sshfs nv340616@login18-3.hpc.itc.rwth-aachen.de:/home/nv340616 hpc'
 
-
-
 alias update='sudo pacman -Syyu'
 alias pacman='sudo pacman'
 
@@ -59,6 +57,8 @@ alias cd..="cd .."
 alias cd.="cd .."
 
 alias za="zathura"
+
+alias ze="zellij"
 
 from_config_to_dotfiles() {
     mkdir -p $HOME/dotfiles/$1/.config/$1
