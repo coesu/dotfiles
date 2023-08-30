@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Define directories and files
+scriptsDir="$HOME/.config/hypr/scripts"
+lock="$scriptsDir/lockscreen"
+
+# Function to execute a command only once
+exec_once() {
+  pgrep -f "$1" >/dev/null || "$@"
+}
+
+# Autostart programs
+swayidle -w timeout 600 "$lock" timeout 1200 "hyprctl dispatch dpms off" resume "hyprctl dispatch dpm>" &
+swaybg -i "$HOME/Pictures/wallpapers/wallhaven-6kqk77.jpg" -m fill &
+exec_once udiskie &
+exec_once /usr/lib/polkit-kde-authentication-agent-1 &
+exec_once $scriptsDir/status &
+exec_once blueman-applet &
+exec_once nm-applet &
+exec_once mako &
+exec_once $scriptsDir/gtkthemes &
+exec_once nextcloud &
+
+# Exit
+exit 0
