@@ -61,7 +61,7 @@ local plugins = {
     "nvim-lualine/lualine.nvim",
     "terrortylor/nvim-comment",
     "folke/zen-mode.nvim",
-    "akinsho/bufferline.nvim",
+    -- "akinsho/bufferline.nvim",
     {
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v2.x",
