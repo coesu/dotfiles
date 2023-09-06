@@ -16,7 +16,10 @@ alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
-alias nh='nvim ~/.config/hypr/hyprland.conf'
+nh() {
+    cd ~/.config/hypr   
+    nvim hyprland.conf
+}
 alias nz='nvim ~/.config/zsh/.zshrc'
 alias na='nvim ~/.config/zsh/aliases.zsh'
 alias nt='$EDITOR ~/dotfiles/tmux/.config/tmux/tmux.conf'
