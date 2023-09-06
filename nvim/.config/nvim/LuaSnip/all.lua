@@ -8,6 +8,7 @@
 --   local non_letter = line_to_cursor:sub(-(#matched_trigger + 1), -(#matched_trigger + 1)):match('[ :`=%{%(%["]')
 --   return line_begin or non_letter
 -- end
+
 --
 -- return
 --   {

@@ -5,7 +5,8 @@ scriptsDir="$HOME/.config/hypr/scripts"
 lock="$scriptsDir/lockscreen"
 
 # Autostart programs
-swayidle -w timeout 600 "$lock" timeout 1200 "hyprctl dispatch dpms off" resume "hyprctl dispatch dpm>" &
+swayidle -w timeout 300 '$lock' &
+swayidle -w timeout 600 'systemctl suspend' &
 swaybg -i "$HOME/Pictures/wallpapers/wallhaven-6kqk77.jpg" -m fill &
 udiskie &
 /usr/lib/polkit-kde-authentication-agent-1 &
