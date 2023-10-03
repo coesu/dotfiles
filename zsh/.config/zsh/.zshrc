@@ -52,4 +52,3 @@ if [ -f "/home/lars/mambaforge/etc/profile.d/mamba.sh" ]; then
     . "/home/lars/mambaforge/etc/profile.d/mamba.sh"
 fi
 # <<< conda initialize <<<
-
