@@ -20,6 +20,7 @@ local plugins = {
         -- or                            , branch = '0.1.x',
         dependencies = { { 'nvim-lua/plenary.nvim' } }
     },
+    { "ellisonleao/gruvbox.nvim", priority = 1000 , config = true},
     'folke/tokyonight.nvim',
     'rebelot/kanagawa.nvim',
     { "catppuccin/nvim", name = "catppuccin" },
@@ -98,20 +99,6 @@ local plugins = {
             }
             vim.g.vimwiki_filetypes = { "md" }
         end
-    },
-    {
-        "jackMort/ChatGPT.nvim",
-        event = "VeryLazy",
-        config = function()
-            require("chatgpt").setup({
-                popup_input = { submit = "<Enter>"}
-            })
-        end,
-        dependencies = {
-            "MunifTanjim/nui.nvim",
-            "nvim-lua/plenary.nvim",
-            "nvim-telescope/telescope.nvim"
-        }
     },
 
     {

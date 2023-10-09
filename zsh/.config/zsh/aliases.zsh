@@ -5,12 +5,6 @@ alias zsh-update-plugins="find "$ZDOTDIR/plugins" -type d -exec test -e '{}/.git
 
 # alias lvim='nvim -u ~/.local/share/lunarvim/lvim/init.lua --cmd "set runtimepath+=~/.local/share/lunarvim/lvim"'
 
-# get fastest mirrors
-alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist"
-alias mirrord="sudo reflector --latest 50 --number 20 --sort delay --save /etc/pacman.d/mirrorlist"
-alias mirrors="sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist"
-alias mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pacman.d/mirrorlist"
-
 # Colorize grep output (good for log files)
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
@@ -22,28 +16,17 @@ nh() {
 }
 alias nz='nvim ~/.config/zsh/.zshrc'
 alias na='nvim ~/.config/zsh/aliases.zsh'
-alias nt='$EDITOR ~/dotfiles/tmux/.config/tmux/tmux.conf'
-alias ns='$EDITOR ~/dotfiles/sway/.config/sway/config'
-alias nq='$EDITOR ~/dotfiles/qtile/.config/qtile/config.py'
 
 nn() {
     cd ~/dotfiles/nvim/.config/nvim
     nvim
 }
-
-mvplots() {
-    mv -iv ~/Nextcloud/uni/6.Semester/BA/tbg-30/scripts/plot_scripts/plots/* ~/Nextcloud/uni/6.Semester/BA/thesis/plots/
-}
-
 #rwth cluster
 scp_hpc() {
     scp -r nv340616@login18-2.hpc.itc.rwth-aachen.de:/home/nv340616/tbg-30/scripts/TBG/$1 .
 }
 alias sshfs_hpc='sshfs nv340616@login18-2.hpc.itc.rwth-aachen.de:/home/nv340616 hpc'
 alias sshfs_hpc3='sshfs nv340616@login18-3.hpc.itc.rwth-aachen.de:/home/nv340616 hpc'
-
-alias update='sudo pacman -Syyu'
-alias pacman='sudo pacman'
 
 alias vim='nvim'
 alias vi='nvim'
@@ -68,35 +51,5 @@ from_config_to_dotfiles() {
     cp -r $HOME/.config/$1 $HOME/dotfiles/$1/.config
 }
 
-# easier to read disk
-alias df='df -h'     # human-readable sizes
-alias free='free -m' # show sizes in MB
-
-
-alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
-alias nvim-kick="NVIM_APPNAME=kickstart nvim"
-alias nvim-chad="NVIM_APPNAME=NvChad nvim"
-alias nvim-astro="NVIM_APPNAME=AstroNvim nvim"
-
-function nvims() {
-  items=("default" "kickstart" "LazyVim" "NvChad" "AstroNvim")
-  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
-  if [[ -z $config ]]; then
-    echo "Nothing selected"
-    return 0
-  elif [[ $config == "default" ]]; then
-    config=""
-  fi
-  NVIM_APPNAME=$config nvim $@
-}
-
-bindkey -s ^a "nvims\n"
-
-# For when keys break
-alias archlinx-fix-keys="sudo pacman-key --init && sudo pacman-key --populate archlinux && sudo pacman-key --refresh-keys"
-
-# python envs
-#
-alias env-tbg="source ~/Nextcloud/uni/6.Semester/BA/tbg-30/.venv/bin/activate"
-alias env-ai="source ~/Nextcloud/Dateien/programming/fastai/.venv/bin/activate"
+alias update="sudo nixos-rebuild switch"
 
