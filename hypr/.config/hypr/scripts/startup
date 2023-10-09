@@ -4,20 +4,14 @@
 scriptsDir="$HOME/.config/hypr/scripts"
 lock="$scriptsDir/lockscreen"
 
-# Autostart programs
-# swayidle -w timeout 300 '$lock' &
-# swayidle -w timeout 600 'systemctl suspend' &
-swaybg -i "$HOME/Pictures/wallpapers/wallhaven-6kqk77.jpg" -m fill &
-udiskie &
-/usr/lib/polkit-kde-authentication-agent-1 &
-$scriptsDir/status &
+swaybg -i "$HOME/Pictures/forest-river.jpg" &
+sh $scriptsDir/status &
+sh $scriptsDir/monitor_config_remote &
 blueman-applet &
 nm-applet &
 mako &
-$scriptsDir/gtkthemes &
-nextcloud &
-./monitor_config_home &
 playerctld daemon &
+nextcloud-client &
 
 # Exit
 exit 0
