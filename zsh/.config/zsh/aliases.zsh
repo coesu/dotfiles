@@ -53,3 +53,8 @@ from_config_to_dotfiles() {
 
 alias update="sudo nixos-rebuild switch"
 
+full-update() {
+    cd /etc/nixos 
+    sudo nix flake update 
+    sudo nixos-rebuild switch --flake .
+}
