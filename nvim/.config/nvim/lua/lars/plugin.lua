@@ -101,6 +101,8 @@ local plugins = {
         end
     },
 
+    {"NvChad/nvim-colorizer.lua", lazy= false},
+
     {
       "epwalsh/obsidian.nvim",
       lazy = true,
