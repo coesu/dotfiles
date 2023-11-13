@@ -34,5 +34,4 @@ if command -v bat &> /dev/null; then
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-eval "$(starship init zsh)"
+# eval "$(starship init zsh)"
