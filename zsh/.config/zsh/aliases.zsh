@@ -41,8 +41,14 @@ alias :q="exit"
 alias :wq="exit"
 alias cd..="cd .."
 alias cd.="cd .."
+alias cd...="cd ../.."
+alias cd....="cd ../.."
+alias cd ...="cd ../.."
+alias cd ....="cd ../.."
 
-alias za="zathura"
+za () {
+    zathura $1 && disown && exit
+}
 
 alias ze="zellij"
 
@@ -58,3 +64,5 @@ full-update() {
     sudo nix flake update 
     sudo nixos-rebuild switch --flake .
 }
+
+alias pysh="nix-shell ~/Documents/python-nix-shell/shell.nix --command zsh"
