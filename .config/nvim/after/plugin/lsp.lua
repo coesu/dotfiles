@@ -33,31 +33,10 @@ nvim_lsp.pyright.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
 })
-
-nvim_lsp.rust_analyzer.setup({
-	-- cmd = {
-	-- 	"rustup",
-	-- 	"run",
-	-- 	"stable",
-	-- 	"rust-analyzer",
-	-- },
-	on_attach = on_attach,
-	capabilities = capabilities,
-	settings = {
-		["rust-analyzer"] = {
-			assist = {
-				importGranularity = "module",
-				importPrefix = "by_self",
-			},
-			cargo = {
-				loadOutDirsFromCheck = true,
-			},
-			procMacro = {
-				enable = true,
-			},
-		},
-	},
-})
+-- nvim_lsp.rust_analyzer.setup({
+-- 	on_attach = on_attach,
+-- 	capabilities = capabilities,
+-- })
 nvim_lsp.lua_ls.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,

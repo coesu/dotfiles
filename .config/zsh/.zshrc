@@ -37,6 +37,8 @@ alias icat='kitten icat'
 alias za='zathura'
 alias ze='zellij'
 
+alias :q='exit'
+
 
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'mamba init' !!
