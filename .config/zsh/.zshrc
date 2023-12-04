@@ -7,12 +7,18 @@ plug "zsh-users/zsh-syntax-highlighting"
 # settings
 bindkey -v
 
+export EDITOR=nvim
+
 # aliases
 #
 alias nz='nvim ~/.config/zsh/.zshrc'
 nn() {
 	cd ~/.config/nvim
 	nvim
+}
+nh() {
+	cd ~/.config/hypr
+	nvim hyprland.conf
 }
 
 alias ls='exa'
@@ -39,6 +45,9 @@ alias ze='zellij'
 
 alias :q='exit'
 
+alias drag='dragon-drop -x -a'
+
+alias svim='sudo -E nvim'
 
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'mamba init' !!
