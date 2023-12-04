@@ -97,10 +97,10 @@ return {
 			vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 		end,
 	},
-	{
-		"luk400/vim-jukit",
-		ft = { "python", "json" },
-	},
+	-- {
+	-- 	"luk400/vim-jukit",
+	-- 	ft = { "python", "json" },
+	-- },
 	{
 		"hrsh7th/nvim-cmp",
 		dependencies = {
