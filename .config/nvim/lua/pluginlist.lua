@@ -6,14 +6,24 @@ return {
 			require("Comment").setup()
 		end,
 	},
+	-- {
+	-- 	"ellisonleao/gruvbox.nvim",
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		vim.cmd("colorscheme gruvbox")
+	-- 		vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+	-- 		vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+	-- 		-- vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+	-- 	end,
+	-- },
 	{
-		"ellisonleao/gruvbox.nvim",
-		priority = 1000,
+		'luisiacc/gruvbox-baby',
 		config = function()
-			vim.cmd("colorscheme gruvbox")
+			vim.cmd("colorscheme gruvbox-baby")
 			vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 			vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 			vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+			-- vim.g.gruvbox_material_background = 'hard'
 		end,
 	},
 	{
@@ -28,6 +38,25 @@ return {
 	},
 	"williamboman/mason-lspconfig.nvim",
 	"neovim/nvim-lspconfig",
+	{
+		"folke/noice.nvim",
+		event = "VeryLazy",
+		opts = {
+			routes = {
+				{
+					filter = { event = "notify", find = "No information available" },
+					opts = { skip = true },
+				},
+			},
+			presets = {
+				lsp_doc_border = true,
+			},
+		},
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			"rcarriga/nvim-notify",
+		},
+	},
 	{
 		"stevearc/conform.nvim",
 		event = { "BufReadPre", "BufNewFile" },
@@ -142,10 +171,10 @@ return {
 		config = function()
 			require("zellij").setup({
 				-- keys with designated default values.
-				path = "zellij", -- Zellij binary path
+				path = "zellij",                -- Zellij binary path
 				replaceVimWindowNavigationKeybinds = false, -- Will set keybinds like <C-w>h to left
 				vimTmuxNavigatorKeybinds = true, -- Will set keybinds like <C-h> to left
-				debug = false, -- Will log things to /tmp/zellij.nvim
+				debug = false,                  -- Will log things to /tmp/zellij.nvim
 			})
 		end,
 	},
@@ -160,7 +189,7 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
 			"MunifTanjim/nui.nvim",
-			"3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+			"3rd/image.nvim",     -- Optional image support in preview window: See `# Preview Mode` for more information
 		},
 	},
 	"tpope/vim-surround",

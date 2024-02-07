@@ -22,8 +22,8 @@ vim.opt.relativenumber = true
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
-vim.opt.textwidth=100
-vim.opt.spelllang="en"
+vim.opt.textwidth = 100
+vim.opt.spelllang = "en"
 
 -- No swap file and undotree instead
 vim.opt.swapfile = false
@@ -78,8 +78,13 @@ vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
-vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<CR>", {silent = true})
+vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<CR>", { silent = true })
 
 
 vim.keymap.set("n", "<leader>rht", "")
 vim.keymap.set("n", "<leader>rpd", "")
+
+
+-- UI
+
+vim.keymap.set("n", "<leader>nd", "<cmd>NoiceDismiss<CR>", { desc = "Dismiss Noice Message" })
