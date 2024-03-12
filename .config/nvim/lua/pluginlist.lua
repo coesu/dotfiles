@@ -17,7 +17,7 @@ return {
 	-- 	end,
 	-- },
 	{
-		'luisiacc/gruvbox-baby',
+		"luisiacc/gruvbox-baby",
 		config = function()
 			vim.cmd("colorscheme gruvbox-baby")
 			vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
@@ -166,18 +166,7 @@ return {
 			require("bufferline").setup({})
 		end,
 	},
-	{
-		"Lilja/zellij.nvim",
-		config = function()
-			require("zellij").setup({
-				-- keys with designated default values.
-				path = "zellij",                -- Zellij binary path
-				replaceVimWindowNavigationKeybinds = false, -- Will set keybinds like <C-w>h to left
-				vimTmuxNavigatorKeybinds = true, -- Will set keybinds like <C-h> to left
-				debug = false,                  -- Will log things to /tmp/zellij.nvim
-			})
-		end,
-	},
+	"ThePrimeagen/vim-be-good",
 	{
 		"stevearc/dressing.nvim",
 		event = "VeryLazy",
@@ -189,7 +178,7 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
 			"MunifTanjim/nui.nvim",
-			"3rd/image.nvim",     -- Optional image support in preview window: See `# Preview Mode` for more information
+			"3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 		},
 	},
 	"tpope/vim-surround",
@@ -199,6 +188,23 @@ return {
 			require("dashboard").setup({})
 		end,
 		dependencies = { { "nvim-tree/nvim-web-devicons" } },
+	},
+	{
+		"christoomey/vim-tmux-navigator",
+		cmd = {
+			"TmuxNavigateLeft",
+			"TmuxNavigateDown",
+			"TmuxNavigateUp",
+			"TmuxNavigateRight",
+			"TmuxNavigatePrevious",
+		},
+		keys = {
+			{ "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
+			{ "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
+			{ "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
+			{ "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
+			{ "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+		},
 	},
 	{
 		"simrat39/rust-tools.nvim",
@@ -216,5 +222,34 @@ return {
 				},
 			})
 		end,
+	},
+	{
+		"epwalsh/obsidian.nvim",
+		version = "*", -- recommended, use latest release instead of latest commit
+		lazy = true,
+		ft = "markdown",
+		-- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
+		-- event = {
+		--   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+		--   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
+		--   "BufReadPre path/to/my-vault/**.md",
+		--   "BufNewFile path/to/my-vault/**.md",
+		-- },
+		dependencies = {
+			-- Required.
+			"nvim-lua/plenary.nvim",
+
+			-- see below for full list of optional dependencies 👇
+		},
+		opts = {
+			workspaces = {
+				{
+					name = "main",
+					path = "~/Nextcloud/obsidian",
+				},
+			},
+
+			-- see below for full list of options 👇
+		},
 	},
 }
