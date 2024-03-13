@@ -5,6 +5,9 @@ vim.opt.relativenumber = true
 
 vim.o.clipboard = "unnamedplus"
 
+vim.g.have_nerd_font = true
+vim.o.showmode = false
+
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4

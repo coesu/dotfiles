@@ -3,10 +3,6 @@ return {
         "nvim-lua/plenary.nvim",
         name = "plenary"
     },
-	{
-		"stevearc/dressing.nvim",
-		event = "VeryLazy",
-    },
-	"folke/neodev.nvim",
+    "folke/neodev.nvim",
+    { 'numToStr/Comment.nvim', opts = {} },
 }
-
