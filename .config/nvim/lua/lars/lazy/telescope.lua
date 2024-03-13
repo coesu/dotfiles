@@ -23,7 +23,7 @@ return {
         end)
         vim.keymap.set('n', '<leader>vh', builtin.help_tags, {})
 
-        vim.keymap.set('n', '<leader>tk', builtin.keymaps, {})
+        vim.keymap.set('n', '<leader>tk', builtin.help_tags, {})
     end
 }
 
