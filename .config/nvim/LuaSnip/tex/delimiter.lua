@@ -1,4 +1,4 @@
-local helpers = require('.luasnip-helper-funcs')
+local helpers = require('lars.luasnip-helper-funcs')
 local get_visual = helpers.get_visual
 
 -- Math context detection 
