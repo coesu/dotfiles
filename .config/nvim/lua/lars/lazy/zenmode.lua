@@ -19,12 +19,12 @@ return {
         vim.keymap.set("n", "<leader>zZ", function()
             require("zen-mode").setup {
                 window = {
-                    width = 80,
+                    width = 200,
                     options = { }
                 },
             }
             require("zen-mode").toggle()
-            vim.wo.wrap = false
+            vim.wo.wrap = true
             vim.wo.number = false
             vim.wo.rnu = false
             vim.opt.colorcolumn = "0"
