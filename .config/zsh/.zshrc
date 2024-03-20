@@ -13,12 +13,13 @@ export EDITOR=nvim
 export PATH=$HOME/.local/scripts:$PATH
 
 bindkey -s '^f' "tmux-sessionizer\n"
+bindkey -s '^n' "nvim +\"Telescope git_files cwd=.\"\n"
 # aliases
 #
 alias nz='nvim ~/.config/zsh/.zshrc'
 nn() {
 	cd ~/.config/nvim
-	nvim
+	nvim .
 }
 nh() {
 	cd ~/.config/hypr
@@ -32,6 +33,7 @@ alias l='exa -l'
 
 alias vim='nvim'
 alias vi='nvim'
+alias svim='sudo -E nvim'
 
 alias pacman='sudo pacman'
 alias update='sudo pacman -Syyu'
@@ -51,7 +53,6 @@ alias :q='exit'
 
 alias drag='dragon-drop -x -a'
 
-alias svim='sudo -E nvim'
 
 # Load and initialise completion system
 autoload -Uz compinit
@@ -61,19 +62,8 @@ compinit
 
 . "$HOME/.cargo/env"
 eval "$(direnv hook zsh)"
-eval "$(starship init zsh)"
+eval "$(zoxide init --cmd cd zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# >>> mamba initialize >>>
-# !! Contents within this block are managed by 'mamba init' !!
-export MAMBA_EXE='/home/lars/.local/bin/micromamba';
-export MAMBA_ROOT_PREFIX='/home/lars/micromamba';
-__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__mamba_setup"
-else
-    alias micromamba="$MAMBA_EXE"  # Fallback on help from mamba activate
-fi
-unset __mamba_setup
-# <<< mamba initialize <<<
+eval "$(starship init zsh)"

@@ -7,6 +7,7 @@ vim.o.clipboard = "unnamedplus"
 
 vim.g.have_nerd_font = true
 vim.o.showmode = false
+vim.o.breakindent = true
 vim.opt.conceallevel = 1
 
 vim.opt.tabstop = 4
