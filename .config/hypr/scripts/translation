@@ -1,6 +1,9 @@
 #!/bin/bash
+
 read -p "What should I translate? " text
-echo `(trans :en "$text")`
+translation=$(trans :en "$text")
+echo -e "$translation"
+
 read -p "Press enter to close " end
 echo $end
 
