@@ -40,22 +40,27 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+-- vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+-- vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 -- running code
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "python",
-  callback = function(args)
-    local file = vim.fn.expand('%')
-    vim.keymap.set('n', '<leader>r', "<cmd>!tmux send-keys -t 1 \"python " .. file .. "\" Enter<CR>" , { buffer = args.buf })
-  end
+	pattern = "python",
+	callback = function(args)
+		local file = vim.fn.expand("%")
+		vim.keymap.set(
+			"n",
+			"<leader>r",
+			'<cmd>!tmux send-keys -t 1 "python ' .. file .. '" Enter<CR>',
+			{ buffer = args.buf }
+		)
+	end,
 })
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "rust",
-  callback = function(args)
-    vim.keymap.set('n', '<leader>r', "<cmd>!tmux send-keys -t 1 \"cargo run\" Enter<CR>" , { buffer = args.buf })
-  end
+	pattern = "rust",
+	callback = function(args)
+		vim.keymap.set("n", "<leader>r", '<cmd>!tmux send-keys -t 1 "cargo run" Enter<CR>', { buffer = args.buf })
+	end,
 })
