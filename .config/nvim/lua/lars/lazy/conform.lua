@@ -12,6 +12,7 @@ return {
 				yaml = { "prettier" },
 				markdown = { "prettier" },
 				css = { "prettier" },
+				nix = { "nixfmt" },
 			},
 			format_on_save = {
 				lsp_fallback = true,
