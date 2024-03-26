@@ -3,4 +3,4 @@
 .config/vifm/vifminfo.json
 .config/zsh/.zcompdump
 .zsh_history
-.zcompdump
+*compdump
