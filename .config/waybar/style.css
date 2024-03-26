@@ -39,9 +39,11 @@
 }
 
 #waybar {
-	font-family: "HackGen35 Console NF", hackgen-nf-font;
-	font-size: 1.1em;
-	font-weight: 400;
+  font-family:
+    JetBrains Mono NL,
+    JetBrainsMonoNerd Font;
+  font-size: 1.1em;
+  font-weight: 400;
   color: @base04;
   background: @base00;
 }
@@ -83,7 +85,20 @@
   border-left: none;
 }
 
-#mode, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #custom-storage, #custom-updates, #custom-weather, #custom-mail, #clock, #temperature {
+#mode,
+#battery,
+#cpu,
+#memory,
+#network,
+#pulseaudio,
+#idle_inhibitor,
+#backlight,
+#custom-storage,
+#custom-updates,
+#custom-weather,
+#custom-mail,
+#clock,
+#temperature {
   margin: 4px 2px;
   padding: 0 6px;
   background-color: @base01;
@@ -112,8 +127,6 @@
 
 #window {
   font-size: 0.9em;
-	font-weight: 400;
-	font-family: sans-serif;
+  font-weight: 400;
+  font-family: sans-serif;
 }
-
-
