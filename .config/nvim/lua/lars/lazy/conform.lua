@@ -13,6 +13,7 @@ return {
 				markdown = { "prettier" },
 				css = { "prettier" },
 				nix = { "nixfmt" },
+				cpp = { "clang-format" },
 			},
 			format_on_save = {
 				lsp_fallback = true,

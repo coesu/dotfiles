@@ -8,6 +8,7 @@ plug "zsh-users/zsh-completions"
 bindkey -v
 
 export EDITOR=nvim
+export MPLBACKEND=TkAgg
 
 
 export PATH=$HOME/.local/scripts:$PATH
@@ -62,11 +63,14 @@ compinit
 
 . "$HOME/.cargo/env"
 eval "$(direnv hook zsh)"
-# eval "$(zoxide init --cmd cd zsh)"
+eval "$(zoxide init zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 eval "$(starship init zsh)"
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/.local/lib/mojo
+export PATH=$PATH:~/.modular/pkg/packages.modular.com_mojo/bin/
 
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'mamba init' !!
