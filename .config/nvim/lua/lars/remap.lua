@@ -13,9 +13,6 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
--- get into normal mode
-vim.keymap.set("i", "kj", "<Esc>")
-
 -- Navigate buffers
 vim.keymap.set("n", "<S-l>", ":bnext<CR>", { silent = true })
 vim.keymap.set("n", "<S-h>", ":bprevious<CR>", { silent = true })
