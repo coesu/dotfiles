@@ -2,17 +2,27 @@ return {
 	"nvim-telescope/telescope.nvim",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
+		"nvim-telescope/telescope-ui-select.nvim",
+		-- {
+		-- 	"nvim-telescope/telescope-fzf-native.nvim",
+		-- 	build = "make",
+		-- 	config = function()
+		-- 		require("telescope").load_extension("fzf")
+		-- 	end,
+		-- },
 	},
 
 	config = function()
 		require("telescope").setup({
 			extensions = {
 				["ui-select"] = { require("telescope.themes").get_dropdown() },
+				-- ["fzf"] = { fuzzy = true },
 			},
 		})
 
-		pcall(require("telescope").load_extension, "fzf")
-		pcall(require("telescope").load_extension, "ui-select")
+		-- pcall(require("telescope").load_extension, "fzf")
+		-- pcall(require("telescope").load_extension, "ui-select")
+		require("telescope").load_extension("ui-select")
 
 		local builtin = require("telescope.builtin")
 		vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })

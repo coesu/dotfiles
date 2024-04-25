@@ -7,5 +7,6 @@ return {
 	{ "numToStr/Comment.nvim", opts = {} },
 	"simrat39/rust-tools.nvim",
 	"christoomey/vim-tmux-navigator",
+	"LhKipp/nvim-nu",
 	-- "github/copilot.vim",
 }

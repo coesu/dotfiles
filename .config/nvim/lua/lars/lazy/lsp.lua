@@ -141,6 +141,20 @@ return {
 						cmd = { "clangd", "--offset-encoding=utf-16" },
 					})
 				end,
+				["rust_analyzer"] = function()
+					local lspconfig = require("lspconfig")
+					lspconfig.rust_analyzer.setup({
+						capabilities = capabilities,
+						settings = {
+							cargo = {
+								allFeatures = true,
+							},
+							checkOnSave = {
+								command = "clippy",
+							},
+						},
+					})
+				end,
 			},
 		})
 	end,
