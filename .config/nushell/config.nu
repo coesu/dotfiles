@@ -21,9 +21,9 @@ alias pacman = sudo pacman
 
 
 # External completer example
-# let carapace_completer = {|spans|
-#     carapace $spans.0 nushell ...$spans | from json
-# }
+let carapace_completer = {|spans|
+    carapace $spans.0 nushell ...$spans | from json
+}
 
 let fish_completer = {|spans|
     fish --command $'complete "--do-complete=($spans | str join " ")"'
@@ -100,7 +100,7 @@ $env.config = {
         external: {
             enable: true # set to false to prevent nushell looking into $env.PATH to find more suggestions, `false` recommended for WSL users as this look up may be very slow
             max_results: 100 # setting it lower can improve completion performance at the cost of omitting some options
-            completer: $fish_completer # check 'carapace_completer' above as an example
+            completer: $carapace_completer # check 'carapace_completer' above as an example
         }
     }
 
@@ -768,4 +768,5 @@ $env.config = {
 use ~/.config/nushell/scripts/conda.nu
 alias mambaa = conda activate
 alias mambad = conda deactivate
+source ~/.cache/carapace/init.nu
 use ~/.cache/starship/init.nu
