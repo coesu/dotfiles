@@ -17,7 +17,14 @@ alias drag = xdragon -a -x
 alias pacman = sudo pacman
 
 
-
+def nn [] {
+    cd ~/.config/nvim/
+    nvim .
+}
+def nh [] {
+    cd ~/.config/hypr/
+    nvim hyprland.conf
+}
 
 
 # External completer example
@@ -110,7 +117,7 @@ $env.config = {
     }
 
     cursor_shape: {
-        vi_insert: line # block, underscore, line, blink_block, blink_underscore, blink_line, inherit to skip setting cursor shape (block is the default)
+        vi_insert: block # block, underscore, line, blink_block, blink_underscore, blink_line, inherit to skip setting cursor shape (block is the default)
         vi_normal: block # block, underscore, line, blink_block, blink_underscore, blink_line, inherit to skip setting cursor shape (underscore is the default)
         emacs: line # block, underscore, line, blink_block, blink_underscore, blink_line, inherit to skip setting cursor shape (line is the default)
     }

@@ -5,7 +5,7 @@ return {
 
 		conform.setup({
 			formatters_by_ft = {
-				python = { "isort", "ruff_fix", "ruff_format" },
+				python = { "isort", "black", "ruff_fix", "ruff_format" },
 				lua = { "stylua" },
 				json = { "prettier" },
 				htlm = { "prettier" },

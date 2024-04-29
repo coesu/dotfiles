@@ -100,6 +100,7 @@ $env.NU_PLUGIN_DIRS = [
 $env.CONDA_INFO = 'MAMBA'
 $env.PATH = ($env.PATH | append '/home/lars/.miniforge3/bin')
 $env.EDITOR = nvim
+$env.MPLBACKEND = tkAgg
 
 # To add entries to PATH (on Windows you might use Path), you can use the following pattern:
 # $env.PATH = ($env.PATH | split row (char esep) | prepend '/some/path')
