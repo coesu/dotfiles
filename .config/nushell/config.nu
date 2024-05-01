@@ -252,7 +252,7 @@ $env.config = {
             event:[
               # { edit: Clear }
               { edit: InsertString,
-                value: "cd (fd -t d | fzf)"
+                value: "cd (fd -t d | sk)"
 
               }
               { send: Enter }
@@ -266,7 +266,35 @@ $env.config = {
             event:[
               # { edit: Clear }
               { edit: InsertString,
-                value: "(fd -t f | fzf)"
+                value: "(fd -t f | sk)"
+
+              }
+              { send: Enter }
+              ]
+      	},
+      	{
+            name: open_file_nvim_sk
+            modifier: CONTROL
+            keycode: Char_e
+            mode: vi_insert
+            event:[
+              # { edit: Clear }
+              { edit: InsertString,
+                value: "nvim (fd -t f | sk)"
+
+              }
+              { send: Enter }
+              ]
+      	},
+      	{
+            name: tmux-sessionizer
+            modifier: CONTROL
+            keycode: Char_f
+            mode: vi_insert
+            event:[
+              # { edit: Clear }
+              { edit: InsertString,
+                value: "~/.local/scripts/tmux-sessionizer"
 
               }
               { send: Enter }
@@ -474,18 +502,18 @@ $env.config = {
                 ]
             }
         }
-        {
-            name: move_to_line_end_or_take_history_hint
-            modifier: control
-            keycode: char_e
-            mode: [emacs, vi_normal, vi_insert]
-            event: {
-                until: [
-                    {send: historyhintcomplete}
-                    {edit: movetolineend}
-                ]
-            }
-        }
+        # {
+        #     name: move_to_line_end_or_take_history_hint
+        #     modifier: control
+        #     keycode: char_e
+        #     mode: [emacs, vi_normal, vi_insert]
+        #     event: {
+        #         until: [
+        #             {send: historyhintcomplete}
+        #             {edit: movetolineend}
+        #         ]
+        #     }
+        # }
         {
             name: move_to_line_start
             modifier: control

@@ -1,6 +1,7 @@
 vim.g.mapleader = " "
 
 vim.keymap.set("n", "<leader>w", "<cmd>w<CR>", { silent = true })
+vim.keymap.set("n", "<leader>q", "<cmd>q<CR>", { silent = true })
 
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
@@ -18,8 +19,14 @@ vim.keymap.set("n", "<S-l>", ":bnext<CR>", { silent = true })
 vim.keymap.set("n", "<S-h>", ":bprevious<CR>", { silent = true })
 
 -- Splits
-vim.keymap.set("n", "<leader>h", "<cmd>split<CR>")
-vim.keymap.set("n", "<leader>v", "<cmd>vsplit<CR>")
+vim.keymap.set("n", "<leader>-", "<cmd>split<CR>", { desc = "split" })
+vim.keymap.set("n", "<leader>v", "<cmd>vsplit<CR>", { desc = "split" })
+
+-- resize
+vim.keymap.set("n", "<S-C-j>", "<cmd>resize +10<CR>")
+vim.keymap.set("n", "<S-C-k>", "<cmd>resize -10<CR>")
+vim.keymap.set("n", "<S-C-h>", "<cmd>vertical resize -10<CR>")
+vim.keymap.set("n", "<S-C-l>", "<cmd>vertical resize +10<CR>")
 
 -- Visual --
 -- Stay in indent mode
@@ -50,7 +57,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set(
 			"n",
 			"<leader>r",
-			'<cmd>!tmux send-keys -t 1 "python ' .. file .. '" Enter<CR>',
+			'<cmd>!tmux send-keys -t 1 "python ' .. file .. '" Enter<CR><CR>',
 			{ buffer = args.buf }
 		)
 	end,
@@ -58,6 +65,24 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "rust",
 	callback = function(args)
-		vim.keymap.set("n", "<leader>r", '<cmd>!tmux send-keys -t 1 "cargo run" Enter<CR>', { buffer = args.buf })
+		vim.keymap.set("n", "<leader>r", '<cmd>!tmux send-keys -t 1 "cargo run" Enter<CR><CR>', { buffer = args.buf })
 	end,
 })
+-- vim.api.nvim_create_autocmd("FileType", {
+-- 	pattern = "python",
+-- 	callback = function(args)
+-- 		local file = vim.fn.expand("%")
+-- 		vim.keymap.set(
+-- 			"n",
+-- 			"<leader>r",
+-- 			"<cmd>!zellij run -d right -- python " .. file .. " Enter<CR><CR>",
+-- 			{ buffer = args.buf, silent = true }
+-- 		)
+-- 	end,
+-- })
+-- vim.api.nvim_create_autocmd("FileType", {
+-- 	pattern = "rust",
+-- 	callback = function(args)
+-- 		vim.keymap.set("n", "<leader>r", "<cmd>!zellij run -d right -- cargo run Enter<CR><CR>", { buffer = args.buf })
+-- 	end,
+-- })
