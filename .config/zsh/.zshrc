@@ -14,38 +14,6 @@ export PATH=$HOME/.local/scripts:$PATH
 
 bindkey -s '^f' "tmux-sessionizer\n"
 
-# file_fzf () {
-#     local file
-#     file=$(fd -t d 2>/dev/null | fzf-tmux)
-#     if [ -n "$file" ]; then
-#         "$file"
-#     else
-#         echo "No file selected or no files found."
-#     fi
-# }
-# bindkey -s '^t' file_fzf()
-# cd_fzf () {
-#     local file
-#     file=$(fd -t d 2>/dev/null | fzf-tmux)
-#     if [ -n "$file" ]; then
-#         cd "$file"
-#     else
-#         echo "No file selected or no files found."
-#     fi
-# }
-# bindkey -s '\ec' "cd_fzf\n"
-# edit_fzf () {
-#     local file
-#     file=$(fd -t f 2>/dev/null | fzf-tmux)
-#     if [ -n "$file" ]; then
-#         nvim "$file"
-#     else
-#         echo "No file selected or no files found."
-#     fi
-# }
-# bindkey -s '^e' "edit_fzf\n"
-
-
 bindkey -s '^n' "nvim +\"Telescope git_files cwd=.\"\n"
 # aliases
 #
@@ -100,3 +68,18 @@ eval "$(starship init zsh)"
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/.local/lib/mojo
 export PATH=$PATH:~/.modular/pkg/packages.modular.com_mojo/bin/
 
+# >>> mamba initialize >>>
+# !! Contents within this block are managed by 'mamba init' !!
+export MAMBA_EXE='/home/lars/.local/bin/micromamba';
+export MAMBA_ROOT_PREFIX='/home/lars/.micromamba';
+__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__mamba_setup"
+else
+    alias micromamba="$MAMBA_EXE"  # Fallback on help from mamba activate
+fi
+unset __mamba_setup
+# <<< mamba initialize <<<
+alias mamba='micromamba'
+alias mambaa='micromamba activate'
+alias mambad='micromamba deactivate'
