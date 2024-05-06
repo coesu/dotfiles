@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# Prompt the user to enter a file extension using wofi
+extension=$(echo -e "txt\npdf\njpg\npng\ndoc\nxls\nppt\nmp3\nmp4\navi\nmkv\ngif\nzip\nrar\nhtml\njs\npy\ncpp\njava\nsh" | wofi --dmenu --prompt="Enter file extension:")
+
+# Find files with the given extension in the home directory and its subdirectories
+file=$(fd -e "$extension" . ~/ | wofi -d)
+
+# Open the selected file
+xdg-open "$file"
