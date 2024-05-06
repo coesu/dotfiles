@@ -47,13 +47,14 @@ alias rm='rm -iv'
 
 alias icat='kitten icat'
 
-alias za='zathura'
-alias ze='zellij'
+alias za=zathura
+alias ze=zellij
 
-alias :q='exit'
+alias :q=exit
 
 alias drag='dragon-drop -x -a'
 
+alias ff=fastfetch
 
 # Load and initialise completion system
 autoload -Uz compinit
