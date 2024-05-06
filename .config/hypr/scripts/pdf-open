@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+file=$(fd -e pdf . ~/ | wofi -d)
+echo $file
+xdg-open "$file"
