@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+
+modul=$(echo -e "quantum-information\nhands-on-tensor-networks\nstatistical-physics\ncomputational-physics" | wofi --dmenu --prompt="Select subject:")
+
+exercise=$(wofi --dmenu --prompt="Select exercise number:")
+
+mkdir $HOME/Nextcloud/uni/master/"$modul"/exercise-"$exercise"

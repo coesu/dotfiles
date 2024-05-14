@@ -1,21 +1,3 @@
-@define-color base00 #181818;
-@define-color base01 #0b0e17;
-/* @define-color base01 #2b2e37; */
-@define-color base02 #1b1e27;
-@define-color base03 #585858;
-@define-color base04 #b8b8b8;
-@define-color base05 #d8d8d8;
-@define-color base06 #e8e8e8;
-@define-color base07 #f8f8f8;
-@define-color base08 #ab4642;
-@define-color base09 #dc9656;
-@define-color base0A #f7ca88;
-@define-color base0B #a1b56c;
-@define-color base0C #86c1b9;
-@define-color base0D #7cafc2;
-@define-color base0E #ba8baf;
-@define-color base0F #a16946;
-
 @define-color base00 #1d2021;
 @define-color base01 #3c3836;
 @define-color base02 #504945;
@@ -33,6 +15,8 @@
 @define-color base0E #d3869b;
 @define-color base0F #d65d0e;
 
+/* @define-color base01 transparent; */
+@define-color base00 transparent;
 * {
   transition: none;
   box-shadow: none;
