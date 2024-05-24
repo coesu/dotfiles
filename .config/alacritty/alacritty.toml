@@ -22,7 +22,6 @@ style = "Regular"
 [env]
 TERM= "xterm-256color"
 
-
 # Default colors
 [colors.primary]
 background = '#1d2021'
