@@ -4,6 +4,11 @@ plug "zsh-users/zsh-autosuggestions"
 plug "zsh-users/zsh-syntax-highlighting"
 plug "zsh-users/zsh-completions"
 
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
+
 # settings
 bindkey -v
 
@@ -15,8 +20,9 @@ export PATH=$HOME/.local/scripts:$PATH
 bindkey -s '^f' "tmux-sessionizer\n"
 
 bindkey -s '^n' "nvim +\"Telescope git_files cwd=.\"\n"
+bindkey '^o' autosuggest-execute
+
 # aliases
-#
 alias nz='nvim ~/.config/zsh/.zshrc'
 nn() {
 	cd ~/.config/nvim
