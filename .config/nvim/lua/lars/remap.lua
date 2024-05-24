@@ -68,21 +68,3 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set("n", "<leader>r", '<cmd>!tmux send-keys -t 1 "cargo run" Enter<CR><CR>', { buffer = args.buf })
 	end,
 })
--- vim.api.nvim_create_autocmd("FileType", {
--- 	pattern = "python",
--- 	callback = function(args)
--- 		local file = vim.fn.expand("%")
--- 		vim.keymap.set(
--- 			"n",
--- 			"<leader>r",
--- 			"<cmd>!zellij run -d right -- python " .. file .. " Enter<CR><CR>",
--- 			{ buffer = args.buf, silent = true }
--- 		)
--- 	end,
--- })
--- vim.api.nvim_create_autocmd("FileType", {
--- 	pattern = "rust",
--- 	callback = function(args)
--- 		vim.keymap.set("n", "<leader>r", "<cmd>!zellij run -d right -- cargo run Enter<CR><CR>", { buffer = args.buf })
--- 	end,
--- })

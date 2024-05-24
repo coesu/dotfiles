@@ -1,8 +1,6 @@
 // If you'd like to override the default keybindings completely, be sure to change "keybinds" to "keybinds clear-defaults=true"
 keybinds clear-defaults=true {
     normal {
-        // uncomment this and adjust key if using copy_on_select=false
-        // bind "Alt c" { Copy; }
     }
     locked {
         bind "Ctrl g" { SwitchToMode "Normal"; }
@@ -38,11 +36,11 @@ keybinds clear-defaults=true {
     }
     renametab {
         bind "Ctrl c" { SwitchToMode "Normal"; }
-        bind "Esc" { UndoRenameTab; SwitchToMode "Tab"; }
+        bind "Esc" { UndoRenameTab; SwitchToMode "Normal"; }
     }
     renamepane {
         bind "Ctrl c" { SwitchToMode "Normal"; }
-        bind "Esc" { UndoRenamePane; SwitchToMode "Pane"; }
+        bind "Esc" { UndoRenamePane; SwitchToMode "Normal"; }
     }
     session {
         bind "d" { Detach; }
@@ -62,48 +60,47 @@ keybinds clear-defaults=true {
         bind "z" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
         bind "c" { NewTab; SwitchToMode "Normal"; }
         bind "," { SwitchToMode "RenameTab"; }
+        bind "d" { Detach; }
+        bind "w" {
+            LaunchOrFocusPlugin "zellij:session-manager" {
+                floating true
+                move_to_focused_tab true
+            };
+            SwitchToMode "Normal"
+        }
         bind "p" { GoToPreviousTab; SwitchToMode "Normal"; }
         bind "n" { GoToNextTab; SwitchToMode "Normal"; }
-        bind "Left" { MoveFocus "Left"; SwitchToMode "Normal"; }
-        bind "Right" { MoveFocus "Right"; SwitchToMode "Normal"; }
-        bind "Down" { MoveFocus "Down"; SwitchToMode "Normal"; }
-        bind "Up" { MoveFocus "Up"; SwitchToMode "Normal"; }
-        bind "h" { MoveFocus "Left"; SwitchToMode "Normal"; }
-        bind "l" { MoveFocus "Right"; SwitchToMode "Normal"; }
-        bind "j" { MoveFocus "Down"; SwitchToMode "Normal"; }
-        bind "k" { MoveFocus "Up"; SwitchToMode "Normal"; }
-        bind "o" { FocusNextPane; }
+        // bind "Left" { MoveFocus "Left"; SwitchToMode "Normal"; }
+        // bind "Right" { MoveFocus "Right"; SwitchToMode "Normal"; }
+        // bind "Down" { MoveFocus "Down"; SwitchToMode "Normal"; }
+        // bind "Up" { MoveFocus "Up"; SwitchToMode "Normal"; }
+        // bind "h" { MoveFocus "Left"; SwitchToMode "Normal"; }
+        // bind "l" { MoveFocus "Right"; SwitchToMode "Normal"; }
+        // bind "j" { MoveFocus "Down"; SwitchToMode "Normal"; }
+        // bind "k" { MoveFocus "Up"; SwitchToMode "Normal"; }
+        // bind "o" { FocusNextPane; }
         bind "d" { Detach; }
         bind "Space" { NextSwapLayout; }
         bind "x" { CloseFocus; SwitchToMode "Normal"; }
+        bind "r" { FocusNextPane; Write 33 33 13 13; FocusPreviousPane; }
     }
     shared_except "locked" {
         bind "Ctrl g" { SwitchToMode "Locked"; }
-        bind "Alt q" { Quit; }
-        bind "Alt n" { NewPane; }
-        bind "Alt h" "Alt Left" { MoveFocusOrTab "Left"; }
-        bind "Alt l" "Alt Right" { MoveFocusOrTab "Right"; }
-        bind "Alt j" "Alt Down" { MoveFocus "Down"; }
-        bind "Alt k" "Alt Up" { MoveFocus "Up"; }
+        bind "Alt m" "Alt Left" { MoveFocusOrTab "Left"; }
+        bind "Alt i" "Alt Right" { MoveFocusOrTab "Right"; }
+        bind "Alt n" "Alt Down" { MoveFocus "Down"; }
+        bind "Alt e" "Alt Up" { MoveFocus "Up"; }
         bind "Alt =" "Alt +" { Resize "Increase"; }
         bind "Alt -" { Resize "Decrease"; }
-        bind "Alt [" { PreviousSwapLayout; }
-        bind "Alt ]" { NextSwapLayout; }
         // bind F1 to open monocle in a new floating pane and open any results in a new tiled/floating pane
-        bind "Alt e" {
-            LaunchOrFocusPlugin "file:~/.config/zellij/plugins/monocle.wasm" {
-                floating true
-            };
-            SwitchToMode "Normal"
-        }
         // bind "Alt m" to open monocle on top of the current pane and open any results on top of itself
-        bind "Alt m" {
-            LaunchPlugin "file:~/.config/zellij/plugins/monocle.wasm" {
-                in_place true
-                kiosk true
-            };
-            SwitchToMode "Normal"
-        }
+        // bind "Alt m" {
+        //     LaunchPlugin "file:~/.config/zellij/plugins/monocle.wasm" {
+        //         in_place true
+        //         kiosk true
+        //     };
+        //     SwitchToMode "Normal"
+        // }
         bind "Alt r" { FocusNextPane; Write 33 33 13 13; FocusPreviousPane; }
     }
     shared_except "normal" "locked" {
@@ -221,8 +218,8 @@ theme "gruvbox-dark"
 // The name of the default layout to load on startup
 // Default: "default"
 //
-default_layout "default"
-// default_layout "compact"
+// default_layout "default"
+default_layout "compact"
 
 // Choose the mode that zellij uses when starting up.
 // Default: normal
