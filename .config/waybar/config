@@ -5,7 +5,7 @@
     // "width": 1280, // Waybar width
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
-    "modules-left": ["hyprland/workspaces"],
+    "modules-left": ["sway/workspaces", "hyprland/workspaces"],
     "modules-center": ["hyprland/window"],
     "modules-right": ["backlight", "battery","pulseaudio",  "tray", "clock"],
     // Modules configuration
@@ -27,6 +27,11 @@
     "hyprland/window": {
         "max-length": 50,
         "separate-outputs": true
+    },
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{name}",
     },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"

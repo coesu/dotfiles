@@ -6,27 +6,25 @@ keybinds clear-defaults=true {
         bind "Ctrl g" { SwitchToMode "Normal"; }
     }
     resize {
-        bind "h" "Left" { Resize "Increase Left"; }
-        bind "j" "Down" { Resize "Increase Down"; }
-        bind "k" "Up" { Resize "Increase Up"; }
-        bind "l" "Right" { Resize "Increase Right"; }
+        bind "m" "Left" { Resize "Increase Left"; }
+        bind "n" "Down" { Resize "Increase Down"; }
+        bind "e" "Up" { Resize "Increase Up"; }
+        bind "i" "Right" { Resize "Increase Right"; }
         bind "=" "+" { Resize "Increase"; }
         bind "-" { Resize "Decrease"; }
     }
     move {
-        bind "n" "Tab" { MovePane; }
-        bind "p" { MovePaneBackwards; }
-        bind "h" "Left" { MovePane "Left"; }
-        bind "j" "Down" { MovePane "Down"; }
-        bind "k" "Up" { MovePane "Up"; }
-        bind "l" "Right" { MovePane "Right"; }
+        bind "m" "Left" { MovePane "Left"; }
+        bind "n" "Down" { MovePane "Down"; }
+        bind "e" "Up" { MovePane "Up"; }
+        bind "i" "Right" { MovePane "Right"; }
     }
     scroll {
         bind "e" { EditScrollback; SwitchToMode "Normal"; }
         bind "s" { SwitchToMode "EnterSearch"; SearchInput 0; }
         bind "Ctrl c" { ScrollToBottom; SwitchToMode "Normal"; }
-        bind "j" "Down" { ScrollDown; }
-        bind "k" "Up" { ScrollUp; }
+        bind "n" "Down" { ScrollDown; }
+        bind "e" "Up" { ScrollUp; }
         bind "Ctrl f" "PageDown" "Right" "l" { PageScrollDown; }
         bind "Ctrl b" "PageUp" "Left" "h" { PageScrollUp; }
         bind "d" { HalfPageScrollDown; }
@@ -41,16 +39,6 @@ keybinds clear-defaults=true {
     renamepane {
         bind "Ctrl c" { SwitchToMode "Normal"; }
         bind "Esc" { UndoRenamePane; SwitchToMode "Normal"; }
-    }
-    session {
-        bind "d" { Detach; }
-        bind "w" {
-            LaunchOrFocusPlugin "zellij:session-manager" {
-                floating true
-                move_to_focused_tab true
-            };
-            SwitchToMode "Normal"
-        }
     }
     tmux {
         bind "[" { SwitchToMode "Scroll"; }
@@ -70,15 +58,7 @@ keybinds clear-defaults=true {
         }
         bind "p" { GoToPreviousTab; SwitchToMode "Normal"; }
         bind "n" { GoToNextTab; SwitchToMode "Normal"; }
-        // bind "Left" { MoveFocus "Left"; SwitchToMode "Normal"; }
-        // bind "Right" { MoveFocus "Right"; SwitchToMode "Normal"; }
-        // bind "Down" { MoveFocus "Down"; SwitchToMode "Normal"; }
-        // bind "Up" { MoveFocus "Up"; SwitchToMode "Normal"; }
-        // bind "h" { MoveFocus "Left"; SwitchToMode "Normal"; }
-        // bind "l" { MoveFocus "Right"; SwitchToMode "Normal"; }
-        // bind "j" { MoveFocus "Down"; SwitchToMode "Normal"; }
-        // bind "k" { MoveFocus "Up"; SwitchToMode "Normal"; }
-        // bind "o" { FocusNextPane; }
+        bind "m" { SwitchToMode "Move"; }
         bind "d" { Detach; }
         bind "Space" { NextSwapLayout; }
         bind "x" { CloseFocus; SwitchToMode "Normal"; }

@@ -43,6 +43,8 @@
 }
 
 #workspaces button.visible {
+  border-radius: 4px;
+  background-color: @base01;
 }
 
 #workspaces button.active {

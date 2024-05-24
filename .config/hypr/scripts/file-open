@@ -4,7 +4,7 @@
 extension=$(echo -e "txt\npdf\njpg\npng\nmp3\nmp4\ngif\nzip\nrar\nhtml\njs\npy\ncpp\njava\nsh\nrs\ntoml\nyml" | wofi --dmenu --prompt="Enter file extension:")
 
 # Find files with the given extension in the home directory and its subdirectories
-file=$(fd -e "$extension" --hidden . ~/ | wofi -d)
+file=$(fd -e "$extension" -I --hidden . ~/ | wofi -d)
 
 # Open the selected file
 xdg-open "$file"
