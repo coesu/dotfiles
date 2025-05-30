@@ -4,3 +4,4 @@
 .config/zsh/.zcompdump
 .zsh_history
 *compdump
+*histfile
