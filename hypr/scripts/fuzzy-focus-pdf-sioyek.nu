@@ -18,7 +18,7 @@ def focus_or_open_file [] {
 
     let combined_list = ($open_files | from json) ++ ($directory_files | from json | uniq-by title) | to json
 
-    let choice = $combined_list | from json | select title | to text | cut -d ' ' -f 2- | anyrun-dmenu
+    let choice = $combined_list | from json | select title | to text | cut -d ' ' -f 2- | anyrun --plugins libstdin.so
     if $choice != "" {
         let selected = ($combined_list | from json | where title == $choice | first)
         if $selected.address != "" {

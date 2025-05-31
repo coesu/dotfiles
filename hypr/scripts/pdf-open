@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-file=$(fd -e pdf -I . ~/ | wofi -d)
+file=$(fd -e pdf -I . ~/ | anyrun --plugins libstdin.so)
 echo $file
 xdg-open "$file"
