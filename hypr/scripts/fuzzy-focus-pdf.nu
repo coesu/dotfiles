@@ -5,7 +5,7 @@ def focus_or_open_file [] {
     let target_dir2 = $"/home/lars/Zotero/storage"
 
     let open_files = hyprctl clients -j | from json | each {|client|
-        if $client.title != "" and $client.class == "sioyek" {
+        if $client.title != "" and $client.class == "org.pwmt.zathura" {
             let file_name = ($client.title | split row "/" | last)
             {title: $file_name, address: $"address:($client.address)"}
         }

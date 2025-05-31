@@ -1,0 +1,2 @@
+!#/bin/sh
+ydotool type $(grep -v '^#' ~/test.txt | wmenu -i | cut -d' ' -f1)

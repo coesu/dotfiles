@@ -1,0 +1,8 @@
+#!/usr/bin/sh
+grim -g "$(slurp)" /tmp/qr-screenshot.png
+
+qr_data=$(zbarimg -q --raw /tmp/qr-screenshot.png)
+
+echo "$qr_data" | wl-copy
+
+rm /tmp/qr-screenshot.png

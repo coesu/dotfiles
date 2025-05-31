@@ -3,7 +3,7 @@
 ln -s ~/dotfiles/helix ~/.config/helix
 
 DOTFILES_DIR=~/dotfiles
-CONFIGS="helix nvim zsh starship.toml kitty hypr waybar"
+CONFIGS="helix nvim zsh starship.toml kitty hypr waybar mako"
 FILES=".tmux.conf .zshenv"
 
 for config in $CONFIGS; do
