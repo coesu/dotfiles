@@ -1,0 +1,7 @@
+#!/bin/sh
+
+wlr-randr --output eDP-1 --pos 0,0 --scale 1.0 &
+wlr-randr --output HDMI-A-1 --pos 0,0 --scale 1.33 &
+wlr-randr --output DP-1 --pos 0,0 --scale 1.33 &
+
+

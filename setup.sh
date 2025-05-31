@@ -3,7 +3,7 @@
 ln -s ~/dotfiles/helix ~/.config/helix
 
 DOTFILES_DIR=~/dotfiles
-CONFIGS="helix nvim hypr kitty waybar zsh starship.toml"
+CONFIGS="helix nvim zsh starship.toml"
 FILES=".tmux.conf .zshenv"
 
 for config in $CONFIGS; do
@@ -15,8 +15,6 @@ for config in $CONFIGS; do
     ln -s "$src" "$dest"
     echo "Linked $rsc -> $dest"
 done
-
-
 
 for file in $FILES; do
     src="$DOTFILES_DIR/$file"
