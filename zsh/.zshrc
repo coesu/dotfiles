@@ -15,6 +15,7 @@ zstyle :compinstall filename '/home/lars/.config/zsh/.zshrc'
 export PATH=$PATH:/home/lars/.cargo/bin
 export PATH=$PATH:/home/lars/.local/bin
 export PATH=$PATH:/home/lars/.juliaup/bin
+export PATH=$PATH:/home/lars/.local/juliaup/bin
 
 alias pacman="sudo pacman"
 alias vim="nvim"
