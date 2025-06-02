@@ -17,7 +17,7 @@ menu(){
 }
 
 main() {
-  choice=$(menu | wmenu | cut -d. -f1)
+  choice=$(menu | wmenu -i -l 10 | cut -d. -f1)
 
   case $choice in
     1)
