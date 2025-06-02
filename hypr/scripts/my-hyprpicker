@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-FORMAT=$(echo $'rgb\nhex\nhsl\nhsv' | anyrun --plugins libstdin.so)
+FORMAT=$(echo $'rgb\nhex\nhsl\nhsv' | wmenu)
 COLOR=$(hyprpicker -f $FORMAT)
 echo "${COLOR}" | wl-copy -n
 notify-send "Color picked ${COLOR}"

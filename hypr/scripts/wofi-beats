@@ -1,25 +1,5 @@
 #!/usr/bin/env bash
 
-## Files
-CONFIG="$HOME/.config/hypr/wofi/config"
-STYLE="$HOME/.config/hypr/wofi/style.css"
-COLORS="$HOME/.config/hypr/wofi/colors"
-
-### Wofi Command
-# wofi_command="wofi --show dmenu \
-#       --conf ${CONFIG} --style ${STYLE} --color ${COLORS} \
-#       --width=350 --height=380 \
-#       --cache-file=/dev/null \
-#       --hide-scroll --no-actions \
-#       --define=matching=fuzzy"
-## Wofi Command
-wofi_command="wofi --show dmenu \
-      --width=350 --height=380 \
-      --cache-file=/dev/null \
-      --hide-scroll --no-actions \
-      --define=matching=fuzzy"
-
-
 notification(){
   notify-send "Lofi Stream" "Now Playing: Lofi Radio"
 }
@@ -37,7 +17,7 @@ menu(){
 }
 
 main() {
-  choice=$(menu | ${wofi_command} | cut -d. -f1)
+  choice=$(menu | wmenu | cut -d. -f1)
 
   case $choice in
     1)

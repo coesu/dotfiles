@@ -1,8 +1,12 @@
 #!/usr/bin/sh
+
+name = $(wmenu < /dev/null)
+
 grim -g "$(slurp)" /tmp/qr-screenshot.png
 
 qr_data=$(zbarimg -q --raw /tmp/qr-screenshot.png)
 
-echo "$qr_data" | wl-copy
+echo "$qr_data" | pass otp add "$name" && echo "$name" >> ~/otp-list
 
 rm /tmp/qr-screenshot.png
+
