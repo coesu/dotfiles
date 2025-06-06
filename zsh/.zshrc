@@ -4,6 +4,7 @@ HISTSIZE=10000
 SAVEHIST=10000
 
 export EDITOR=nvim
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 bindkey -v
 
 autoload edit-command-line; zle -N edit-command-line
@@ -27,9 +28,11 @@ alias svim='sudo -E nvim'
 
 alias drag="dragon-drop -a -x"
 
-alias ls="exa"
-alias ll="exa -l"
-alias la="exa -la"
+alias ls="ls --color=auto"
+alias ll="ls --color=auto -l"
+alias la="ls --color=auto -la"
+# alias ll="eza -l"
+# alias la="eza -la"
 
 alias mv='mv -iv'
 alias cp='cp -iv'

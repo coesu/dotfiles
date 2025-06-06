@@ -3,6 +3,7 @@
     "position": "left", // Waybar position (top|bottom|left|right)
     "spacing": 8, // Gaps between modules (4px)
     "modules-left": ["hyprland/workspaces"],
+
     // "modules-center": ["river/window"],
     "modules-right": ["wireplumber", "backlight", "battery", "tray", "clock"],
     // Modules configuration
