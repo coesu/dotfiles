@@ -28,11 +28,9 @@ alias svim='sudo -E nvim'
 
 alias drag="dragon-drop -a -x"
 
-alias ls="ls --color=auto"
-alias ll="ls --color=auto -l"
-alias la="ls --color=auto -la"
-# alias ll="eza -l"
-# alias la="eza -la"
+alias ls="eza"
+alias ll="eza -l"
+alias la="eza -la"
 
 alias mv='mv -iv'
 alias cp='cp -iv'
