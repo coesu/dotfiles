@@ -4,7 +4,7 @@ HISTSIZE=10000
 SAVEHIST=10000
 
 export EDITOR=nvim
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+eval $(ssh-agent)
 bindkey -v
 
 autoload edit-command-line; zle -N edit-command-line
