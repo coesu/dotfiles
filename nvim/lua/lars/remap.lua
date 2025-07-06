@@ -70,6 +70,11 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.keymap.set("n", "<leader>r", '<cmd>!tmux send-keys -t 1 Up Enter<CR><CR>')
 
+vim.keymap.set('v', '<leader>dc', function()
+    vim.cmd([['<,'>s/\s*#.*\s*$//g | '<,'>g/^\s*$/d]])
+end, { desc = 'Delete comments in visual selection' })
+
+
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
 vim.keymap.set("n", "<leader>E", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })

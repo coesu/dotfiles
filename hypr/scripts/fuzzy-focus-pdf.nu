@@ -2,7 +2,6 @@
 
 def focus_or_open_file [] {
     let target_dir = $"/home/lars/Zotero/storage/**/*.pdf"
-    let target_dir2 = $"/home/lars/Zotero/storage"
 
     let open_files = hyprctl clients -j | from json | each {|client|
         if $client.title != "" and $client.class == "org.pwmt.zathura" {

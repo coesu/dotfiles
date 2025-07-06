@@ -7,6 +7,8 @@ export EDITOR=nvim
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 bindkey -v
 
+export GEMINI_API_KEY=$(cat ~/gemini-api)
+
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
