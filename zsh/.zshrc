@@ -4,8 +4,18 @@ HISTSIZE=10000
 SAVEHIST=10000
 
 export EDITOR=nvim
-eval $(ssh-agent)
 bindkey -v
+
+# Start ssh-agent if not running
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+  mkdir -p "$XDG_RUNTIME_DIR"
+  ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
+fi
+
+# Source the environment if needed
+if [ ! -S "$SSH_AUTH_SOCK" ] && [ -f "$XDG_RUNTIME_DIR/ssh-agent.env" ]; then
+  source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
+fi
 
 export GEMINI_API_KEY=$(cat ~/gemini-api)
 
@@ -23,6 +33,7 @@ export PATH=$PATH:/home/lars/.cargo/bin
 export PATH=$PATH:/home/lars/.local/bin
 export PATH=$PATH:/home/lars/.juliaup/bin
 export PATH=$PATH:/home/lars/.local/juliaup/bin
+export PATH=$PATH:/home/lars/.pixi/bin
 
 alias pacman="sudo pacman"
 alias vim="nvim"
