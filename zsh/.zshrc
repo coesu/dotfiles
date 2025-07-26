@@ -6,15 +6,12 @@ SAVEHIST=10000
 export EDITOR=nvim
 bindkey -v
 
-# Start ssh-agent if not running
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-  mkdir -p "$XDG_RUNTIME_DIR"
-  ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
+    ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
 fi
 
-# Source the environment if needed
-if [ ! -S "$SSH_AUTH_SOCK" ] && [ -f "$XDG_RUNTIME_DIR/ssh-agent.env" ]; then
-  source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
+if [ -f "$XDG_RUNTIME_DIR/ssh-agent.env" ]; then
+    eval "$(cat "$XDG_RUNTIME_DIR/ssh-agent.env")" >/dev/null
 fi
 
 export GEMINI_API_KEY=$(cat ~/gemini-api)
