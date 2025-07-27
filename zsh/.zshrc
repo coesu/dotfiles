@@ -4,7 +4,6 @@ HISTSIZE=10000
 SAVEHIST=10000
 
 export EDITOR=nvim
-eval $(ssh-agent)
 bindkey -v
 
 autoload edit-command-line; zle -N edit-command-line
@@ -21,6 +20,7 @@ export PATH=$PATH:/home/lars/.cargo/bin
 export PATH=$PATH:/home/lars/.local/bin
 export PATH=$PATH:/home/lars/.juliaup/bin
 export PATH=$PATH:/home/lars/.local/juliaup/bin
+export PATH=$PATH:/home/lars/.pixi/bin
 
 alias pacman="sudo pacman"
 alias vim="nvim"
