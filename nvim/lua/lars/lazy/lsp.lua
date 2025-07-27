@@ -69,6 +69,7 @@ return {
             texlab = true,
             rust_analyzer = true,
             julials = true,
+            mojo = true,
             -- julials = {
             -- 	on_new_config = function(new_config, _)
             -- 		local julia = vim.fn.expand("~/.julia/environments/nvim-lspconfig/bin/julia")

@@ -6,6 +6,16 @@ SAVEHIST=10000
 export EDITOR=nvim
 bindkey -v
 
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
+fi
+
+if [ -f "$XDG_RUNTIME_DIR/ssh-agent.env" ]; then
+    eval "$(cat "$XDG_RUNTIME_DIR/ssh-agent.env")" >/dev/null
+fi
+
+export GEMINI_API_KEY=$(cat ~/gemini-api)
+
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
