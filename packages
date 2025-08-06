@@ -14,9 +14,7 @@ tmux
 network-manager-applet
 bluez
 bluez-utils
-bluez-runit
 blueman
-artix-archlinux-support
 nextcloud-client
 hypridle
 hyprpaper
@@ -35,3 +33,7 @@ discord
 mpv
 wl-clipboard
 gitui
+eza
+starship
+skim
+btop
