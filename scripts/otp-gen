@@ -1,6 +1,6 @@
 #!/usr/bin/sh
 
-name=$(wmenu < /dev/null)
+name=$(fuzzel --dmenu < /dev/null)
 
 grim -g "$(slurp)" /tmp/qr-screenshot.png
 

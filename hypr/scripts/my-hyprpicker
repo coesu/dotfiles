@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-FORMAT=$(echo $'rgb\nhex\nhsl\nhsv' | wmenu)
+FORMAT=$(echo $'rgb\nhex\nhsl\nhsv' | fuzzel --dmenu)
 COLOR=$(hyprpicker -f $FORMAT)
 echo "${COLOR}" | wl-copy -n
 notify-send "Color picked ${COLOR}"

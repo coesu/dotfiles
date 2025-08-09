@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 # Prompt the user to enter a file extension using wofi
-extension=$(echo -e "txt\npdf\njpg\npng\nmp3\nmp4\ngif\nzip\nrar\nhtml\njs\npy\ncpp\njava\nsh\nrs\ntoml\nyml" | anyrun --plugins libstdin.so )
+extension=$(echo -e "txt\npdf\njpg\npng\nmp3\nmp4\ngif\nzip\nrar\nhtml\njs\npy\ncpp\njava\nsh\nrs\ntoml\nyml" | fuzzel --dmenu )
 
 # Find files with the given extension in the home directory and its subdirectories
-file=$(fd -e "$extension" -I --hidden . ~/ | anyrun --plugins libstdin.so)
+file=$(fd -e "$extension" -I --hidden . ~/ | fuzzel --dmenu)
 
 # Open the selected file
 xdg-open "$file"

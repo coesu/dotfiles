@@ -1,7 +1,7 @@
 !#/usr/bin/sh
 
 DOTFILES_DIR=~/dotfiles
-CONFIGS="helix nvim zsh starship.toml kitty hypr waybar mako anyrun zathura foot"
+CONFIGS="helix nvim zsh starship.toml kitty hypr waybar mako anyrun zathura foot fuzzel"
 FILES=".tmux.conf .zshenv"
 BINS="scripts hypr/scripts"
 

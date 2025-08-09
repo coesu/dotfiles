@@ -74,7 +74,7 @@ def focus_or_open_file [] {
 
     let combined_list = ($open_files ++ ($directory_files | uniq-by title))
 
-    let choice = $combined_list | select title | get title | to text | wmenu -l 10 -i
+    let choice = $combined_list | select title | get title | to text | fuzzel --dmenu
 
     if $choice != "" {
         let selected = ($combined_list | where title == $choice | first)

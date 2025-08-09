@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-file=$(fd -e pdf -I . ~/ | wmenu -l 10 -i)
+file=$(fd -e pdf -I . ~/ | fuzzel --dmenu)
 echo $file
 xdg-open "$file"

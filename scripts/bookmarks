@@ -1,2 +1,2 @@
 #!/bin/sh
-ydotool type $(grep -v '^#' ~/test.txt | wmenu -i | cut -d' ' -f1)
+ydotool type $(grep -v '^#' ~/test.txt | fuzzel --dmenu | cut -d' ' -f1)
