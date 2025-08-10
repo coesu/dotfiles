@@ -2,6 +2,7 @@
 # Author: Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)
 
 set default-bg                  "#1d2021"
+set default-bg                  "#000000"
 set default-fg                  "#3c3836"
 
 set statusbar-fg                "#bdae93"
