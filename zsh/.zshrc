@@ -14,7 +14,9 @@ if [ -f "$XDG_RUNTIME_DIR/ssh-agent.env" ]; then
     eval "$(cat "$XDG_RUNTIME_DIR/ssh-agent.env")" >/dev/null
 fi
 
-export GEMINI_API_KEY=$(cat ~/gemini-api)
+if [ -f ~/.secrets/api-keys ]; then
+    source ~/.secrets/api-keys
+fi
 
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
@@ -75,4 +77,4 @@ fi
 unset __mamba_setup
 # <<< mamba initialize <<<
 eval "$(starship init zsh)"
-source /usr/share/nvm/init-nvm.sh
+# source /usr/share/nvm/init-nvm.sh

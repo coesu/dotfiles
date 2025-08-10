@@ -149,7 +149,7 @@ set $menu fuzzel
 
     # Switch the current container between different layout styles
     bindsym $mod+s layout stacking
-    bindsym $mod+w layout tabbed
+    bindsym $mod+t layout tabbed
     bindsym $mod+e layout toggle split
 
     # Make the current focus fullscreen
@@ -183,16 +183,16 @@ mode "resize" {
     # right will grow the containers width
     # up will shrink the containers height
     # down will grow the containers height
-    bindsym $left resize shrink width 10px
-    bindsym $down resize grow height 10px
-    bindsym $up resize shrink height 10px
-    bindsym $right resize grow width 10px
+    bindsym $left resize shrink width 50px
+    bindsym $down resize grow height 50px
+    bindsym $up resize shrink height 50px
+    bindsym $right resize grow width 50px
 
     # Ditto, with arrow keys
-    bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym Right resize grow width 10px
+    bindsym Left resize shrink width 50px
+    bindsym Down resize grow height 50px
+    bindsym Up resize shrink height 50px
+    bindsym Right resize grow width 50px
 
     # Return to default mode
     bindsym Return mode "default"
@@ -226,7 +226,7 @@ bar {
 
     colors {
         statusline #ffffff
-        background #323232
+        background #000000
         inactive_workspace #32323200 #32323200 #ffffff
         focused_workspace #32323200 #83A598 #000000
     }
@@ -251,7 +251,12 @@ bindsym $mod+Shift+f exec $term -e $sc/tmux-sessionizer
 
 bindsym $mod+Shift+x exec hyprlock
 
-exec wl-paste -t text --watch clipman store --no-persist
+bindsym $mod+Shift+s exec grim -g "$(slurp)" - | swappy -f -
+bindsym $mod+c exec grim -g "$(slurp)" - | wl-copy
+
+exec wl-paste --type text --watch cliphist store
+exec wl-paste --type image --watch cliphist store
+bindsym $mod+Shift+v exec $sc/cliphist-fuzzel
 
 for_window [title=".*Bitwarden Password Manager.*"] floating enable
 for_window [title="(?i)(?:copying|deleting|moving)"] floating enable
@@ -268,7 +273,7 @@ for_window [title="nvim-scratch"] \
     scratchpad show
 
 bindsym $mod+Shift+n exec foot --title nvim-scratch --working-directory ~/.config/nvim -e nvim -c "Telescope live_grep"
-bindsym $mod+Shift+s exec foot --title nvim-scratch --working-directory ~/.config/sway -e nvim config
+bindsym $mod+Shift+y exec foot --title nvim-scratch --working-directory ~/.config/sway -e nvim config
 bindsym $mod+Shift+b exec foot --title nvim-scratch btop
 
 seat seat0 xcursor_theme Bibata-Modern-Ice 24
