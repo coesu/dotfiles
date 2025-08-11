@@ -1,6 +1,6 @@
 default-timeout=5000
 
-font=Cozette 11
+font=JetBrainsMonoNerdFont 11
 sort=-time
 output=DP-2
 layer=overlay
