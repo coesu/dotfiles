@@ -40,9 +40,9 @@ alias svim='sudo -E nvim'
 
 alias drag="dragon-drop -a -x"
 
-alias ls="eza"
-alias ll="eza -l"
-alias la="eza -la"
+alias ls="eza --icons=auto"
+alias ll="eza -l --icons=auto"
+alias la="eza -la --icons=auto"
 
 alias mv='mv -iv'
 alias cp='cp -iv'
