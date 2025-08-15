@@ -22,10 +22,10 @@ vim.keymap.set("n", "<leader>-", "<cmd>split<CR>", { desc = "split" })
 vim.keymap.set("n", "<leader>v", "<cmd>vsplit<CR>", { desc = "split" })
 
 -- resize
-vim.keymap.set("n", "<S-C-j>", "<cmd>resize +10<CR>")
-vim.keymap.set("n", "<S-C-k>", "<cmd>resize -10<CR>")
-vim.keymap.set("n", "<S-C-h>", "<cmd>vertical resize -10<CR>")
-vim.keymap.set("n", "<S-C-l>", "<cmd>vertical resize +10<CR>")
+vim.keymap.set("n", "<M-j>", "<cmd>resize +10<CR>")
+vim.keymap.set("n", "<M-k>", "<cmd>resize -10<CR>")
+vim.keymap.set("n", "<M-h>", "<cmd>vertical resize -10<CR>")
+vim.keymap.set("n", "<M-l>", "<cmd>vertical resize +10<CR>")
 
 -- Visual --
 -- Stay in indent mode
