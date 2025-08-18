@@ -11,8 +11,4 @@ vim.g.vimtex_quickfix_mode = 0
 vim.opt_local.conceallevel = 2
 vim.g.tex_conceal = "abdmg"
 
--- Add any custom keymappings for LaTeX files
-vim.keymap.set("n", "<leader>lc", "<cmd>VimtexCompile<CR>", { buffer = true })
-vim.keymap.set("n", "<leader>lv", "<cmd>VimtexView<CR>", { buffer = true })
-
 vim.keymap.set({ "i", "n" }, "<M-s>", "<c-g>u<Esc>[s1z=`]a<c-g>u", { buffer = true })

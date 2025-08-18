@@ -34,6 +34,8 @@ export PATH=$PATH:/home/lars/.juliaup/bin
 export PATH=$PATH:/home/lars/.local/juliaup/bin
 export PATH=$PATH:/home/lars/.pixi/bin
 
+export MANPAGER="nvim +Man!"
+
 alias pacman="sudo pacman"
 alias vim="nvim"
 alias svim='sudo -E nvim'
