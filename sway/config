@@ -25,7 +25,9 @@ set $menu fuzzel
 #
 # Example configuration:
 #
-output HDMI-A-1 resolution 1920x1080 position 1920,0 transform 270
+# output HDMI-A-1 resolution 1920x1080 position 1920,0 transform 270
+output HDMI-A-1 resolution 1920x1080 position 1920,0
+output DP-1 scale 1.25
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
@@ -291,10 +293,10 @@ set $sa ~/.local/share/applications
 
 bindsym $mod+Alt+t exec $sa/chatgpt --title nvim-scratch
 
-exec dbus-launch pipewire
-exec dbus-launch pipewire-pulse
-exec dbus-launch wireplumber
-exec nextcloud
+# exec dbus-launch pipewire
+# exec dbus-launch pipewire-pulse
+# exec dbus-launch wireplumber
+exec syncthing
 
 seat seat0 xcursor_theme Bibata-Modern-Ice 24
 
