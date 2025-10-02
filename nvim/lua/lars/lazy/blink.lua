@@ -24,7 +24,7 @@ return {
 
         opts = {
             keymap = {
-                preset = "default",
+                preset = "none",
                 ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
                 ["<C-e>"] = { "hide" },
                 ["<C-o>"] = { "select_and_accept" },
