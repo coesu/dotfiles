@@ -37,7 +37,7 @@ return {
             workspaces = {
                 {
                     name = "main",
-                    path = "~/Nextcloud/obsidian",
+                    path = "~/Syncthing/obsidian",
                 },
             },
             notes_subdir = "notes",

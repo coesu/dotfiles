@@ -37,7 +37,7 @@ end
 
 -- Main citation picker
 local function insert_citation(cite_command)
-    local bibfile = vim.fn.expand("~/Nextcloud/master-thesis/thesis/master-thesis.bib") -- Change path if needed
+    local bibfile = vim.fn.expand("~/Syncthing/master-thesis/thesis/master-thesis.bib")
     local entries = parse_bib_entries(bibfile)
 
     pickers.new({}, {
