@@ -278,12 +278,12 @@ for_window [title="nvim-scratch"] \
     move scratchpad, \
     scratchpad show
 
-for_window [title="ChatGPT"] \
-    floating enable, \
-    resize set 1800 1200, \
-    move position center, \
-    move scratchpad, \
-    scratchpad show
+# for_window [title="ChatGPT"] \
+#     floating enable, \
+#     resize set 1800 1200, \
+#     move position center, \
+#     move scratchpad, \
+#     scratchpad show
 
 bindsym $mod+Shift+n exec foot --title nvim-scratch --working-directory ~/.config/nvim -e nvim -c "Telescope live_grep"
 bindsym $mod+Shift+y exec foot --title nvim-scratch --working-directory ~/.config/sway -e nvim config
