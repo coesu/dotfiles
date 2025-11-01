@@ -65,10 +65,17 @@ compinit
 source /home/lars/.config/zsh/skim/completion.zsh
 source /home/lars/.config/zsh/skim/keybinds.zsh
 
-source /home/lars/.config/zsh/zsh-completions/zsh-completions.plugin.zsh
-source /home/lars/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+### Zinit ###
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+if [[ ! -d $ZINIT_HOME ]]; then
+  mkdir -p "$(dirname $ZINIT_HOME)"
+  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+source "${ZINIT_HOME}/zinit.zsh"
 
-source /home/lars/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-syntax-highlighting
 
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'micromamba shell init' !!

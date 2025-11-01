@@ -43,6 +43,4 @@ for dir in $BINS; do
     done
 done
 
-if command -v git >/dev/null 2>&1; then
-    git -C "$DOTFILES_DIR" submodule update --init --recursive
-fi
+# Zsh plugins are now managed by Zinit.
