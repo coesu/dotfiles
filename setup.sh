@@ -1,4 +1,6 @@
-!#/usr/bin/sh
+#!/usr/bin/env sh
+
+set -e
 
 DOTFILES_DIR=~/dotfiles
 CONFIGS="helix nvim zsh starship.toml kitty hypr waybar mako anyrun zathura foot fuzzel"
@@ -40,3 +42,7 @@ for dir in $BINS; do
         echo "Linked $file -> $dest"
     done
 done
+
+if command -v git >/dev/null 2>&1; then
+    git -C "$DOTFILES_DIR" submodule update --init --recursive
+fi
