@@ -296,7 +296,7 @@ bindsym $mod+Alt+t exec $sa/chatgpt --title nvim-scratch
 # exec dbus-launch pipewire
 # exec dbus-launch pipewire-pulse
 # exec dbus-launch wireplumber
-exec syncthing
+exec syncthing --no-browser
 
 seat seat0 xcursor_theme Bibata-Modern-Ice 24
 
