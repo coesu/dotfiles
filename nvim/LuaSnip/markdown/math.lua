@@ -1,11 +1,11 @@
-local helpers = require("lars.luasnip-helper-funcs")
+local helpers = require("user.luasnip-helper-funcs")
 local get_visual = helpers.get_visual
 
 -- Math con detection
 -- in_mathzone = function() return vim.fn['vimtex#syntax#in_mathzone']() == 1 end
 -- in_text = function() return not tex.in_mathzone() end
 
-local mathzone = require("lars/detect-mathzone")
+local mathzone = require("user/detect-mathzone")
 local in_mathzone = mathzone.in_mathzone
 
 -- Return snippet tables

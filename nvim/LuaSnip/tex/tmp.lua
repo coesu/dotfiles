@@ -1,11 +1,11 @@
-local helpers = require("lars.luasnip-helper-funcs")
+local helpers = require("user.luasnip-helper-funcs")
 local get_visual = helpers.get_visual
 
 local line_begin = require("luasnip.extras.expand_conditions").line_begin
 
 -- Math context detection
 local tex = {}
-tex.in_mathzone = require("lars/detect-mathzone").in_mathzone
+tex.in_mathzone = require("user/detect-mathzone").in_mathzone
 tex.in_text = function()
 	return not tex.in_mathzone()
 end
