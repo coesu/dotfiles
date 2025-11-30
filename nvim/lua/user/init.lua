@@ -1,5 +1,6 @@
 require("user.set")
 require("user.keymaps")
+require("user.autocmd")
 
 local function load_dir(dir)
     local files = vim.fn.globpath(dir, "*.lua", false, true)

@@ -16,6 +16,10 @@
       "rev": "d45ce94",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
+    "leetcode.nvim": {
+      "rev": "fdd3f91",
+      "src": "https://github.com/kawre/leetcode.nvim"
+    },
     "noice.nvim": {
       "rev": "db24837",
       "src": "https://github.com/folke/noice.nvim"
@@ -51,6 +55,10 @@
     "snacks.nvim": {
       "rev": "59c5545",
       "src": "https://github.com/folke/snacks.nvim"
+    },
+    "supermaven-nvim": {
+      "rev": "07d20fc",
+      "src": "https://github.com/supermaven-inc/supermaven-nvim"
     },
     "undotree": {
       "rev": "0f1c981",
