@@ -58,28 +58,6 @@ alias za=zathura
 
 alias :q=exit
 
-
-autoload -Uz compinit
-compinit
-
-source /home/lars/.config/zsh/skim/completion.zsh
-source /home/lars/.config/zsh/skim/keybinds.zsh
-
-rga-fzf() {
-	RG_PREFIX="rga --files-with-matches"
-	local file
-	file="$(
-		FZF_DEFAULT_COMMAND="$RG_PREFIX '$1'" \
-			fzf --sort --preview="[[ ! -z {} ]] && rga --pretty --context 5 {q} {}" \
-				--phony -q "$1" \
-				--bind "change:reload:$RG_PREFIX {q}" \
-				--preview-window="70%:wrap"
-	)" &&
-	echo "opening $file" &&
-	xdg-open "$file"
-}
-
-
 ### Zinit ###
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 if [[ ! -d $ZINIT_HOME ]]; then
@@ -106,3 +84,18 @@ unset __mamba_setup
 # <<< mamba initialize <<<
 eval "$(starship init zsh)"
 # source /usr/share/nvm/init-nvm.sh
+#
+autoload -Uz compinit
+
+source /home/lars/.config/zsh/skim/completion.zsh
+source /home/lars/.config/zsh/skim/keybinds.zsh
+
+compinit
+
+# generate codex completions if not existent and is executable
+if command -v codex >/dev/null 2>&1; then
+    if [[ ! -s "${fpath[1]}/_codex" ]]; then
+        echo "generating completions for codex"
+        codex completion zsh > "${fpath[1]}/_codex"
+    fi
+fi
