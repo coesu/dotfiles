@@ -12,6 +12,10 @@
       "rev": "a4ab037",
       "src": "https://github.com/saghen/blink.cmp"
     },
+    "fidget.nvim": {
+      "rev": "e32b672",
+      "src": "https://github.com/j-hui/fidget.nvim"
+    },
     "fzf-lua": {
       "rev": "d45ce94",
       "src": "https://github.com/ibhagwan/fzf-lua"
@@ -67,6 +71,10 @@
     "vim-tmux-navigator": {
       "rev": "c45243d",
       "src": "https://github.com/christoomey/vim-tmux-navigator"
+    },
+    "vim-tpipeline": {
+      "rev": "bc6dfc1",
+      "src": "https://github.com/vimpostor/vim-tpipeline"
     },
     "vimtex": {
       "rev": "be9deac3",

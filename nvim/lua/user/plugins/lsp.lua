@@ -6,7 +6,7 @@ vim.lsp.config("lua_ls", {
     settings = { Lua = { workspace = { library = vim.api.nvim_get_runtime_file("", true) } } }
 })
 
-vim.lsp.enable({ 'lua_ls', 'julials', 'rust_analyzer', 'texlab', 'clangd', 'ruff' })
+vim.lsp.enable({ 'lua_ls', 'julials', 'rust_analyzer', 'texlab', 'clangd', 'pyright', 'ruff' })
 
 
 local map = vim.keymap.set
