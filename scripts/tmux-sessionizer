@@ -55,7 +55,7 @@ hydrate() {
 sanity_check
 
 # if TS_SEARCH_PATHS is not set use default
-[[ -n "$TS_SEARCH_PATHS" ]] || TS_SEARCH_PATHS=(~/ ~/Syncthing ~/Syncthing/master-thesis ~/Syncthing/dateien/programming/rust ~/Syncthing/dateien/programming/python/)
+[[ -n "$TS_SEARCH_PATHS" ]] || TS_SEARCH_PATHS=(~/ ~/Syncthing ~/Syncthing/master-thesis ~/Syncthing/dateien/programming/rust ~/Syncthing/dateien/programming/ ~/Syncthing/dateien/programming/python/)
 
 # Add any extra search paths to the TS_SEARCH_PATHS array
 # e.g : EXTRA_SEARCH_PATHS=("$HOME/extra1:4" "$HOME/extra2")
