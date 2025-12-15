@@ -43,4 +43,4 @@ vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
 vim.keymap.set("n", "<leader>c", "<cmd>!cat % | wl-copy<CR>", { desc = "Copy file content" })
 
-vim.keymap.set("n", "<leader>r", '<cmd>!tmux send-keys -t 1 Up Enter<CR>')
+vim.keymap.set("n", "<leader>r", '<cmd>!tmux send-keys -t 1 Up Enter<CR><CR>')

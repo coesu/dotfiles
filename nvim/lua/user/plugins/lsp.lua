@@ -8,6 +8,7 @@ vim.lsp.config("lua_ls", {
 
 vim.lsp.enable({ 'lua_ls', 'julials', 'rust_analyzer', 'texlab', 'clangd', 'pyright', 'ruff' })
 
+vim.diagnostic.config({ virtual_text = true, virtual_lines = false })
 
 local map = vim.keymap.set
 
@@ -35,5 +36,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
         map("n", "<leader>ca", FzfLua.lsp_code_actions)
         map("n", "<leader>ws", FzfLua.lsp_live_workspace_symbols, { desc = "[W]orkspace [S]ymbols" })
         map("n", "gD", FzfLua.lsp_declarations)
+
+		local opts = { buffer = args.buf }
+		vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     end,
 })
