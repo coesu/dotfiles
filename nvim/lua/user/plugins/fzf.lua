@@ -14,7 +14,6 @@ vim.keymap.set("n", "<leader>sg", fzf.live_grep, { desc = "[S]earch by [G]rep" }
 vim.keymap.set("n", "<leader>sd", fzf.diagnostics_workspace, { desc = "[S]earch [D]iagnostics" })
 vim.keymap.set("n", "<leader>sr", fzf.resume, { desc = "[S]earch [R]esume" })
 vim.keymap.set("n", "<leader>s.", fzf.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-vim.keymap.set("n", "<C-P>", fzf.git_files, { desc = "[S]earch git files" })
 vim.keymap.set("n", "<leader><leader>", fzf.buffers, { desc = "[ ] Find existing buffers" })
 vim.keymap.set("n", "<leader>/", function()
     fzf.grep_curbuf({
@@ -25,3 +24,20 @@ end, { desc = "[/] Fuzzily search in current buffer" })
 vim.keymap.set("n", "<leader>sn", function()
     fzf.files({ cwd = vim.fn.stdpath("config") })
 end, { desc = "[S]earch [N]eovim files" })
+
+vim.keymap.set('', '<C-p>', function()
+    opts = {}
+    opts.cmd = 'fd --color=never --hidden --type f --type l --exclude .git'
+    local base = vim.fn.fnamemodify(vim.fn.expand('%'), ':h:.:S')
+    if base ~= '.' then
+        -- if there is no current file,
+        -- proximity-sort can't do its thing
+        opts.cmd = opts.cmd .. (" | proximity-sort %s"):format(vim.fn.shellescape(vim.fn.expand('%')))
+    end
+    opts.fzf_opts = {
+        ['--scheme']   = 'path',
+        ['--tiebreak'] = 'index',
+        -- ["--layout"]   = "default",
+    }
+    require 'fzf-lua'.files(opts)
+end)

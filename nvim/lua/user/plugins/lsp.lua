@@ -5,8 +5,35 @@ vim.pack.add({
 vim.lsp.config("lua_ls", {
     settings = { Lua = { workspace = { library = vim.api.nvim_get_runtime_file("", true) } } }
 })
+vim.lsp.config("rust_analyzer", {
+    settings = {
+        ["rust-analyzer"] = {
+            cargo = {
+                features = "all",
+            },
+            checkOnSave = {
+                enable = true,
+            },
+            check = {
+                command = "clippy",
+            },
+            imports = {
+                group = {
+                    enable = false,
+                },
+            },
+            completion = {
+                postfix = {
+                    enable = false,
+                },
+            },
+        },
+    },
+})
 
 vim.lsp.enable({ 'lua_ls', 'julials', 'rust_analyzer', 'texlab', 'clangd', 'pyright', 'ruff' })
+
+
 
 vim.diagnostic.config({ virtual_text = true, virtual_lines = false })
 
@@ -37,7 +64,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         map("n", "<leader>ws", FzfLua.lsp_live_workspace_symbols, { desc = "[W]orkspace [S]ymbols" })
         map("n", "gD", FzfLua.lsp_declarations)
 
-		local opts = { buffer = args.buf }
-		vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+        local opts = { buffer = args.buf }
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     end,
 })
