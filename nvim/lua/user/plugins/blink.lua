@@ -1,4 +1,20 @@
-vim.pack.add({ { src = "https://github.com/saghen/blink.cmp", build = "cargo build --relese" } })
+local function build_blink(ev)
+    local name, kind = ev.data.spec.name, ev.data.kind
+
+    if name == 'blink.cmp' and (kind == 'install' or kind == 'update') then
+        vim.notify('Building blink.cmp', vim.log.levels.INFO)
+        print(ev.data.path)
+        local obj = vim.system({ 'cargo', 'build', '--release' }, { cwd = ev.data.path }):wait()
+        if obj.code == 0 then
+            vim.notify('Building blink.cmp done', vim.log.levels.INFO)
+        else
+            vim.notify('Building blink.cmp failed', vim.log.levels.ERROR)
+        end
+    end
+end
+
+vim.api.nvim_create_autocmd('PackChanged', { callback = build_blink })
+vim.pack.add({ "https://github.com/saghen/blink.cmp" })
 
 require("blink.cmp").setup({
     keymap = {
@@ -30,4 +46,7 @@ require("blink.cmp").setup({
 
     },
     fuzzy = { implementation = "rust" },
+    cmdline = { enabled = true },
+    completion = {
+    }
 })
