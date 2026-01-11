@@ -8,3 +8,6 @@
 nvim/spell/
 nvim/nvim-pack-lock.json
 completions/
+.DS_STORE
+.zcompcache
+.zsh_sessions

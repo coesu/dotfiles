@@ -26,8 +26,8 @@ sanity_check() {
         exit 1
     fi
 
-    if ! command -v sk &>/dev/null; then
-        echo "skim is not installed. Please install it first."
+    if ! command -v fzf &>/dev/null; then
+        echo "fzf is not installed. Please install it first."
         exit 1
     fi
 }
@@ -55,7 +55,7 @@ hydrate() {
 sanity_check
 
 # if TS_SEARCH_PATHS is not set use default
-[[ -n "$TS_SEARCH_PATHS" ]] || TS_SEARCH_PATHS=(~/ ~/Syncthing ~/Syncthing/master-thesis ~/Syncthing/dateien/programming/rust ~/Syncthing/dateien/programming/ ~/Syncthing/dateien/programming/python/)
+[[ -n "$TS_SEARCH_PATHS" ]] || TS_SEARCH_PATHS=(~/)
 
 # Add any extra search paths to the TS_SEARCH_PATHS array
 # e.g : EXTRA_SEARCH_PATHS=("$HOME/extra1:4" "$HOME/extra2")
@@ -87,18 +87,23 @@ find_dirs() {
             path="$entry"
         fi
 
-        [[ -d "$path" ]] && find "$path" -mindepth 1 -maxdepth "${depth:-${TS_MAX_DEPTH:-1}}" -path '*/.git' -prune -o -type d -print
+        [[ -d "$path" ]] && find "$path" -mindepth 1 -maxdepth "${depth:-${TS_MAX_DEPTH:-1}}" -path '*/.*' -prune -o -type d -print | sed "s|^$HOME/||"
     done
 }
 
 if [[ $# -eq 1 ]]; then
     selected="$1"
 else
-    selected=$(find_dirs | sk)
+    selected=$(find_dirs | fzf --select-1 --bind 'one:accept')
 fi
 
 if [[ -z $selected ]]; then
     exit 0
+fi
+
+# Restore home prefix if path doesn't start with / or [TMUX]
+if [[ ! "$selected" =~ ^/ ]] && [[ ! "$selected" =~ ^\[TMUX\] ]]; then
+    selected="$HOME/$selected"
 fi
 
 if [[ "$selected" =~ ^\[TMUX\]\ (.+)$ ]]; then

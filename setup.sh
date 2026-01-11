@@ -16,6 +16,7 @@ mkdir -p "$HOME/.local/bin"
 
 # Configuration directories to link to ~/.config
 CONFIGS="helix nvim zsh starship.toml kitty hypr waybar mako anyrun zathura foot fuzzel"
+CONFIGS="helix nvim zsh starship.toml tmux-sessionizer"
 # Individual files to link to ~
 FILES=".tmux.conf .zshenv"
 # Directories containing binaries to link to ~/.local/bin
