@@ -19,7 +19,7 @@ require("nvim-treesitter.configs").setup({
     sync_install = false,
     modules = {},
     ignore_install = {},
-    auto_install = true,
+    auto_install = false,
     highlight = {
         enable = true,
         additional_vim_regex_highlighting = { "markdown" },
@@ -37,7 +37,7 @@ require("nvim-treesitter.configs").setup({
     textobjects = {
         select = {
             enable = true,
-            lookahead = true,             -- Automatically jump forward to textobj
+            lookahead = true, -- Automatically jump forward to textobj
             keymaps = {
                 ["af"] = "@function.outer",
                 ["if"] = "@function.inner",
@@ -49,3 +49,16 @@ require("nvim-treesitter.configs").setup({
     },
 
 })
+
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+
+parser_config.latex = {
+    install_info = {
+        -- The path to your local grammar folder
+        url = "~/.local/share/nvim/tree-sitter-latex",
+        files = { "src/parser.c" }, -- add "src/scanner.c" if your grammar has one
+        -- Crucial: Tell Neovim NOT to run 'tree-sitter generate'
+        requires_generate_from_grammar = false,
+    },
+    filetype = "tex",
+}

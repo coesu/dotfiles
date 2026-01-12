@@ -7,6 +7,6 @@ vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle Undotr
 vim.pack.add({ "https://github.com/supermaven-inc/supermaven-nvim" })
 
 vim.pack.add({ "https://github.com/lervag/vimtex" })
-vim.g.vimtex_view_method = 'zathura'
+vim.g.vimtex_view_method = 'sioyek'
 
 vim.pack.add({ "https://github.com/vimpostor/vim-tpipeline" })

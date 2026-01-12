@@ -5,11 +5,11 @@
       "src": "https://github.com/L3MON4D3/LuaSnip"
     },
     "base16-nvim": {
-      "rev": "e05bcb99951d8ae4ecbf4ae053922fd2be6263a5",
+      "rev": "e92143368fc563f7201ba924079b5bfae3d35494",
       "src": "https://github.com/RRethy/base16-nvim"
     },
     "blink.cmp": {
-      "rev": "10c164bbdf065f9781b6cc2f7d068c016276055b",
+      "rev": "6a4914ca987453464a7dfc7fc237a992adb567d0",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "fidget.nvim": {
@@ -17,11 +17,11 @@
       "src": "https://github.com/j-hui/fidget.nvim"
     },
     "fzf-lua": {
-      "rev": "19d7020b700879759d7f834fc717dde086f673a7",
+      "rev": "a03d68e40eea835a1cdbd9f93049708dab3621e6",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "leetcode.nvim": {
-      "rev": "fdd3f91",
+      "rev": "fdd3f91800b3983e27bc9fcfb99cfa7293d7f11a",
       "src": "https://github.com/kawre/leetcode.nvim"
     },
     "lsp_signature.nvim": {
@@ -33,15 +33,15 @@
       "src": "https://github.com/folke/noice.nvim"
     },
     "nui.nvim": {
-      "rev": "de74099",
+      "rev": "de740991c12411b663994b2860f1a4fd0937c130",
       "src": "https://github.com/MunifTanjim/nui.nvim"
     },
     "nvim-lspconfig": {
-      "rev": "41ceb6bba3a40128b7841f5b7f5a9dae7201e823",
+      "rev": "0b38bc74487e73489624d61396af7805af9cc75f",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
-      "rev": "42fc28ba",
+      "rev": "42fc28ba918343ebfd5565147a42a26580579482",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-textobjects": {
@@ -49,11 +49,11 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
     },
     "obsidian.nvim": {
-      "rev": "14e0427",
+      "rev": "14e0427bef6c55da0d63f9a313fd9941be3a2479",
       "src": "https://github.com/epwalsh/obsidian.nvim"
     },
     "plenary.nvim": {
-      "rev": "b9fd522",
+      "rev": "b9fd5226c2f76c951fc8ed5923d85e4de065e509",
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
     "sidekick.nvim": {
@@ -65,7 +65,7 @@
       "src": "https://github.com/folke/snacks.nvim"
     },
     "supermaven-nvim": {
-      "rev": "07d20fc",
+      "rev": "07d20fce48a5629686aefb0a7cd4b25e33947d50",
       "src": "https://github.com/supermaven-inc/supermaven-nvim"
     },
     "undotree": {
@@ -73,15 +73,15 @@
       "src": "https://github.com/mbbill/undotree"
     },
     "vim-tmux-navigator": {
-      "rev": "c45243d",
+      "rev": "c45243dc1f32ac6bcf6068e5300f3b2b237e576a",
       "src": "https://github.com/christoomey/vim-tmux-navigator"
     },
     "vim-tpipeline": {
-      "rev": "bc6dfc1",
+      "rev": "bc6dfc10e26a8dd1ec2f0512050a8a0afaa9d090",
       "src": "https://github.com/vimpostor/vim-tpipeline"
     },
     "vimtex": {
-      "rev": "f5c37462c690da9a0d05cd12a7b9595b10b56200",
+      "rev": "a50f40783c1cade2e8e2994a9f4a8e038a0a57bc",
       "src": "https://github.com/lervag/vimtex"
     },
     "which-key.nvim": {

@@ -14,12 +14,15 @@ case "$(uname -s)" in
 esac
 
 # SSH agent setup (Linux only - macOS handles this via Keychain)
-if [[ "$OS" == "linux" ]]; then
-    if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-        ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
-    fi
-    if [ -f "$XDG_RUNTIME_DIR/ssh-agent.env" ]; then
-        eval "$(cat "$XDG_RUNTIME_DIR/ssh-agent.env")" >/dev/null
+# Skip in devcontainers (they handle SSH forwarding differently)
+if [[ "$OS" == "linux" ]] && [[ -z "$REMOTE_CONTAINERS" ]] && [[ -z "$CODESPACES" ]] && [[ -z "$DEVCONTAINER" ]]; then
+    if [[ -n "$XDG_RUNTIME_DIR" ]]; then
+        if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+            ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null 2>&1
+        fi
+        if [ -f "$XDG_RUNTIME_DIR/ssh-agent.env" ]; then
+            eval "$(cat "$XDG_RUNTIME_DIR/ssh-agent.env")" >/dev/null
+        fi
     fi
 fi
 
@@ -30,7 +33,10 @@ fi
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
-bindkey -s '^f' "tmux-sessionizer\n"
+# tmux-sessionizer (only if available)
+if command -v tmux-sessionizer &> /dev/null; then
+    bindkey -s '^f' "tmux-sessionizer\n"
+fi
 
 bindkey -s '^n' "nvim +\"Telescope git_files cwd=.\"\n"
 bindkey '^o' autosuggest-execute
@@ -73,8 +79,11 @@ alias mv='mv -iv'
 alias cp='cp -iv'
 alias rm='rm -iv'
 
-_ask() { fabric -p raw_query "$*"; }
-alias '?'='noglob _ask'
+# fabric AI query (only if available)
+if command -v fabric &> /dev/null; then
+    _ask() { fabric -p raw_query "$*"; }
+    alias '?'='noglob _ask'
+fi
 
 # Clipboard copy function
 copy() {
@@ -89,7 +98,8 @@ alias za=zathura
 
 alias :q=exit
 
-source ~/.config/zsh/skim/keybinds.zsh
+# skim keybinds (only if file exists)
+[[ -f ~/.config/zsh/skim/keybinds.zsh ]] && source ~/.config/zsh/skim/keybinds.zsh
 
 # --- Manual Plugin Management ---
 ZPLUGINS_DIR="${HOME}/.local/share/zsh-plugins"
@@ -155,4 +165,7 @@ if command -v direnv &> /dev/null; then
     eval "$(direnv hook zsh)"
 fi
 
-eval "$(starship init zsh)"
+# Starship prompt
+if command -v starship &> /dev/null; then
+    eval "$(starship init zsh)"
+fi
