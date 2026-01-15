@@ -3,6 +3,8 @@ HISTFILE=~/.cache/zsh/history
 HISTSIZE=10000
 SAVEHIST=10000
 
+export XDG_CONFIG_HOME="$HOME/.config"
+
 export EDITOR=nvim
 bindkey -v
 
@@ -33,10 +35,6 @@ fi
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
-# tmux-sessionizer (only if available)
-if command -v tmux-sessionizer &> /dev/null; then
-    bindkey -s '^f' "tmux-sessionizer\n"
-fi
 
 bindkey -s '^n' "nvim +\"Telescope git_files cwd=.\"\n"
 bindkey '^o' autosuggest-execute
@@ -46,6 +44,15 @@ export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/.juliaup/bin
 export PATH=$PATH:$HOME/.local/juliaup/bin
+
+# tmux-sessionizer (only if available)
+if command -v tmux-sessionizer &> /dev/null; then
+    bindkey -s ^f "tmux-sessionizer\n"
+    # bindkey -s '\en' "tmux-sessionizer -s 0\n"
+    # bindkey -s '\ee' "tmux-sessionizer -s 1\n"
+    # bindkey -s '\ei' "tmux-sessionizer -s 2\n"
+    # bindkey -s '\eo' "tmux-sessionizer -s 3\n"
+fi
 
 if [[ "$OS" == "linux" ]]; then
     export PATH=$PATH:$HOME/.pixi/bin

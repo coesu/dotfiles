@@ -69,7 +69,7 @@ if [ "$IS_DEVCONTAINER" = true ]; then
     CONFIGS="nvim zsh starship.toml"
 elif [ "$OS" = "linux" ]; then
     # Full set for Linux desktop
-    CONFIGS="helix nvim zsh starship.toml kitty hypr waybar mako anyrun zathura foot fuzzel tmux-sessionizer"
+    CONFIGS="helix nvim zsh starship.toml kitty hypr waybar mako anyrun zathura foot fuzzel tmux-sessionizer tmux-sessionizer-creator"
 else
     # macOS set
     CONFIGS="helix nvim zsh starship.toml tmux-sessionizer"

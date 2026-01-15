@@ -1,0 +1,148 @@
+#!/usr/bin/env bash
+# Creates a new directory and starts a tmux session in it
+# Uses the same config file as tmux-sessionizer
+
+CONFIG_FILE_NAME="tmux-sessionizer.conf"
+CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/tmux-sessionizer"
+CONFIG_FILE="$CONFIG_DIR/$CONFIG_FILE_NAME"
+
+# config file example
+# ------------------------
+# # Paths where new directories can be created
+# TS_NEW_DIR_PATHS=(~/projects ~/work ~/personal)
+# ------------------------
+
+if [[ -f "$CONFIG_FILE" ]]; then
+    source "$CONFIG_FILE"
+fi
+
+if [[ -f "$CONFIG_FILE_NAME" ]]; then
+    source "$CONFIG_FILE_NAME"
+fi
+
+sanity_check() {
+    if ! command -v tmux &>/dev/null; then
+        echo "tmux is not installed. Please install it first."
+        exit 1
+    fi
+
+    if ! command -v fzf &>/dev/null; then
+        echo "fzf is not installed. Please install it first."
+        exit 1
+    fi
+}
+
+switch_to() {
+    if [[ -z $TMUX ]]; then
+        tmux attach-session -t "$1"
+    else
+        tmux switch-client -t "$1"
+    fi
+}
+
+has_session() {
+    tmux list-sessions | grep -q "^$1:"
+}
+
+hydrate() {
+    if [ -f "$2/.tmux-sessionizer" ]; then
+        tmux send-keys -t "$1" "source $2/.tmux-sessionizer" c-M
+    elif [ -f "$HOME/.tmux-sessionizer" ]; then
+        tmux send-keys -t "$1" "source $HOME/.tmux-sessionizer" c-M
+    fi
+}
+
+is_tmux_running() {
+    tmux_running=$(pgrep tmux)
+    if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+        return 1
+    fi
+    return 0
+}
+
+sanity_check
+
+# Check if TS_NEW_DIR_PATHS is configured
+if [[ -z "$TS_NEW_DIR_PATHS" || ${#TS_NEW_DIR_PATHS[@]} -eq 0 ]]; then
+    echo "Error: TS_NEW_DIR_PATHS is not configured."
+    echo "Add the following to $CONFIG_FILE:"
+    echo "  TS_NEW_DIR_PATHS=(~/projects ~/work:2)"
+    exit 1
+fi
+
+# Build list of available paths (with subdirectories based on :depth suffix)
+find_base_paths() {
+    for entry in "${TS_NEW_DIR_PATHS[@]}"; do
+        # Check if entry has :number suffix for depth
+        if [[ "$entry" =~ ^([^:]+):([0-9]+)$ ]]; then
+            path="${BASH_REMATCH[1]}"
+            depth="${BASH_REMATCH[2]}"
+        else
+            path="$entry"
+            depth=0
+        fi
+
+        # Expand tilde
+        path="${path/#\~/$HOME}"
+
+        # Always include the base path itself
+        [[ -d "$path" ]] && echo "$path"
+
+        # Find subdirectories if depth > 0
+        if [[ "$depth" -gt 0 ]] && [[ -d "$path" ]]; then
+            fd -t d --min-depth 1 --max-depth "$depth" . "$path" 2>/dev/null
+        fi
+    done
+}
+
+# Select base path using fzf
+base_path=$(find_base_paths | fzf --prompt="Select base path: ")
+
+if [[ -z $base_path ]]; then
+    exit 0
+fi
+
+# Prompt for directory name
+echo -n "Enter directory name: "
+read -r dir_name
+
+if [[ -z $dir_name ]]; then
+    echo "Directory name cannot be empty"
+    exit 1
+fi
+
+# Create full path
+full_path="$base_path/$dir_name"
+
+# Check if directory already exists
+if [[ -d "$full_path" ]]; then
+    echo "Directory already exists: $full_path"
+    echo -n "Switch to existing directory? [y/N]: "
+    read -r confirm
+    if [[ ! $confirm =~ ^[Yy]$ ]]; then
+        exit 0
+    fi
+else
+    # Create the directory
+    mkdir -p "$full_path"
+    if [[ $? -ne 0 ]]; then
+        echo "Failed to create directory: $full_path"
+        exit 1
+    fi
+    echo "Created: $full_path"
+fi
+
+# Create/switch to tmux session
+selected_name=$(basename "$full_path" | tr . _)
+
+if ! is_tmux_running; then
+    tmux new-session -ds "$selected_name" -c "$full_path"
+    hydrate "$selected_name" "$full_path"
+fi
+
+if ! has_session "$selected_name"; then
+    tmux new-session -ds "$selected_name" -c "$full_path"
+    hydrate "$selected_name" "$full_path"
+fi
+
+switch_to "$selected_name"
