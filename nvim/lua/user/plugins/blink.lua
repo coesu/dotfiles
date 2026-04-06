@@ -42,8 +42,14 @@ require("blink.cmp").setup({
             "path",
             "snippets",
             "buffer",
+            "99",
         },
-
+        providers = {
+            ["99"] = {
+                name = "99",
+                module = "99.extensions.blink",
+            },
+        },
     },
     fuzzy = { implementation = "rust" },
     cmdline = { enabled = true },

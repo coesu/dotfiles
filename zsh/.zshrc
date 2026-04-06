@@ -44,6 +44,7 @@ export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/.juliaup/bin
 export PATH=$PATH:$HOME/.local/juliaup/bin
+export PATH=$PATH:$HOME/dotfiles/scripts
 
 # tmux-sessionizer (only if available)
 if command -v tmux-sessionizer &> /dev/null; then
@@ -86,10 +87,9 @@ alias mv='mv -iv'
 alias cp='cp -iv'
 alias rm='rm -iv'
 
-# fabric AI query (only if available)
-if command -v fabric &> /dev/null; then
-    _ask() { fabric -p raw_query "$*"; }
-    alias '?'='noglob _ask'
+# fabric AI query alias (fab and ask scripts are in ~/dotfiles/scripts)
+if command -v ask &> /dev/null; then
+    alias '?'='noglob ask'
 fi
 
 # Clipboard copy function
