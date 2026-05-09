@@ -9,92 +9,61 @@
     font-size: 12pt;
 }
 
-window#waybar, tooltip {
-    background: alpha(@base00, 1.000000);
+window#waybar,
+tooltip {
+    background: alpha(@base00, 1.0);
     color: @base05;
 }
 
 tooltip {
     border-color: @base0D;
 }
+
 #wireplumber,
-#pulseaudio,
-#sndio {
-    padding: 0 5px;
-}
 #wireplumber.muted,
-#pulseaudio.muted,
-#sndio.muted {
+#battery,
+#battery.charging,
+#clock,
+#backlight,
+#tray {
     padding: 0 5px;
 }
-#upower,
-#battery {
-    padding: 0 5px;
+
+#tray image,
+#tray menu image {
+    -gtk-icon-style: symbolic;
 }
-#upower.charging,
-#battery.Charging {
-    padding: 0 5px;
-}
-#network {
-    padding: 0 5px;
-}
-#network.disconnected {
-    padding: 0 5px;
-}
-#user {
-    padding: 0 5px;
-}
-#clock {
-    padding: 0 5px;
-}
-#backlight {
-    padding: 0 5px;
-}
-#cpu {
-    padding: 0 5px;
-}
-#disk {
-    padding: 0 5px;
-}
-#idle_inhibitor {
-    padding: 0 5px;
-}
-#temperature {
-    padding: 0 5px;
-}
-#mpd {
-    padding: 0 5px;
-}
-#language {
-    padding: 0 5px;
-}
-#keyboard-state {
-    padding: 0 5px;
-}
-#memory {
-    padding: 0 5px;
-}
-#window {
-    padding: 0 5px;
-}
+
 .modules-left #workspaces button {
     border-bottom: 3px solid transparent;
+    color: @base04;
 }
+
+.modules-left #workspaces button:hover {
+    background: @base02;
+    color: @base06;
+}
+
+.modules-left #workspaces button.visible {
+    background: @base01;
+    color: @base06;
+}
+
 .modules-left #workspaces button.focused,
 .modules-left #workspaces button.active {
     background: @base03;
+    color: @base07;
 }
-.modules-center #workspaces button {
-    border-bottom: 3px solid transparent;
+
+.modules-left #workspaces button.urgent {
+    background: @base08;
+    color: @base00;
 }
-.modules-center #workspaces button.focused,
-.modules-center #workspaces button.active {
-    border-bottom: 3px solid @base05;
+
+#battery.warning {
+    color: @base0A;
 }
-.modules-right #workspaces button {
-    border-bottom: 3px solid transparent;
-}
-.modules-right #workspaces button.focused,
-.modules-right #workspaces button.active {
-    border-bottom: 3px solid @base05;
+
+#battery.critical {
+    color: @base08;
 }

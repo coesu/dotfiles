@@ -257,8 +257,8 @@ bindsym $mod+Shift+f exec $term -e $sc/tmux-sessionizer
 
 bindsym $mod+Shift+x exec hyprlock
 
-bindsym $mod+Shift+s exec grim -g "$(slurp)" - | swappy -f -
-bindsym $mod+c exec grim -g "$(slurp)" - | wl-copy
+bindsym $mod+Ctrl+Shift+s exec grim -g "$(slurp)" - | swappy -f -
+bindsym $mod+Ctrl+Shift+c exec grim -g "$(slurp)" - | wl-copy
 
 exec wl-paste --type text --watch cliphist store
 exec wl-paste --type image --watch cliphist store

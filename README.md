@@ -51,6 +51,7 @@ To use these dotfiles, you'll need to have the following software installed:
 - `zathura`
 - `fuzzel`
 - `tmux`
+- `wl-clipboard`
 - `git`
 
 ## Repository Structure
