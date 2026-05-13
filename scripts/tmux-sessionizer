@@ -281,6 +281,9 @@ hydrate() {
     if [[ ! -z $session_cmd ]]; then
         log "skipping hydrate for $1 -- using \"$session_cmd\" instead"
         return
+    elif [[ "$1" == *mail* ]]; then
+        log "starting aerc for $1"
+        tmux send-keys -t "$1" "aerc" c-M
     elif [ -f "$2/.tmux-sessionizer" ]; then
         log "sourcing(local) $2/.tmux-sessionizer"
         tmux send-keys -t "$1" "source $2/.tmux-sessionizer" c-M

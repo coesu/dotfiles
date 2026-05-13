@@ -101,6 +101,30 @@ copy() {
     fi
 }
 
+screencopy() {
+    emulate -L zsh
+    setopt local_options null_glob
+
+    local desktop="$HOME/Desktop"
+    local newest=""
+    local file
+    local -a matches=("$desktop"/Screen*(N))
+
+    if (( ${#matches} == 0 )); then
+        echo "No Desktop screenshot matching 'Screen*' found." >&2
+        return 1
+    fi
+
+    for file in "${matches[@]}"; do
+        if [[ -z "$newest" || "$file" -nt "$newest" ]]; then
+            newest="$file"
+        fi
+    done
+
+    printf 'cp %q .\n' "$newest"
+    command cp "$newest" .
+}
+
 alias za=zathura
 
 alias :q=exit
