@@ -1,0 +1,6 @@
+[providers]
+default = [
+  "desktopapplications",
+  "runner",
+  "menus",
+]
