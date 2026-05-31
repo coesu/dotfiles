@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+cliphist_list=$(cliphist list)
+if [ -z "$cliphist_list" ]; then
+  walker --dmenu --inputonly --placeholder "cliphist: please store something first" < /dev/null
+  exit
+fi
+
+item=$(printf '%s\n' "$cliphist_list" | walker --dmenu --placeholder "Search clipboard...")
+[ -z "$item" ] || printf '%s\n' "$item" | cliphist decode | wl-copy

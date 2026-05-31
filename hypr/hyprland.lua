@@ -1,6 +1,11 @@
 local terminal = "ghostty"
 local menu = "walker"
 local browser = "helium-browser"
+local home = os.getenv("HOME") or "/home/lars"
+local scripts_dir = home .. "/.config/hypr/scripts"
+local local_bin = home .. "/.local/bin"
+local otp_list = os.getenv("DOTFILES_OTP_LIST") or home .. "/otp-list"
+local screenshot_dir = os.getenv("DOTFILES_SCREENSHOT_DIR") or home .. "/Pictures/screenshots"
 
 hl.config({
     general = {
@@ -11,10 +16,13 @@ hl.config({
             active_border = "rgba(83A598ff)",
             inactive_border = "rgba(1D2021ff)",
         },
-        layout = "dwindle",
+        layout = "scrolling",
     },
-    dwindle = { preserve_split = true },
+    decoration = {
+        rounding = 0,
+    },
     animations = { enabled = false },
+    -- scrolling = {},
 
     input = {
         kb_layout = "us,de",
@@ -33,6 +41,23 @@ hl.config({
         disable_hyprland_logo = true,
         disable_splash_rendering = true,
         mouse_move_enables_dpms = true,
+        enable_swallow = true,
+        swallow_regex = "^(ghostty|foot)$",
+    },
+    xwayland = {
+        force_zero_scaling = false,
+    },
+    group = {
+        col = {
+            border_active = "rgba(83A598ff)",
+            border_inactive = "rgba(1D2021ff)",
+        },
+        groupbar = {
+            col = {
+                active = "rgba(83A598ff)",
+                inactive = "rgba(1D2021ff)",
+            },
+        },
     },
     ecosystem = {
         no_update_news = true,
@@ -49,6 +74,12 @@ end
 hl.bind(sc({ Mod, "Return" }), hl.dsp.exec_cmd(terminal))
 hl.bind(sc({ Mod, "W" }), hl.dsp.exec_cmd(browser))
 hl.bind(sc({ Mod, "R" }), hl.dsp.exec_cmd(menu))
+hl.bind(sc({ Mod, "S" }), hl.dsp.exec_cmd(scripts_dir .. "/status"))
+hl.bind(sc({ Mod, "F1" }), hl.dsp.exec_cmd(scripts_dir .. "/keybinds-overview"))
+hl.bind(sc({ Mod, "D" }), hl.dsp.exec_cmd(local_bin .. "/walker-hub"))
+
+hl.bind(sc({ "ALT", "CTRL", "Y" }), hl.dsp.exec_cmd(terminal .. " -e ttyper -w 9"))
+hl.bind(sc({ "ALT", "CTRL", "B" }), hl.dsp.exec_cmd("blueman-manager"))
 
 hl.bind(sc({ Mod, "Q" }), hl.dsp.window.close())
 
@@ -90,6 +121,7 @@ for key, dir in pairs(dirs) do
     )
 end
 
+hl.bind("ALT + TAB", hl.dsp.focus({ workspace = "previous" }))
 
 hl.bind(Mod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(Mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
@@ -112,6 +144,25 @@ hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = tr
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
 
+hl.bind(sc({ Mod, "CTRL", "SHIFT", "S" }), hl.dsp.exec_cmd([[grim -g "$(slurp)" - | swappy -f -]]))
+hl.bind(sc({ Mod, "CTRL", "SHIFT", "C" }), hl.dsp.exec_cmd([[grim -g "$(slurp)" - | wl-copy]]))
+hl.bind(
+    sc({ Mod, "CTRL", "SHIFT", "Y" }),
+    hl.dsp.exec_cmd([[mkdir -p "]] .. screenshot_dir .. [[" && grim -g "$(slurp)" "]] .. screenshot_dir .. [[/$(date +'%s.png')"]])
+)
+
+hl.bind(sc({ Mod, "SHIFT", "O" }), hl.dsp.exec_cmd(local_bin .. "/otp-gen"))
+hl.bind(sc({ Mod, "SHIFT", "R" }), hl.dsp.exec_cmd([[pass otp -c "$(cat "]] .. otp_list .. [[" | walker --dmenu)"]]))
+hl.bind(sc({ Mod, "SHIFT", "A" }), hl.dsp.exec_cmd(local_bin .. "/dmenu-pass"))
+hl.bind(sc({ Mod, "SHIFT", "T" }), hl.dsp.exec_cmd(scripts_dir .. "/fuzzy-focus-pdf.nu"))
+hl.bind(sc({ Mod, "SHIFT", "P" }), hl.dsp.exec_cmd(scripts_dir .. "/my-hyprpicker"))
+hl.bind(sc({ Mod, "SHIFT", "G" }), hl.dsp.exec_cmd(scripts_dir .. "/pdf-open"))
+hl.bind(sc({ Mod, "CTRL", "F" }), hl.dsp.exec_cmd(terminal .. " -e tmux-sessionizer"))
+hl.bind(sc({ Mod, "SHIFT", "C" }), hl.dsp.exec_cmd(terminal .. [[ --class fully -e nvim +"ObsidianToday"]]))
+hl.bind(sc({ Mod, "SHIFT", "B" }), hl.dsp.exec_cmd(local_bin .. "/bookmarks"))
+hl.bind(sc({ Mod, "O" }), hl.dsp.exec_cmd(local_bin .. "/dictate-toggle"))
+hl.bind(sc({ Mod, "SHIFT", "V" }), hl.dsp.exec_cmd(local_bin .. "/cliphist-walker"))
+
 hl.bind(sc({ Mod, "X" }), hl.dsp.submap("logout-menu"))
 
 hl.define_submap("logout-menu", function()
@@ -130,14 +181,103 @@ hl.define_submap("logout-menu", function()
     hl.bind("escape", hl.dsp.submap("reset"))
 end)
 
+hl.bind(sc({ Mod, "C" }), hl.dsp.send_shortcut({ mods = "CTRL", key = "Insert" }))
+hl.bind(sc({ Mod, "V" }), hl.dsp.send_shortcut({ mods = "SHIFT", key = "Insert" }))
+hl.bind(sc({ Mod, "X" }), hl.dsp.send_shortcut({ mods = "CTRL", key = "X" }))
+
 hl.window_rule({
     name = "discord, spotify",
-    match = { class = "discord|spotify", },
-    workspace = 5,
+    match = { class = "discord|Spotify|spotify", },
+    workspace = "5 silent",
+})
+
+hl.window_rule({
+    name = "float utilities",
+    match = { class = "yad|nm-connection-editor|pavucontrol|Rofi|polkit-kde-authentication-agent-1|feh|blueman-manager|gksqt|zoom|floating" },
+    float = true,
+})
+
+hl.window_rule({
+    name = "float figures",
+    match = { title = "Figure [1-4]|App" },
+    float = true,
+})
+
+hl.window_rule({
+    name = "mattermost",
+    match = { class = "Mattermost" },
+    workspace = "6 silent",
+})
+
+hl.window_rule({
+    name = "thunderbird",
+    match = { class = "thunderbird" },
+    workspace = "6 silent",
+})
+
+hl.window_rule({
+    name = "nextcloud",
+    match = { class = "com\\.nextcloud\\.desktopclient\\.nextcloud" },
+    workspace = "9 silent",
+})
+
+hl.window_rule({
+    name = "anyconnect",
+    match = { class = "com\\.cisco\\.anyconnect\\.gui" },
+    workspace = "9 silent",
+})
+
+hl.window_rule({
+    name = "fullscreen scratch",
+    match = { class = "fully" },
+    fullscreen = true,
+})
+
+hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })
+hl.workspace_rule({ workspace = "f[1]", gaps_out = 0, gaps_in = 0 })
+
+hl.window_rule({
+    name = "no gaps wtv1",
+    match = { float = false, workspace = "w[tv1]" },
+    border_size = 0,
+    rounding = 0,
+})
+
+hl.window_rule({
+    name = "no gaps f1",
+    match = { float = false, workspace = "f[1]" },
+    border_size = 0,
+    rounding = 0,
+})
+
+hl.window_rule({
+    name = "suppress maximize",
+    match = { class = ".*" },
+    suppress_event = "maximize",
+})
+
+hl.window_rule({
+    name = "fix xwayland drags",
+    match = {
+        class = "^$",
+        title = "^$",
+        xwayland = true,
+        float = true,
+        fullscreen = false,
+        pin = false,
+    },
+    no_focus = true,
+})
+
+hl.layer_rule({
+    name = "blur waybar",
+    match = { namespace = "waybar" },
+    blur = true,
 })
 
 local startup_programs = {
-    terminal,
+    scripts_dir .. "/monitor_config_office",
+    scripts_dir .. "/xdph",
     "hyprpaper",
     "hyprsunset",
     "hypridle",
@@ -150,7 +290,9 @@ local startup_programs = {
     "blueman-applet",
     "syncthing --no-browser",
     "mako",
-    "elephant",
+    "elephant &",
+    "wl-paste --type text --watch cliphist store",
+    "wl-paste --type image --watch cliphist store",
 }
 
 hl.on("hyprland.start", function()

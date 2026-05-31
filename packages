@@ -1,5 +1,7 @@
 hyprland
+walker
 firefox
+ghostty
 kitty
 pipewire
 pipewire-pulse
@@ -32,6 +34,13 @@ slurp
 discord
 mpv
 wl-clipboard
+cliphist
+fd
+pass
+zathura
+hyprpicker
+ydotool
+zbar
 gitui
 eza
 starship

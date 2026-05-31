@@ -17,7 +17,7 @@ menu(){
 }
 
 main() {
-  choice=$(menu | fuzzel --dmenu | cut -d. -f1)
+  choice=$(menu | walker --dmenu | cut -d. -f1)
 
   case $choice in
     1)

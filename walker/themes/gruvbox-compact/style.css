@@ -1,0 +1,197 @@
+@define-color bg #282828;
+@define-color bg0_h #1d2021;
+@define-color bg1 #3c3836;
+@define-color bg2 #504945;
+@define-color fg #ebdbb2;
+@define-color fg2 #d5c4a1;
+@define-color muted #928374;
+@define-color blue #83a598;
+@define-color orange #fe8019;
+@define-color red #fb4934;
+
+* {
+  all: unset;
+  font-family: JetBrainsMono Nerd Font, monospace;
+  font-size: 13px;
+}
+
+popover {
+  background: @bg;
+  border: 1px solid @bg2;
+  border-radius: 8px;
+  padding: 6px;
+}
+
+.normal-icons {
+  -gtk-icon-size: 16px;
+}
+
+.large-icons {
+  -gtk-icon-size: 20px;
+}
+
+scrollbar {
+  opacity: 0;
+}
+
+.box-wrapper {
+  background: @bg;
+  border: 1px solid @bg2;
+  border-radius: 8px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.36);
+  padding: 10px;
+}
+
+.preview-box,
+.elephant-hint,
+.placeholder {
+  color: @fg2;
+}
+
+.search-container {
+  border-radius: 6px;
+}
+
+.input {
+  background: @bg0_h;
+  border: 1px solid @bg2;
+  border-radius: 6px;
+  caret-color: @blue;
+  color: @fg;
+  padding: 7px 9px;
+}
+
+.input placeholder {
+  color: @muted;
+  opacity: 0.8;
+}
+
+.input selection {
+  background: alpha(@blue, 0.3);
+  color: @fg;
+}
+
+.list {
+  color: @fg;
+}
+
+.item-box {
+  border-radius: 6px;
+  padding: 5px 7px;
+}
+
+.item-text {
+  color: @fg;
+}
+
+.item-subtext {
+  color: @muted;
+  font-size: 11px;
+  opacity: 1;
+}
+
+.item-image-text {
+  color: @blue;
+  font-size: 20px;
+}
+
+.item-quick-activation {
+  background: alpha(@blue, 0.14);
+  border: 1px solid alpha(@blue, 0.25);
+  border-radius: 4px;
+  color: @blue;
+  padding: 3px 6px;
+}
+
+child:selected .item-box,
+row:selected .item-box {
+  background: @bg1;
+  box-shadow: inset 0 0 0 1px alpha(@blue, 0.45);
+}
+
+child:selected .item-text,
+row:selected .item-text {
+  color: @blue;
+}
+
+.providerlist .item-subtext {
+  font-size: unset;
+  opacity: 0.85;
+}
+
+.preview {
+  border: 1px solid @bg2;
+  border-radius: 6px;
+  color: @fg;
+}
+
+.calc .item-text {
+  color: @blue;
+  font-size: 20px;
+}
+
+.symbols .item-image {
+  font-size: 20px;
+}
+
+.todo.done .item-text-box {
+  opacity: 0.35;
+}
+
+.todo.urgent {
+  color: @orange;
+}
+
+.todo.active {
+  font-weight: bold;
+}
+
+.bluetooth.disconnected {
+  opacity: 0.5;
+}
+
+.preview .large-icons {
+  -gtk-icon-size: 48px;
+}
+
+.keybinds {
+  border-top: 1px solid @bg1;
+  color: @muted;
+  font-size: 11px;
+  padding-top: 6px;
+}
+
+.keybind-button {
+  opacity: 0.65;
+}
+
+.keybind-button:hover {
+  opacity: 0.9;
+}
+
+.keybind-bind {
+  opacity: 0.45;
+  text-transform: lowercase;
+}
+
+.keybind-label {
+  border: 1px solid @bg2;
+  border-radius: 4px;
+  color: @fg2;
+  padding: 1px 4px;
+}
+
+.error {
+  background: @red;
+  color: @bg0_h;
+  padding: 7px;
+}
+
+:not(.calc).current {
+  font-style: italic;
+}
+
+.preview-content.archlinuxpkgs,
+.preview-content.dnfpackages {
+  font-family: monospace;
+}

@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+
+set -u
+
+missing=0
+
+check_command() {
+    local name=$1
+    local required=${2:-required}
+
+    if command -v "$name" >/dev/null 2>&1; then
+        printf 'ok      %s\n' "$name"
+    else
+        printf '%-7s %s\n' "$required" "$name"
+        [ "$required" = "required" ] && missing=1
+    fi
+}
+
+check_path() {
+    local path=$1
+    local label=$2
+
+    if [ -e "$path" ]; then
+        printf 'ok      %s\n' "$label"
+    else
+        printf 'missing %s (%s)\n' "$label" "$path"
+        missing=1
+    fi
+}
+
+check_installed_or_repo_file() {
+    local installed=$1
+    local repo_file=$2
+    local label=$3
+
+    if [ -e "$installed" ] || [ -e "$repo_file" ]; then
+        printf 'ok      %s\n' "$label"
+    else
+        printf 'missing %s (%s)\n' "$label" "$installed"
+        missing=1
+    fi
+}
+
+echo "Commands"
+for command in \
+    bash git rg fd nu luac python xmllint \
+    hyprland hyprctl walker ghostty zathura \
+    wl-copy wl-paste cliphist pass grim slurp swappy \
+    playerctl wpctl notify-send ydotool hyprpicker zbarimg; do
+    check_command "$command"
+done
+
+for command in foot kitty brightnessctl; do
+    check_command "$command" optional
+done
+
+echo
+echo "Dotfile paths"
+check_path "$HOME/.config/hypr/hyprland.lua" "Hyprland Lua config"
+check_path "$HOME/.config/walker/config.toml" "Walker config"
+check_installed_or_repo_file "$HOME/.local/bin/walker-hub" "./scripts/walker-hub" "Walker workflow hub"
+check_installed_or_repo_file "$HOME/.local/bin/keybinds-overview" "./hypr/scripts/keybinds-overview" "Keybind overview"
+
+echo
+if [ "$missing" -eq 0 ]; then
+    echo "Doctor passed."
+else
+    echo "Doctor found missing required items."
+fi
+
+exit "$missing"

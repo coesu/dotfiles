@@ -1,0 +1,92 @@
+SUPER + Return	Open terminal	exec: ghostty
+SUPER + W	Open browser	exec: helium-browser
+SUPER + R	Open launcher	exec: walker
+SUPER + S	Show status	exec: status script
+SUPER + F1	Show keybind overview	exec: keybinds-overview
+SUPER + D	Open workflow hub	exec: walker-hub
+SUPER + Q	Close active window	window.close
+SUPER + F	Toggle fullscreen	window.fullscreen
+SUPER + Space	Toggle floating	window.float
+SUPER + 1	Switch to workspace 1	focus workspace 1
+SUPER + 2	Switch to workspace 2	focus workspace 2
+SUPER + 3	Switch to workspace 3	focus workspace 3
+SUPER + 4	Switch to workspace 4	focus workspace 4
+SUPER + 5	Switch to workspace 5	focus workspace 5
+SUPER + 6	Switch to workspace 6	focus workspace 6
+SUPER + 7	Switch to workspace 7	focus workspace 7
+SUPER + 8	Switch to workspace 8	focus workspace 8
+SUPER + 9	Switch to workspace 9	focus workspace 9
+SUPER + 0	Switch to workspace 10	focus workspace 10
+SUPER + SHIFT + 1	Move window to workspace 1	window.move workspace 1
+SUPER + SHIFT + 2	Move window to workspace 2	window.move workspace 2
+SUPER + SHIFT + 3	Move window to workspace 3	window.move workspace 3
+SUPER + SHIFT + 4	Move window to workspace 4	window.move workspace 4
+SUPER + SHIFT + 5	Move window to workspace 5	window.move workspace 5
+SUPER + SHIFT + 6	Move window to workspace 6	window.move workspace 6
+SUPER + SHIFT + 7	Move window to workspace 7	window.move workspace 7
+SUPER + SHIFT + 8	Move window to workspace 8	window.move workspace 8
+SUPER + SHIFT + 9	Move window to workspace 9	window.move workspace 9
+SUPER + SHIFT + 0	Move window to workspace 10	window.move workspace 10
+SUPER + M	Move focus left	focus direction left
+SUPER + I	Move focus right	focus direction right
+SUPER + E	Move focus up	focus direction up
+SUPER + N	Move focus down	focus direction down
+SUPER + H	Move focus left	focus direction left
+SUPER + L	Move focus right	focus direction right
+SUPER + K	Move focus up	focus direction up
+SUPER + J	Move focus down	focus direction down
+SUPER + CTRL + M	Move window left	window.move direction left
+SUPER + CTRL + I	Move window right	window.move direction right
+SUPER + CTRL + E	Move window up	window.move direction up
+SUPER + CTRL + N	Move window down	window.move direction down
+SUPER + CTRL + H	Move window left	window.move direction left
+SUPER + CTRL + L	Move window right	window.move direction right
+SUPER + CTRL + K	Move window up	window.move direction up
+SUPER + CTRL + J	Move window down	window.move direction down
+SUPER + SHIFT + M	Resize window left	window.resize -50 0
+SUPER + SHIFT + I	Resize window right	window.resize 50 0
+SUPER + SHIFT + E	Resize window up	window.resize 0 -50
+SUPER + SHIFT + N	Resize window down	window.resize 0 50
+SUPER + SHIFT + H	Resize window left	window.resize -50 0
+SUPER + SHIFT + L	Resize window right	window.resize 50 0
+SUPER + SHIFT + K	Resize window up	window.resize 0 -50
+SUPER + SHIFT + J	Resize window down	window.resize 0 50
+ALT + TAB	Switch to previous workspace	focus workspace previous
+SUPER + mouse:272	Drag window	window.drag
+SUPER + mouse:273	Resize window	window.resize
+XF86AudioRaiseVolume	Increase volume	wpctl volume up
+XF86AudioLowerVolume	Decrease volume	wpctl volume down
+XF86AudioMute	Toggle mute	wpctl mute
+XF86AudioMicMute	Toggle microphone mute	wpctl mic mute
+XF86MonBrightnessUp	Increase brightness	brightnessctl up
+XF86MonBrightnessDown	Decrease brightness	brightnessctl down
+XF86AudioNext	Next media track	playerctl next
+XF86AudioPause	Play or pause media	playerctl play-pause
+XF86AudioPlay	Play or pause media	playerctl play-pause
+XF86AudioPrev	Previous media track	playerctl previous
+SUPER + CTRL + SHIFT + S	Take screenshot and edit	grim/slurp/swappy
+SUPER + CTRL + SHIFT + C	Take screenshot to clipboard	grim/slurp/wl-copy
+SUPER + CTRL + SHIFT + Y	Save screenshot	grim/slurp file
+SUPER + SHIFT + O	Add OTP from QR code	otp-gen
+SUPER + SHIFT + R	Copy OTP code	pass otp
+SUPER + SHIFT + A	Select password	dmenu-pass
+SUPER + SHIFT + T	Focus or open PDF	fuzzy-focus-pdf.nu
+SUPER + SHIFT + P	Pick color	hyprpicker
+SUPER + SHIFT + G	Open PDF	pdf-open
+SUPER + CTRL + F	Open tmux sessionizer	tmux-sessionizer
+SUPER + SHIFT + C	Open today note	nvim ObsidianToday
+SUPER + SHIFT + B	Type bookmark	bookmarks
+SUPER + O	Toggle dictation	dictate-toggle
+SUPER + SHIFT + V	Clipboard history	cliphist-walker
+SUPER + X	Open logout menu	submap logout-menu
+[logout-menu] L	Lock session	logout-menu
+[logout-menu] SUPER + L	Lock session	logout-menu
+[logout-menu] U	Suspend	logout-menu
+[logout-menu] SUPER + U	Suspend	logout-menu
+[logout-menu] R	Reboot	logout-menu
+[logout-menu] SUPER + R	Reboot	logout-menu
+[logout-menu] S	Power off	logout-menu
+[logout-menu] SUPER + S	Power off	logout-menu
+[logout-menu] Escape	Close logout menu	logout-menu
+SUPER + C	Send Ctrl+Insert	send shortcut
+SUPER + V	Send Shift+Insert	send shortcut

@@ -30,6 +30,30 @@ mkdir -p "$HOME/.config"
 mkdir -p "$HOME/.local/bin"
 mkdir -p "$HOME/.cache/zsh"
 
+link_path() {
+    local src=$1
+    local dest=$2
+    local label=$3
+
+    if [ ! -e "$src" ]; then
+        echo "Warning: Source not found, skipping: $src"
+        return
+    fi
+
+    if [ -L "$dest" ] && [ "$(readlink "$dest")" = "$src" ]; then
+        echo "Already linked $label: $dest"
+        return
+    fi
+
+    if [ -e "$dest" ] || [ -L "$dest" ]; then
+        echo "Backing up existing $label: $dest"
+        mv "$dest" "$BACKUP_DIR"
+    fi
+
+    ln -s "$src" "$dest"
+    echo "Linked $src -> $dest"
+}
+
 # Install dependencies in devcontainer
 if [ "$IS_DEVCONTAINER" = true ]; then
     echo "Devcontainer detected, installing dependencies..."
@@ -69,7 +93,7 @@ if [ "$IS_DEVCONTAINER" = true ]; then
     CONFIGS="nvim zsh starship.toml"
 elif [ "$OS" = "linux" ]; then
     # Full set for Linux desktop
-    CONFIGS="helix walker nvim zsh starship.toml kitty hypr waybar mako anyrun zathura foot fuzzel tmux-sessionizer tmux-sessionizer-creator"
+    CONFIGS="ghostty helix walker nvim zsh starship.toml kitty hypr waybar mako zathura foot tmux-sessionizer"
 else
     # macOS set
     CONFIGS="helix nvim zsh starship.toml tmux-sessionizer"
@@ -91,40 +115,14 @@ echo "Linking configuration directories..."
 for config in $CONFIGS; do
     src="$DOTFILES_DIR/$config"
     dest="$HOME/.config/$config"
-
-    # Skip if source doesn't exist
-    if [ ! -e "$src" ]; then
-        echo "Warning: Source not found, skipping: $src"
-        continue
-    fi
-
-    if [ -e "$dest" ] || [ -L "$dest" ]; then
-        echo "Backing up existing link or directory: $dest"
-        mv "$dest" "$BACKUP_DIR"
-    fi
-
-    ln -s "$src" "$dest"
-    echo "Linked $src -> $dest"
+    link_path "$src" "$dest" "config"
 done
 
 echo "Linking files..."
 for file in $FILES; do
     src="$DOTFILES_DIR/$file"
     dest="$HOME/$file"
-
-    # Skip if source doesn't exist
-    if [ ! -e "$src" ]; then
-        echo "Warning: Source not found, skipping: $src"
-        continue
-    fi
-
-    if [ -e "$dest" ] || [ -L "$dest" ]; then
-        echo "Backing up existing link or file: $dest"
-        mv "$dest" "$BACKUP_DIR"
-    fi
-
-    ln -s "$src" "$dest"
-    echo "Linked $src -> $dest"
+    link_path "$src" "$dest" "file"
 done
 
 echo "Linking binaries..."
@@ -140,14 +138,7 @@ for dir in $BINS; do
         if [ -f "$file" ]; then
             filename=$(basename "$file")
             dest="$HOME/.local/bin/$filename"
-
-            if [ -e "$dest" ] || [ -L "$dest" ]; then
-                echo "Backing up existing binary: $dest"
-                mv "$dest" "$BACKUP_DIR"
-            fi
-
-            ln -s "$file" "$dest"
-            echo "Linked $file -> $dest"
+            link_path "$file" "$dest" "binary"
         fi
     done
 done

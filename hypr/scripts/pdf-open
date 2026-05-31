@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
+paths_file=${DOTFILES_PATHS:-$HOME/.local/bin/dotfiles-paths}
+[ -r "$paths_file" ] && . "$paths_file"
 
-file=$(fd -e pdf -I . ~/ | fuzzel --dmenu)
-echo $file
+file=$(fd -e pdf -I . "${DOTFILES_PDF_SEARCH_ROOT:-$HOME}" | walker --dmenu --width 900 --placeholder "Search PDF files")
+echo "$file"
 xdg-open "$file"

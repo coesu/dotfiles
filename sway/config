@@ -16,7 +16,7 @@ set $right l
 # Your preferred terminal emulator
 set $term foot
 # Your preferred application launcher
-set $menu fuzzel
+set $menu walker
 
 ### Output configuration
 #
@@ -249,7 +249,7 @@ client.focused #83A598 #285577 #ffffff #2e9ef4 #83A598
 
 set $sc ~/.local/bin
 bindsym $mod+Shift+a exec $sc/dmenu-pass
-bindsym $mod+Shift+r exec pass otp -c "$(cat ~/otp-list | $menu --dmenu)"
+bindsym $mod+Shift+r exec sh -c '. "$HOME/.local/bin/dotfiles-paths" 2>/dev/null || DOTFILES_OTP_LIST="$HOME/otp-list"; pass otp -c "$(cat "$DOTFILES_OTP_LIST" | walker --dmenu)"'
 bindsym $mod+Shift+t exec $sc/fuzzy-focus-pdf.nu
 bindsym $mod+Shift+g exec $sc/pdf-open
 # bindsym $mod+Shift+f exec $term -e "btop"
@@ -262,7 +262,7 @@ bindsym $mod+Ctrl+Shift+c exec grim -g "$(slurp)" - | wl-copy
 
 exec wl-paste --type text --watch cliphist store
 exec wl-paste --type image --watch cliphist store
-bindsym $mod+Shift+v exec $sc/cliphist-fuzzel
+bindsym $mod+Shift+v exec $sc/cliphist-walker
 
 for_window [title=".*Bitwarden Password Manager.*"] floating enable
 for_window [title="(?i)(?:copying|deleting|moving)"] floating enable

@@ -71,6 +71,7 @@
         "format-icons": {
             "headphone": "",
             "default": ["", "", ""]
-        }
+        },
+        "on-click": "pavucontrol",
     }
 }

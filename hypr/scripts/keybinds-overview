@@ -1,0 +1,145 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+script_path=$(readlink -f "${BASH_SOURCE[0]}")
+repo_hypr_dir=$(dirname "$(dirname "$script_path")")
+config_hypr_dir="${HYPR_CONFIG_DIR:-${XDG_CONFIG_HOME:-$HOME/.config}/hypr}"
+
+if [ ! -f "$config_hypr_dir/keybinds-overview.tsv" ]; then
+  config_hypr_dir="$repo_hypr_dir"
+fi
+
+format_static_binds() {
+  local source_file="$config_hypr_dir/keybinds-overview.tsv"
+  [ -f "$source_file" ] || return 1
+
+  awk -F '\t' '
+    NF >= 2 {
+      details = NF >= 3 ? $3 : ""
+      printf "%-34s  %-48s  %s\n", $1, $2, details
+    }
+  ' "$source_file"
+}
+
+format_live_binds() {
+  command -v hyprctl >/dev/null 2>&1 || return 1
+
+  hyprctl binds 2>/dev/null | awk '
+    function trim(value) {
+      gsub(/^[ \t]+|[ \t]+$/, "", value)
+      return value
+    }
+
+    function has_mod(mask, bit) {
+      return int(mask / bit) % 2
+    }
+
+    function key_combo(mask, key, combo) {
+      combo = ""
+      if (has_mod(mask, 64)) combo = combo "SUPER + "
+      if (has_mod(mask, 4)) combo = combo "CTRL + "
+      if (has_mod(mask, 8)) combo = combo "ALT + "
+      if (has_mod(mask, 1)) combo = combo "SHIFT + "
+      if (key == "") key = keycode
+      return combo key
+    }
+
+    function description(dispatcher, arg) {
+      if (dispatcher == "exec") return arg
+      if (dispatcher == "workspace") return "Switch to workspace " arg
+      if (dispatcher == "movetoworkspace") return "Move window to workspace " arg
+      if (dispatcher == "movetoworkspacesilent") return "Move window to workspace " arg " silently"
+      if (dispatcher == "movefocus") return "Move focus " arg
+      if (dispatcher == "movewindoworgroup") return "Move window/group " arg
+      if (dispatcher == "resizeactive") return "Resize active window " arg
+      if (dispatcher == "fullscreen") return "Toggle fullscreen"
+      if (dispatcher == "togglefloating") return "Toggle floating"
+      if (dispatcher == "killactive") return "Close active window"
+      if (dispatcher == "togglespecialworkspace") return "Toggle special workspace " arg
+      if (dispatcher == "movecurrentworkspacetomonitor") return "Move workspace to monitor " arg
+      if (dispatcher == "togglegroup") return "Toggle window group"
+      if (dispatcher == "togglesplit") return "Toggle split"
+      if (dispatcher == "submap") return "Enter " arg " keymap"
+      return dispatcher (arg == "" ? "" : " " arg)
+    }
+
+    function emit() {
+      if (!seen || dispatcher == "") return
+
+      combo = key_combo(modmask + 0, key)
+      if (submap != "" && submap != "reset") combo = "[" submap "] " combo
+      details = dispatcher
+      if (arg != "") details = details ": " arg
+      printf "%-34s  %-48s  %s\n", combo, description(dispatcher, arg), details
+    }
+
+    /^bind/ {
+      emit()
+      seen = 1
+      modmask = key = keycode = submap = dispatcher = arg = ""
+      next
+    }
+
+    /^[ \t]*modmask:/ {
+      sub(/^[ \t]*modmask:[ \t]*/, "")
+      modmask = trim($0)
+      next
+    }
+
+    /^[ \t]*submap:/ {
+      sub(/^[ \t]*submap:[ \t]*/, "")
+      submap = trim($0)
+      next
+    }
+
+    /^[ \t]*key:/ {
+      sub(/^[ \t]*key:[ \t]*/, "")
+      key = trim($0)
+      next
+    }
+
+    /^[ \t]*keycode:/ {
+      sub(/^[ \t]*keycode:[ \t]*/, "")
+      keycode = trim($0)
+      next
+    }
+
+    /^[ \t]*dispatcher:/ {
+      sub(/^[ \t]*dispatcher:[ \t]*/, "")
+      dispatcher = trim($0)
+      next
+    }
+
+    /^[ \t]*arg:/ {
+      sub(/^[ \t]*arg:[ \t]*/, "")
+      arg = trim($0)
+      next
+    }
+
+    END {
+      emit()
+    }
+  '
+}
+
+if ! binds=$(format_static_binds) || [ -z "$binds" ]; then
+  binds=$(format_live_binds)
+fi
+
+if [ -z "$binds" ]; then
+  walker --dmenu --inputonly --placeholder "No Hyprland keybinds found" < /dev/null
+  exit 1
+fi
+
+if [ "${1:-}" = "--print" ]; then
+  printf '%s\n' "$binds"
+  exit 0
+fi
+
+selection=$(printf '%s\n' "$binds" | walker --dmenu --placeholder "Search Hyprland keybinds")
+
+if [ -n "$selection" ] && command -v wl-copy >/dev/null 2>&1; then
+  printf '%s\n' "$selection" | wl-copy
+  notify-send "Hyprland keybind copied" "$selection" 2>/dev/null || true
+fi

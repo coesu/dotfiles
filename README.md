@@ -8,13 +8,12 @@ These are my personal dotfiles for a minimal Hyprland setup. The configurations 
 
 - **Window Manager:** [Hyprland](https://hyprland.org/)
 - **Bar:** [Waybar](https://github.com/Alexays/Waybar)
-- **Launcher:** [anyrun](https://github.com/Kirottu/anyrun)
+- **Launcher/Search:** [walker](https://github.com/abenz1267/walker)
 - **Terminal:** [kitty](https://sw.kovidgoyal.net/kitty/) & [foot](https://codeberg.org/dnkl/foot)
 - **Editor:** [Neovim](https://neovim.io/) & [Helix](https://helix-editor.com/)
 - **Shell:** [Zsh](https://www.zsh.org/) with [Starship](https://starship.rs/) prompt
 - **Notification Daemon:** [Mako](https://github.com/emersion/mako)
 - **PDF Viewer:** [Zathura](https://pwmt.org/projects/zathura/)
-- **Fuzzy Finder:** [fuzzel](https://codeberg.org/dnkl/fuzzel)
 - **Multiplexer:** [tmux](https://github.com/tmux/tmux/wiki)
 
 ## Installation
@@ -34,13 +33,19 @@ These are my personal dotfiles for a minimal Hyprland setup. The configurations 
     ./setup.sh
     ```
 
+3.  **Check the setup:**
+
+    ```sh
+    doctor
+    check
+    ```
+
 ## Dependencies
 
 To use these dotfiles, you'll need to have the following software installed:
 
 - `hyprland`
 - `waybar`
-- `anyrun`
 - `kitty`
 - `foot`
 - `neovim`
@@ -49,10 +54,20 @@ To use these dotfiles, you'll need to have the following software installed:
 - `starship`
 - `mako`
 - `zathura`
-- `fuzzel`
+- `walker`
 - `tmux`
 - `wl-clipboard`
 - `git`
+
+## Local Paths
+
+Common script paths can be overridden with environment variables:
+
+- `DOTFILES_BOOKMARKS_FILE`
+- `DOTFILES_OTP_LIST`
+- `DOTFILES_PDF_GLOB`
+- `DOTFILES_PDF_SEARCH_ROOT`
+- `DOTFILES_SCREENSHOT_DIR`
 
 ## Repository Structure
 

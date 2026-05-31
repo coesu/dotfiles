@@ -1,0 +1,7 @@
+# Shared path defaults for scripts. Override any of these in your shell env.
+
+: "${DOTFILES_BOOKMARKS_FILE:=$HOME/test.txt}"
+: "${DOTFILES_OTP_LIST:=$HOME/otp-list}"
+: "${DOTFILES_PDF_GLOB:=$HOME/Zotero/storage/**/*.pdf}"
+: "${DOTFILES_PDF_SEARCH_ROOT:=$HOME}"
+: "${DOTFILES_SCREENSHOT_DIR:=$HOME/Pictures/screenshots}"

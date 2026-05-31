@@ -1,4 +1,0 @@
-source= ./options.conf
-source= ./keybinds.conf
-source= ./startup.conf
-source= ./windowrules.conf
