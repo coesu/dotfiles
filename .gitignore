@@ -11,3 +11,4 @@ completions/
 .DS_STORE
 .zcompcache
 .zsh_sessions
+.codex
