@@ -9,4 +9,6 @@ vim.pack.add({ "https://github.com/supermaven-inc/supermaven-nvim" })
 vim.pack.add({ "https://github.com/lervag/vimtex" })
 vim.g.vimtex_view_method = 'zathura'
 
+vim.pack.add({ "https://github.com/nvim-tree/nvim-web-devicons" })
+
 vim.pack.add({ "https://github.com/vimpostor/vim-tpipeline" })

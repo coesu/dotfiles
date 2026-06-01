@@ -4,6 +4,12 @@ vim.pack.add({
 })
 
 local fzf = require("fzf-lua")
+fzf.setup({
+    files = {
+        file_icons = "devicons",
+        fd_opts    = [[--color=never --type f --type l --exclude .git --exclude .jj --exclude .venv]],
+    }
+})
 
 vim.keymap.set("n", "<leader>sh", fzf.help_tags, { desc = "[S]earch [H]elp" })
 vim.keymap.set("n", "<leader>sk", fzf.keymaps, { desc = "[S]earch [K]eymaps" })
