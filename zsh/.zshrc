@@ -160,21 +160,6 @@ autoload -Uz compinit
 ZSH_COMPDUMP="${HOME}/.cache/zsh/compdump"
 compinit -u -d $ZSH_COMPDUMP
 
-# Micromamba (Linux only)
-if [[ "$OS" == "linux" ]]; then
-    export MAMBA_EXE="$HOME/.local/bin/micromamba"
-    export MAMBA_ROOT_PREFIX="$HOME/.micromamba"
-    if [[ -x "$MAMBA_EXE" ]]; then
-        __mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
-        if [ $? -eq 0 ]; then
-            eval "$__mamba_setup"
-        else
-            alias micromamba="$MAMBA_EXE"
-        fi
-        unset __mamba_setup
-    fi
-fi
-
 # Password copy function (macOS only - uses osascript for concealed clipboard)
 if [[ "$OS" == "macos" ]]; then
     passc() {

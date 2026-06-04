@@ -14,6 +14,7 @@ Open PDF
 Passwords
 Add OTP from QR code
 Bookmarks
+Ask Codex
 Pick color
 Lofi stream
 Monitor layout: home
@@ -33,6 +34,7 @@ case "$choice" in
     "Passwords") exec "$local_bin/dmenu-pass" ;;
     "Add OTP from QR code") exec "$local_bin/otp-gen" ;;
     "Bookmarks") exec "$local_bin/bookmarks" ;;
+    "Ask Codex") exec "$local_bin/codex-walker" ;;
     "Pick color") exec "$hypr_scripts/my-hyprpicker" ;;
     "Lofi stream") exec "$hypr_scripts/wofi-beats" ;;
     "Monitor layout: home") exec "$hypr_scripts/monitor_config_home" ;;

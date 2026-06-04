@@ -16,7 +16,7 @@ hl.config({
             active_border = "rgba(83A598ff)",
             inactive_border = "rgba(1D2021ff)",
         },
-        layout = "scrolling",
+        layout = "dwindle",
     },
     decoration = {
         rounding = 0,
@@ -148,7 +148,8 @@ hl.bind(sc({ Mod, "CTRL", "SHIFT", "S" }), hl.dsp.exec_cmd([[grim -g "$(slurp)" 
 hl.bind(sc({ Mod, "CTRL", "SHIFT", "C" }), hl.dsp.exec_cmd([[grim -g "$(slurp)" - | wl-copy]]))
 hl.bind(
     sc({ Mod, "CTRL", "SHIFT", "Y" }),
-    hl.dsp.exec_cmd([[mkdir -p "]] .. screenshot_dir .. [[" && grim -g "$(slurp)" "]] .. screenshot_dir .. [[/$(date +'%s.png')"]])
+    hl.dsp.exec_cmd([[mkdir -p "]] ..
+        screenshot_dir .. [[" && grim -g "$(slurp)" "]] .. screenshot_dir .. [[/$(date +'%s.png')"]])
 )
 
 hl.bind(sc({ Mod, "SHIFT", "O" }), hl.dsp.exec_cmd(local_bin .. "/otp-gen"))
@@ -157,11 +158,8 @@ hl.bind(sc({ Mod, "SHIFT", "A" }), hl.dsp.exec_cmd(local_bin .. "/dmenu-pass"))
 hl.bind(sc({ Mod, "SHIFT", "T" }), hl.dsp.exec_cmd(scripts_dir .. "/fuzzy-focus-pdf.nu"))
 hl.bind(sc({ Mod, "SHIFT", "P" }), hl.dsp.exec_cmd(scripts_dir .. "/my-hyprpicker"))
 hl.bind(sc({ Mod, "SHIFT", "G" }), hl.dsp.exec_cmd(scripts_dir .. "/pdf-open"))
-hl.bind(sc({ Mod, "CTRL", "F" }), hl.dsp.exec_cmd(terminal .. " -e tmux-sessionizer"))
-hl.bind(sc({ Mod, "SHIFT", "C" }), hl.dsp.exec_cmd(terminal .. [[ --class fully -e nvim +"ObsidianToday"]]))
+hl.bind(sc({ Mod, "SHIFT", "C" }), hl.dsp.exec_cmd(terminal .. [[ -e nvim +"ObsidianToday"]]))
 hl.bind(sc({ Mod, "SHIFT", "B" }), hl.dsp.exec_cmd(local_bin .. "/bookmarks"))
-hl.bind(sc({ Mod, "O" }), hl.dsp.exec_cmd(local_bin .. "/dictate-toggle"))
-hl.bind(sc({ Mod, "SHIFT", "V" }), hl.dsp.exec_cmd(local_bin .. "/cliphist-walker"))
 
 hl.bind(sc({ Mod, "X" }), hl.dsp.submap("logout-menu"))
 
@@ -180,6 +178,8 @@ hl.define_submap("logout-menu", function()
 
     hl.bind("escape", hl.dsp.submap("reset"))
 end)
+
+hl.bind(sc({ Mod, "ALT", "A" }), hl.dsp.exec_cmd(local_bin .. "/codex-walker"))
 
 hl.bind(sc({ Mod, "C" }), hl.dsp.send_shortcut({ mods = "CTRL", key = "Insert" }))
 hl.bind(sc({ Mod, "V" }), hl.dsp.send_shortcut({ mods = "SHIFT", key = "Insert" }))

@@ -58,6 +58,7 @@ To use these dotfiles, you'll need to have the following software installed:
 - `tmux`
 - `wl-clipboard`
 - `git`
+- `codex` (optional, for the Walker "Ask Codex" workflow)
 
 ## Local Paths
 
@@ -68,6 +69,8 @@ Common script paths can be overridden with environment variables:
 - `DOTFILES_PDF_GLOB`
 - `DOTFILES_PDF_SEARCH_ROOT`
 - `DOTFILES_SCREENSHOT_DIR`
+- `DOTFILES_CODEX_MODEL` (defaults to `gpt-5.5`)
+- `DOTFILES_CODEX_SEARCH`
 
 ## Repository Structure
 

@@ -1,0 +1,88 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+show_message() {
+    local message=$1
+    local placeholder=${2:-"Codex"}
+
+    printf '%s\n' "$message" | walker --dmenu --width 1000 --placeholder "$placeholder" >/dev/null
+}
+
+if ! command -v walker >/dev/null 2>&1; then
+    printf 'codex-walker: walker is not installed\n' >&2
+    exit 1
+fi
+
+if ! command -v codex >/dev/null 2>&1; then
+    show_message "codex command not found" "Codex is not installed"
+    exit 1
+fi
+
+if [ "$#" -gt 0 ]; then
+    question="$*"
+else
+    question=$(walker --dmenu --inputonly --width 900 --placeholder "Ask Codex..." < /dev/null)
+fi
+
+case "$question" in
+    *[![:space:]]*) ;;
+    *) exit 0 ;;
+esac
+
+tmp_dir=$(mktemp -d "${TMPDIR:-/tmp}/codex-walker.XXXXXX")
+trap 'rm -rf "$tmp_dir"' EXIT
+
+answer_file="$tmp_dir/answer.md"
+log_file="$tmp_dir/codex.log"
+
+codex_model=${DOTFILES_CODEX_MODEL:-gpt-5.5}
+
+codex_args=(
+    exec
+    --ephemeral
+    --sandbox read-only
+    --cd "$HOME"
+    --skip-git-repo-check
+    --model "$codex_model"
+    --output-last-message "$answer_file"
+)
+
+if [ "${DOTFILES_CODEX_SEARCH:-0}" = "1" ]; then
+    codex_args+=("--search")
+fi
+
+if ! codex "${codex_args[@]}" - >"$log_file" 2>&1 <<EOF
+You are being called from a launcher menu to answer a short user question.
+
+Return only the answer. Keep it concise unless the question asks for detail.
+If the user asks for code, a shell command, config, or other insertable text,
+return only the directly pasteable text with no Markdown fences, labels, or explanation.
+Do not edit files. Do not run commands unless they are required to answer accurately.
+
+Question:
+$question
+EOF
+then
+    error=$(tail -n 20 "$log_file" | sed 's/\x1b\[[0-9;]*m//g')
+    [ -n "$error" ] || error="Codex failed without writing an error message."
+    show_message "$error" "Codex failed"
+    exit 1
+fi
+
+if [ ! -s "$answer_file" ]; then
+    show_message "Codex completed but did not return an answer." "Codex returned no answer"
+    exit 1
+fi
+
+answer=$(sed 's/\x1b\[[0-9;]*m//g' "$answer_file")
+
+if command -v wl-copy >/dev/null 2>&1; then
+    printf '%s' "$answer" | wl-copy
+    placeholder="Codex answer copied to clipboard"
+else
+    placeholder="Codex answer"
+fi
+
+preview=$(printf '%s' "$answer" | tr '\n' ' ' | sed 's/[[:space:]][[:space:]]*/ /g; s/^ //; s/ $//')
+printf '%s\n' "$preview" | walker --dmenu --width 1000 --placeholder "$placeholder" >/dev/null
