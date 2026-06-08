@@ -3,7 +3,7 @@ paths_file=${DOTFILES_PATHS:-$(dirname "$(readlink -f "$0")")/dotfiles-paths}
 [ -r "$paths_file" ] && . "$paths_file"
 : "${DOTFILES_OTP_LIST:=$HOME/otp-list}"
 
-name=$(walker --dmenu --inputonly --placeholder "OTP entry name" < /dev/null)
+name=$(rofi-dmenu --inputonly --placeholder "OTP entry name" < /dev/null)
 
 grim -g "$(slurp)" /tmp/qr-screenshot.png
 

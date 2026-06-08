@@ -3,4 +3,4 @@ paths_file=${DOTFILES_PATHS:-$(dirname "$(readlink -f "$0")")/dotfiles-paths}
 [ -r "$paths_file" ] && . "$paths_file"
 : "${DOTFILES_BOOKMARKS_FILE:=$HOME/test.txt}"
 
-ydotool type "$(grep -v '^#' "$DOTFILES_BOOKMARKS_FILE" | walker --dmenu --placeholder "Select bookmark" | cut -d' ' -f1)"
+ydotool type "$(grep -v '^#' "$DOTFILES_BOOKMARKS_FILE" | rofi-dmenu --placeholder "Select bookmark" | cut -d' ' -f1)"

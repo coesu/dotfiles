@@ -1,9 +1,9 @@
 local terminal = "ghostty"
-local menu = "walker"
+local menu = "rofi -matching fuzzy -case-smart -show drun"
 local browser = "helium-browser"
 local home = os.getenv("HOME") or "/home/lars"
-local scripts_dir = home .. "/.config/hypr/scripts"
 local local_bin = home .. "/.local/bin"
+local scripts_dir = local_bin
 local otp_list = os.getenv("DOTFILES_OTP_LIST") or home .. "/otp-list"
 local screenshot_dir = os.getenv("DOTFILES_SCREENSHOT_DIR") or home .. "/Pictures/screenshots"
 
@@ -76,7 +76,7 @@ hl.bind(sc({ Mod, "W" }), hl.dsp.exec_cmd(browser))
 hl.bind(sc({ Mod, "R" }), hl.dsp.exec_cmd(menu))
 hl.bind(sc({ Mod, "S" }), hl.dsp.exec_cmd(scripts_dir .. "/status"))
 hl.bind(sc({ Mod, "F1" }), hl.dsp.exec_cmd(scripts_dir .. "/keybinds-overview"))
-hl.bind(sc({ Mod, "D" }), hl.dsp.exec_cmd(local_bin .. "/walker-hub"))
+hl.bind(sc({ Mod, "D" }), hl.dsp.exec_cmd(local_bin .. "/rofi-hub"))
 
 hl.bind(sc({ "ALT", "CTRL", "Y" }), hl.dsp.exec_cmd(terminal .. " -e ttyper -w 9"))
 hl.bind(sc({ "ALT", "CTRL", "B" }), hl.dsp.exec_cmd("blueman-manager"))
@@ -153,7 +153,7 @@ hl.bind(
 )
 
 hl.bind(sc({ Mod, "SHIFT", "O" }), hl.dsp.exec_cmd(local_bin .. "/otp-gen"))
-hl.bind(sc({ Mod, "SHIFT", "R" }), hl.dsp.exec_cmd([[pass otp -c "$(cat "]] .. otp_list .. [[" | walker --dmenu)"]]))
+hl.bind(sc({ Mod, "SHIFT", "R" }), hl.dsp.exec_cmd([[pass otp -c "$(cat "]] .. otp_list .. [[" | rofi-dmenu)"]]))
 hl.bind(sc({ Mod, "SHIFT", "A" }), hl.dsp.exec_cmd(local_bin .. "/dmenu-pass"))
 hl.bind(sc({ Mod, "SHIFT", "T" }), hl.dsp.exec_cmd(scripts_dir .. "/fuzzy-focus-pdf.nu"))
 hl.bind(sc({ Mod, "SHIFT", "P" }), hl.dsp.exec_cmd(scripts_dir .. "/my-hyprpicker"))
@@ -179,7 +179,7 @@ hl.define_submap("logout-menu", function()
     hl.bind("escape", hl.dsp.submap("reset"))
 end)
 
-hl.bind(sc({ Mod, "ALT", "A" }), hl.dsp.exec_cmd(local_bin .. "/codex-walker"))
+hl.bind(sc({ Mod, "ALT", "A" }), hl.dsp.exec_cmd(local_bin .. "/codex-rofi"))
 
 hl.bind(sc({ Mod, "C" }), hl.dsp.send_shortcut({ mods = "CTRL", key = "Insert" }))
 hl.bind(sc({ Mod, "V" }), hl.dsp.send_shortcut({ mods = "SHIFT", key = "Insert" }))

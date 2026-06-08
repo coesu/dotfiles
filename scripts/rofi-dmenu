@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+rofi_args=(-matching fuzzy -case-smart -dmenu)
+
+while [ "$#" -gt 0 ]; do
+    case "$1" in
+        --dmenu|--inputonly)
+            shift
+            ;;
+        --placeholder)
+            rofi_args+=(-p "${2:-}")
+            shift 2
+            ;;
+        --width)
+            rofi_args+=(-theme-str "window { width: ${2:-900}px; }")
+            shift 2
+            ;;
+        *)
+            rofi_args+=("$1")
+            shift
+            ;;
+    esac
+done
+
+exec rofi "${rofi_args[@]}"

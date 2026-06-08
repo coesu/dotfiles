@@ -9,7 +9,7 @@ if [[ $1 == "--type" ]]; then
 fi
 
 if [[ -n $WAYLAND_DISPLAY ]]; then
-	dmenu="walker --dmenu"
+	dmenu="rofi-dmenu"
 	xdotool="wtype"
 elif [[ -n $DISPLAY ]]; then
 	dmenu="dmenu"

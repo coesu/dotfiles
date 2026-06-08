@@ -6,7 +6,7 @@ repo_dir=$(cd "$(dirname "$0")/.." && pwd)
 cd "$repo_dir"
 
 echo "Checking shell scripts..."
-for file in scripts/* hypr/scripts/* setup.sh; do
+for file in scripts/* setup.sh; do
     [ -f "$file" ] || continue
     first_line=$(sed -n '1p' "$file")
     case "$first_line" in
@@ -16,7 +16,7 @@ for file in scripts/* hypr/scripts/* setup.sh; do
 done
 
 echo "Checking Nushell scripts..."
-for file in hypr/scripts/*.nu; do
+for file in scripts/*.nu; do
     [ -f "$file" ] || continue
     nu --no-config-file --commands "nu-check '$file'" >/dev/null
 done
@@ -28,10 +28,7 @@ echo "Checking Hyprland config..."
 hyprland --verify-config --config hypr/hyprland.lua >/dev/null
 
 echo "Checking TOML..."
-python -c 'import tomllib; tomllib.load(open("walker/config.toml", "rb")); tomllib.load(open("starship.toml", "rb"))'
-
-echo "Checking XML..."
-xmllint --noout walker/themes/gruvbox-compact/*.xml
+python -c 'import tomllib; tomllib.load(open("starship.toml", "rb"))'
 
 echo "Checking whitespace..."
 git diff --check

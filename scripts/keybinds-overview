@@ -1,0 +1,306 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+script_path=$(readlink -f "${BASH_SOURCE[0]}")
+repo_dir=$(dirname "$(dirname "$script_path")")
+
+config_file() {
+  local env_path=$1
+  local config_path=$2
+  local repo_path=$3
+
+  if [ -n "$env_path" ] && [ -f "$env_path" ]; then
+    printf '%s\n' "$env_path"
+  elif [ -f "$config_path" ]; then
+    printf '%s\n' "$config_path"
+  else
+    printf '%s\n' "$repo_path"
+  fi
+}
+
+detect_wm() {
+  case "${DOTFILES_WM:-}" in
+    hyprland|sway|mango) printf '%s\n' "$DOTFILES_WM"; return ;;
+  esac
+
+  if [ -n "${HYPRLAND_INSTANCE_SIGNATURE:-}" ]; then
+    printf 'hyprland\n'
+  elif [ -n "${SWAYSOCK:-}" ]; then
+    printf 'sway\n'
+  elif pgrep -x mango >/dev/null 2>&1; then
+    printf 'mango\n'
+  elif pgrep -x Hyprland >/dev/null 2>&1 || pgrep -x hyprland >/dev/null 2>&1; then
+    printf 'hyprland\n'
+  elif pgrep -x sway >/dev/null 2>&1; then
+    printf 'sway\n'
+  else
+    printf 'unknown\n'
+  fi
+}
+
+format_hypr_static() {
+  local source_file
+  source_file=$(config_file \
+    "${HYPR_KEYBINDS_FILE:-}" \
+    "${XDG_CONFIG_HOME:-$HOME/.config}/hypr/keybinds-overview.tsv" \
+    "$repo_dir/hypr/keybinds-overview.tsv")
+  [ -f "$source_file" ] || return 1
+
+  awk -F '\t' '
+    NF >= 2 {
+      details = NF >= 3 ? $3 : ""
+      printf "%-34s  %-48s  %s\n", $1, $2, details
+    }
+  ' "$source_file"
+}
+
+format_hypr_live() {
+  command -v hyprctl >/dev/null 2>&1 || return 1
+
+  hyprctl binds 2>/dev/null | awk '
+    function trim(value) {
+      gsub(/^[ \t]+|[ \t]+$/, "", value)
+      return value
+    }
+
+    function has_mod(mask, bit) {
+      return int(mask / bit) % 2
+    }
+
+    function key_combo(mask, key, combo) {
+      combo = ""
+      if (has_mod(mask, 64)) combo = combo "SUPER + "
+      if (has_mod(mask, 4)) combo = combo "CTRL + "
+      if (has_mod(mask, 8)) combo = combo "ALT + "
+      if (has_mod(mask, 1)) combo = combo "SHIFT + "
+      if (key == "") key = keycode
+      return combo key
+    }
+
+    function description(dispatcher, arg) {
+      if (dispatcher == "exec") return arg
+      if (dispatcher == "workspace") return "Switch to workspace " arg
+      if (dispatcher == "movetoworkspace") return "Move window to workspace " arg
+      if (dispatcher == "movetoworkspacesilent") return "Move window to workspace " arg " silently"
+      if (dispatcher == "movefocus") return "Move focus " arg
+      if (dispatcher == "movewindoworgroup") return "Move window/group " arg
+      if (dispatcher == "resizeactive") return "Resize active window " arg
+      if (dispatcher == "fullscreen") return "Toggle fullscreen"
+      if (dispatcher == "togglefloating") return "Toggle floating"
+      if (dispatcher == "killactive") return "Close active window"
+      if (dispatcher == "togglespecialworkspace") return "Toggle special workspace " arg
+      if (dispatcher == "movecurrentworkspacetomonitor") return "Move workspace to monitor " arg
+      if (dispatcher == "togglegroup") return "Toggle window group"
+      if (dispatcher == "togglesplit") return "Toggle split"
+      if (dispatcher == "submap") return "Enter " arg " keymap"
+      return dispatcher (arg == "" ? "" : " " arg)
+    }
+
+    function emit() {
+      if (!seen || dispatcher == "") return
+
+      combo = key_combo(modmask + 0, key)
+      if (submap != "" && submap != "reset") combo = "[" submap "] " combo
+      details = dispatcher
+      if (arg != "") details = details ": " arg
+      printf "%-34s  %-48s  %s\n", combo, description(dispatcher, arg), details
+    }
+
+    /^bind/ {
+      emit()
+      seen = 1
+      modmask = key = keycode = submap = dispatcher = arg = ""
+      next
+    }
+
+    /^[ \t]*modmask:/ { sub(/^[ \t]*modmask:[ \t]*/, ""); modmask = trim($0); next }
+    /^[ \t]*submap:/ { sub(/^[ \t]*submap:[ \t]*/, ""); submap = trim($0); next }
+    /^[ \t]*key:/ { sub(/^[ \t]*key:[ \t]*/, ""); key = trim($0); next }
+    /^[ \t]*keycode:/ { sub(/^[ \t]*keycode:[ \t]*/, ""); keycode = trim($0); next }
+    /^[ \t]*dispatcher:/ { sub(/^[ \t]*dispatcher:[ \t]*/, ""); dispatcher = trim($0); next }
+    /^[ \t]*arg:/ { sub(/^[ \t]*arg:[ \t]*/, ""); arg = trim($0); next }
+
+    END {
+      emit()
+    }
+  '
+}
+
+format_sway_config() {
+  local source_file
+  source_file=$(config_file \
+    "${SWAY_CONFIG_FILE:-}" \
+    "${XDG_CONFIG_HOME:-$HOME/.config}/sway/config" \
+    "$repo_dir/sway/config")
+  [ -f "$source_file" ] || return 1
+
+  awk '
+    function trim(value) {
+      gsub(/^[ \t]+|[ \t]+$/, "", value)
+      return value
+    }
+
+    function expand_vars(text, name, value) {
+      for (name in vars) {
+        value = vars[name]
+        if (value == "Mod4") value = "SUPER"
+        if (value == "Mod1") value = "ALT"
+        gsub("\\" name, value, text)
+      }
+      return text
+    }
+
+    function display_combo(combo) {
+      combo = expand_vars(combo)
+      gsub(/\+/, " + ", combo)
+      return combo
+    }
+
+    function description(action) {
+      if (action ~ /^exec /) return substr(action, 6)
+      if (action == "kill") return "Close active window"
+      if (action ~ /^focus /) return "Focus " substr(action, 7)
+      if (action ~ /^move /) return "Move " substr(action, 6)
+      if (action == "fullscreen") return "Toggle fullscreen"
+      if (action ~ /^layout /) return "Layout " substr(action, 8)
+      if (action ~ /^workspace /) return "Switch to " action
+      return action
+    }
+
+    /^[ \t]*set[ \t]+\$/ {
+      name = $2
+      value = $0
+      sub(/^[ \t]*set[ \t]+\$[^ \t]+[ \t]+/, "", value)
+      vars[name] = value
+      next
+    }
+
+    /^[ \t]*bindsym[ \t]+/ {
+      line = $0
+      sub(/^[ \t]*bindsym[ \t]+/, "", line)
+      split(line, parts, /[ \t]+/)
+      combo = parts[1]
+      sub(/^[^ \t]+[ \t]+/, "", line)
+      line = expand_vars(line)
+      printf "%-34s  %-48s  %s\n", display_combo(combo), description(line), line
+    }
+  ' "$source_file"
+}
+
+format_mango_config() {
+  local source_file
+  source_file=$(config_file \
+    "${MANGO_CONFIG_FILE:-}" \
+    "${XDG_CONFIG_HOME:-$HOME/.config}/mango/config.conf" \
+    "$repo_dir/mango/config.conf")
+  [ -f "$source_file" ] || return 1
+
+  awk -F, '
+    function trim(value) {
+      gsub(/^[ \t]+|[ \t]+$/, "", value)
+      return value
+    }
+
+    function combo(mods, key) {
+      mods = toupper(mods)
+      gsub(/\+/, " + ", mods)
+      if (mods == "NONE" || mods == "") return key
+      return mods " + " key
+    }
+
+    function description(action, arg) {
+      if (action == "spawn") return arg
+      if (action == "reload_config") return "Reload config"
+      if (action == "quit") return "Quit Mango"
+      if (action == "killclient") return "Close active window"
+      if (action == "focusdir") return "Focus " arg
+      if (action == "exchange_client") return "Move window " arg
+      if (action == "togglefloating") return "Toggle floating"
+      if (action == "togglefullscreen") return "Toggle fullscreen"
+      if (action == "toggleoverview") return "Toggle overview"
+      if (action == "view") return "Switch to tag " arg
+      if (action == "tagsilent") return "Move window to tag " arg
+      if (action == "focusmon") return "Focus monitor " arg
+      if (action == "tagmon") return "Move window to monitor " arg
+      return action (arg == "" ? "" : " " arg)
+    }
+
+    /^[ \t]*bind=/ {
+      line = $0
+      sub(/^[ \t]*bind=/, "", line)
+      field_count = split(line, fields, ",")
+      mods = trim(fields[1])
+      key = trim(fields[2])
+      action = trim(fields[3])
+      arg = ""
+      for (i = 4; i <= field_count; i++) {
+        arg = arg (arg == "" ? "" : ",") trim(fields[i])
+      }
+      details = action
+      if (arg != "") details = details ": " arg
+      printf "%-34s  %-48s  %s\n", combo(mods, key), description(action, arg), details
+    }
+  ' "$source_file"
+}
+
+print_only=0
+wm=""
+
+for arg in "$@"; do
+  case "$arg" in
+    --print)
+      print_only=1
+      ;;
+    --wm=hyprland|--wm=sway|--wm=mango)
+      wm=${arg#--wm=}
+      ;;
+    hyprland|sway|mango)
+      wm=$arg
+      ;;
+    *)
+      printf 'usage: keybinds-overview [--print] [--wm=hyprland|sway|mango]\n' >&2
+      exit 2
+      ;;
+  esac
+done
+
+[ -n "$wm" ] || wm=$(detect_wm)
+
+case "$wm" in
+  hyprland)
+    if ! binds=$(format_hypr_static) || [ -z "$binds" ]; then
+      binds=$(format_hypr_live)
+    fi
+    label="Hyprland"
+    ;;
+  sway)
+    binds=$(format_sway_config)
+    label="Sway"
+    ;;
+  mango)
+    binds=$(format_mango_config)
+    label="Mango"
+    ;;
+  *)
+    binds=""
+    label="window manager"
+    ;;
+esac
+
+if [ -z "${binds:-}" ]; then
+  rofi-dmenu --inputonly --placeholder "No $label keybinds found" < /dev/null
+  exit 1
+fi
+
+if [ "$print_only" -eq 1 ]; then
+  printf '%s\n' "$binds"
+  exit 0
+fi
+
+selection=$(printf '%s\n' "$binds" | rofi-dmenu --placeholder "Search $label keybinds")
+
+if [ -n "$selection" ] && command -v wl-copy >/dev/null 2>&1; then
+  printf '%s\n' "$selection" | wl-copy
+  notify-send "$label keybind copied" "$selection" 2>/dev/null || true
+fi

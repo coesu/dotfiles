@@ -2,15 +2,19 @@
 
 set -euo pipefail
 
+script_dir=$(cd "$(dirname "$0")" && pwd)
+dmenu=rofi-dmenu
+[ -x "$script_dir/rofi-dmenu" ] && dmenu="$script_dir/rofi-dmenu"
+
 show_message() {
     local message=$1
     local placeholder=${2:-"Codex"}
 
-    printf '%s\n' "$message" | walker --dmenu --width 1000 --placeholder "$placeholder" >/dev/null
+    printf '%s\n' "$message" | "$dmenu" --width 1000 --placeholder "$placeholder" >/dev/null
 }
 
-if ! command -v walker >/dev/null 2>&1; then
-    printf 'codex-walker: walker is not installed\n' >&2
+if ! command -v rofi >/dev/null 2>&1; then
+    printf 'codex-rofi: rofi is not installed\n' >&2
     exit 1
 fi
 
@@ -22,7 +26,7 @@ fi
 if [ "$#" -gt 0 ]; then
     question="$*"
 else
-    question=$(walker --dmenu --inputonly --width 900 --placeholder "Ask Codex..." < /dev/null)
+    question=$("$dmenu" --inputonly --width 900 --placeholder "Ask Codex..." < /dev/null)
 fi
 
 case "$question" in
@@ -30,7 +34,7 @@ case "$question" in
     *) exit 0 ;;
 esac
 
-tmp_dir=$(mktemp -d "${TMPDIR:-/tmp}/codex-walker.XXXXXX")
+tmp_dir=$(mktemp -d "${TMPDIR:-/tmp}/codex-rofi.XXXXXX")
 trap 'rm -rf "$tmp_dir"' EXIT
 
 answer_file="$tmp_dir/answer.md"
@@ -85,4 +89,4 @@ else
 fi
 
 preview=$(printf '%s' "$answer" | tr '\n' ' ' | sed 's/[[:space:]][[:space:]]*/ /g; s/^ //; s/ $//')
-printf '%s\n' "$preview" | walker --dmenu --width 1000 --placeholder "$placeholder" >/dev/null
+printf '%s\n' "$preview" | "$dmenu" --width 1000 --placeholder "$placeholder" >/dev/null

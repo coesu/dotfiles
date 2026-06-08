@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+script_dir=$(cd "$(dirname "$0")" && pwd)
+dmenu=rofi-dmenu
+[ -x "$script_dir/rofi-dmenu" ] && dmenu="$script_dir/rofi-dmenu"
+
+cliphist_list=$(cliphist list)
+if [ -z "$cliphist_list" ]; then
+  "$dmenu" --inputonly --placeholder "cliphist: please store something first" < /dev/null
+  exit
+fi
+
+item=$(printf '%s\n' "$cliphist_list" | "$dmenu" --placeholder "Search clipboard...")
+[ -z "$item" ] || printf '%s\n' "$item" | cliphist decode | wl-copy

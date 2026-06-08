@@ -8,7 +8,7 @@ These are my personal dotfiles for a minimal Hyprland setup. The configurations 
 
 - **Window Manager:** [Hyprland](https://hyprland.org/)
 - **Bar:** [Waybar](https://github.com/Alexays/Waybar)
-- **Launcher/Search:** [walker](https://github.com/abenz1267/walker)
+- **Launcher/Search:** [Rofi](https://github.com/davatorium/rofi)
 - **Terminal:** [kitty](https://sw.kovidgoyal.net/kitty/) & [foot](https://codeberg.org/dnkl/foot)
 - **Editor:** [Neovim](https://neovim.io/) & [Helix](https://helix-editor.com/)
 - **Shell:** [Zsh](https://www.zsh.org/) with [Starship](https://starship.rs/) prompt
@@ -54,11 +54,11 @@ To use these dotfiles, you'll need to have the following software installed:
 - `starship`
 - `mako`
 - `zathura`
-- `walker`
+- `rofi-wayland`
 - `tmux`
 - `wl-clipboard`
 - `git`
-- `codex` (optional, for the Walker "Ask Codex" workflow)
+- `codex` (optional, for the Rofi "Ask Codex" workflow)
 
 ## Local Paths
 

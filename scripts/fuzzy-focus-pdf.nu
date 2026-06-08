@@ -90,7 +90,7 @@ def focus_or_open_file [] {
 
     let combined_list = ($open_files ++ $directory_files) | uniq-by title
 
-    let choice = $combined_list | get label | to text | walker --dmenu --width 900 --placeholder "Search PDF files"
+    let choice = $combined_list | get label | to text | rofi-dmenu --width 900 --placeholder "Search PDF files"
 
     if $choice != "" {
         let selected = ($combined_list | where label == $choice | first)

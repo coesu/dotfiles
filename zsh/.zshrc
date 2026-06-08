@@ -3,7 +3,46 @@ HISTFILE=~/.cache/zsh/history
 HISTSIZE=10000
 SAVEHIST=10000
 
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+# XDG Base Directory specification
 export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_STATE_HOME="$HOME/.local/state"
+
+# Search paths
+export XDG_DATA_DIRS="/usr/local/share:/usr/share"
+export XDG_CONFIG_DIRS="/etc/xdg"
+
+# User binaries
+export PATH="$HOME/.local/bin:$PATH"
+
+# Less
+export LESSHISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/less/history"
+
+# Wget
+export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
+
+# Python
+export PYTHON_HISTORY="${XDG_STATE_HOME:-$HOME/.local/state}/python/history"
+
+# Node / npm
+export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/npm/npmrc"
+
+# Cargo / Rust
+export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
+export RUSTUP_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/rustup"
+
+# Go
+export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
+export GOBIN="$HOME/.local/bin"
+export PATH="$GOBIN:$GOPATH/bin:$PATH"
+
+# Docker
+export DOCKER_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/docker"
+
+export GTK_THEME=adw-gtk3-dark
 
 export EDITOR=nvim
 bindkey -v
@@ -40,8 +79,8 @@ bindkey -s '^n' "nvim +\"Telescope git_files cwd=.\"\n"
 bindkey '^o' autosuggest-execute
 
 # PATH setup (use $HOME instead of hardcoded paths)
-export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:$HOME/.local/bin
+export PATH="${CARGO_HOME:-$HOME/.local/share/cargo}/bin:$PATH"
 export PATH=$PATH:$HOME/.juliaup/bin
 export PATH=$PATH:$HOME/.local/juliaup/bin
 export PATH=$PATH:$HOME/dotfiles/scripts

@@ -1,9 +1,9 @@
 SUPER + Return	Open terminal	exec: ghostty
 SUPER + W	Open browser	exec: helium-browser
-SUPER + R	Open launcher	exec: walker
+SUPER + R	Open launcher	exec: rofi -matching fuzzy -case-smart -show drun
 SUPER + S	Show status	exec: status script
 SUPER + F1	Show keybind overview	exec: keybinds-overview
-SUPER + D	Open workflow hub	exec: walker-hub
+SUPER + D	Open workflow hub	exec: rofi-hub
 SUPER + Q	Close active window	window.close
 SUPER + F	Toggle fullscreen	window.fullscreen
 SUPER + Space	Toggle floating	window.float
@@ -77,7 +77,7 @@ SUPER + CTRL + F	Open tmux sessionizer	tmux-sessionizer
 SUPER + SHIFT + C	Open today note	nvim ObsidianToday
 SUPER + SHIFT + B	Type bookmark	bookmarks
 SUPER + O	Toggle dictation	dictate-toggle
-SUPER + SHIFT + V	Clipboard history	cliphist-walker
+SUPER + SHIFT + V	Clipboard history	cliphist-rofi
 SUPER + X	Open logout menu	submap logout-menu
 [logout-menu] L	Lock session	logout-menu
 [logout-menu] SUPER + L	Lock session	logout-menu

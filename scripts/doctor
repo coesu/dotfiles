@@ -44,7 +44,7 @@ check_installed_or_repo_file() {
 echo "Commands"
 for command in \
     bash git rg fd nu luac python xmllint \
-    hyprland hyprctl walker ghostty zathura \
+    hyprland hyprctl rofi ghostty zathura \
     wl-copy wl-paste cliphist pass grim slurp swappy \
     playerctl wpctl notify-send ydotool hyprpicker zbarimg; do
     check_command "$command"
@@ -57,10 +57,10 @@ done
 echo
 echo "Dotfile paths"
 check_path "$HOME/.config/hypr/hyprland.lua" "Hyprland Lua config"
-check_path "$HOME/.config/walker/config.toml" "Walker config"
-check_installed_or_repo_file "$HOME/.local/bin/walker-hub" "./scripts/walker-hub" "Walker workflow hub"
-check_installed_or_repo_file "$HOME/.local/bin/codex-walker" "./scripts/codex-walker" "Walker Codex workflow"
-check_installed_or_repo_file "$HOME/.local/bin/keybinds-overview" "./hypr/scripts/keybinds-overview" "Keybind overview"
+check_installed_or_repo_file "$HOME/.local/bin/rofi-dmenu" "./scripts/rofi-dmenu" "Rofi dmenu wrapper"
+check_installed_or_repo_file "$HOME/.local/bin/rofi-hub" "./scripts/rofi-hub" "Rofi workflow hub"
+check_installed_or_repo_file "$HOME/.local/bin/codex-rofi" "./scripts/codex-rofi" "Rofi Codex workflow"
+check_installed_or_repo_file "$HOME/.local/bin/keybinds-overview" "./scripts/keybinds-overview" "Keybind overview"
 
 echo
 if [ "$missing" -eq 0 ]; then
