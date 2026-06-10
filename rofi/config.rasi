@@ -1,0 +1,163 @@
+configuration {
+    modi: "drun,run,window";
+    show-icons: true;
+    matching: "fuzzy";
+    case-sensitive: false;
+    sort: true;
+    drun-display-format: "{name}";
+    display-drun: "Apps";
+    display-run: "Run";
+    display-window: "Windows";
+}
+
+/*
+ * Base16 Gruvbox Dark Hard
+ * base00 #1d2021  base01 #3c3836  base02 #504945  base03 #665c54
+ * base04 #bdae93  base05 #d5c4a1  base06 #ebdbb2  base07 #fbf1c7
+ * base08 #fb4934  base09 #fe8019  base0A #fabd2f  base0B #b8bb26
+ * base0C #8ec07c  base0D #83a598  base0E #d3869b  base0F #d65d0e
+ */
+* {
+    base00: #1d2021;
+    base01: #3c3836;
+    base02: #504945;
+    base03: #665c54;
+    base04: #bdae93;
+    base05: #d5c4a1;
+    base06: #ebdbb2;
+    base07: #fbf1c7;
+    base08: #fb4934;
+    base09: #fe8019;
+    base0A: #fabd2f;
+    base0B: #b8bb26;
+    base0C: #8ec07c;
+    base0D: #83a598;
+    base0E: #d3869b;
+    base0F: #d65d0e;
+
+    background: @base00;
+    background-alt: @base01;
+    foreground: @base05;
+    muted: @base04;
+    alternate: #282828;
+    selected: @base01;
+    selected-foreground: @base07;
+    active: @base0B;
+    urgent: @base08;
+    border-color: @base03;
+
+    font: "JetBrainsMono Nerd Font 11";
+}
+
+window {
+    width: 760px;
+    location: center;
+    anchor: center;
+    border: 2px;
+    border-color: @border-color;
+    border-radius: 8px;
+    background-color: @background;
+}
+
+mainbox {
+    spacing: 0;
+    padding: 12px;
+    background-color: @background;
+    children: [inputbar, message, listview];
+}
+
+inputbar {
+    spacing: 10px;
+    padding: 10px 12px;
+    border: 1px;
+    border-color: @base02;
+    border-radius: 6px;
+    background-color: @background-alt;
+    text-color: @foreground;
+    children: [prompt, entry];
+}
+
+prompt {
+    text-color: @base0A;
+}
+
+entry {
+    placeholder-color: @muted;
+    text-color: @foreground;
+}
+
+message {
+    margin: 10px 0 0;
+    padding: 8px 10px;
+    border-radius: 6px;
+    background-color: @background-alt;
+    text-color: @foreground;
+}
+
+textbox {
+    text-color: @foreground;
+}
+
+listview {
+    margin: 10px 0 0;
+    lines: 10;
+    columns: 1;
+    fixed-height: true;
+    scrollbar: false;
+    spacing: 4px;
+    background-color: @background;
+}
+
+element {
+    padding: 8px 10px;
+    border-radius: 6px;
+    background-color: transparent;
+    text-color: @foreground;
+}
+
+element-icon {
+    size: 1.1em;
+    background-color: transparent;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color: @foreground;
+}
+
+element alternate.normal {
+    background-color: @alternate;
+    text-color: @foreground;
+}
+
+element selected.normal {
+    background-color: @selected;
+    text-color: @selected-foreground;
+}
+
+element normal.active,
+element alternate.active,
+element selected.active {
+    text-color: @active;
+}
+
+element normal.urgent,
+element alternate.urgent,
+element selected.urgent {
+    text-color: @urgent;
+}
+
+element selected.active,
+element selected.urgent {
+    background-color: @selected;
+}
+
+scrollbar {
+    handle-color: @base03;
+    background-color: @background-alt;
+}
