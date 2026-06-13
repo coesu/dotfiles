@@ -24,8 +24,8 @@ export LESSHISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/less/history"
 # Wget
 export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
 
-# Python
 export PYTHON_HISTORY="${XDG_STATE_HOME:-$HOME/.local/state}/python/history"
+export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
 
 # Node / npm
 export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/npm/npmrc"
@@ -38,6 +38,16 @@ export RUSTUP_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/rustup"
 export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
 export GOBIN="$HOME/.local/bin"
 export PATH="$GOBIN:$GOPATH/bin:$PATH"
+
+export JULIA_DEPOT_PATH="$XDG_DATA_HOME/julia:"
+export JULIAUP_DEPOT_PATH="$XDG_DATA_HOME/juliaup"
+export BUN_INSTALL="$XDG_DATA_HOME/bun"
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
+export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
+
+# Python/science
+export MPLCONFIGDIR="$XDG_CONFIG_HOME/matplotlib"
+
 
 # Docker
 export DOCKER_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/docker"
