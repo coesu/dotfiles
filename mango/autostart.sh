@@ -10,4 +10,6 @@ wl-paste --type text --watch cliphist store >/dev/null 2>&1 &
 
 /usr/lib/xfce-polkit/xfce-polkit >/dev/null 2>&1 &
 
+mangobar &
+
 syncthing --no-browser &
