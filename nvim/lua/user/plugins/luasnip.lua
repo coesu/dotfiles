@@ -25,8 +25,12 @@ ls.config.set_config({
     updateevents = "TextChanged,TextChangedI",
     region_check_events = "InsertEnter",
     delete_check_events = "InsertLeave",
+    store_selection_keys = "<Tab>",
 })
 -- require("luasnip.loaders.from_lua").lazy_load({ paths = "~/.config/nvim/LuaSnip/" })
+-- ls.setup({
+--   store_selection_keys = "<Tab>",
+-- })
 
 vim.snippet.expand = ls.lsp_expand
 
