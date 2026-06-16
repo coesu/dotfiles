@@ -48,6 +48,7 @@ export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
 # Python/science
 export MPLCONFIGDIR="$XDG_CONFIG_HOME/matplotlib"
 
+export ZK_NOTEBOOK_DIR="$HOME/Syncthing/notes"
 
 # Docker
 export DOCKER_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/docker"
@@ -85,7 +86,7 @@ autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 
-bindkey -s '^n' "nvim +\"Telescope git_files cwd=.\"\n"
+bindkey -s '^n' "nvim +\"FzfLua files\"\n"
 bindkey '^o' autosuggest-execute
 
 # PATH setup (use $HOME instead of hardcoded paths)
