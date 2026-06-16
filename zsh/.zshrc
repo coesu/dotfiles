@@ -115,6 +115,7 @@ fi
 
 export MANPAGER="nvim +Man!"
 
+alias cat=bat
 alias pacman="sudo pacman"
 alias vim="nvim"
 alias svim='sudo -E nvim'
