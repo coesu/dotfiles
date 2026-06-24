@@ -7,7 +7,7 @@ local fzf = require("fzf-lua")
 fzf.setup({
     files = {
         file_icons = "devicons",
-        fd_opts    = [[--color=never --type f --type l --exclude .git --exclude .jj --exclude .venv]],
+        fd_opts    = [[--color=never --type f --type l]],
     }
 })
 
@@ -16,7 +16,7 @@ vim.keymap.set("n", "<leader>sk", fzf.keymaps, { desc = "[S]earch [K]eymaps" })
 vim.keymap.set("n", "<leader>f", fzf.files, { desc = "[S]earch [F]iles" })
 vim.keymap.set("n", "<leader>ss", fzf.builtin, { desc = "[S]earch [S]elect fzf-lua" })
 vim.keymap.set("n", "<leader>sw", fzf.grep_cword, { desc = "[S]earch current [W]ord" })
-vim.keymap.set("n", "<leader>sg", fzf.live_grep, { desc = "[S]earch by [G]rep" })
+vim.keymap.set("n", "<leader>sg", fzf.live_grep_native, { desc = "[S]earch by [G]rep" })
 vim.keymap.set("n", "<leader>sd", fzf.diagnostics_workspace, { desc = "[S]earch [D]iagnostics" })
 vim.keymap.set("n", "<leader>sr", fzf.resume, { desc = "[S]earch [R]esume" })
 vim.keymap.set("n", "<leader>s.", fzf.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
