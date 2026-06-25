@@ -1,0 +1,346 @@
+#!/usr/bin/env python3
+import argparse
+import json
+import os
+import re
+import sys
+from pathlib import Path
+from datetime import date
+
+NOTES_DIR = Path(os.environ.get("ZK_NOTES_DIR", "~/Syncthing/notes")).expanduser()
+BIB_FILE = Path(
+    os.environ.get("ZK_BIB_FILE", NOTES_DIR / "references.bib")
+).expanduser()
+LIT_DIR = NOTES_DIR / "lit"
+
+
+def parse_bibtex_entries(text):
+    entries = []
+    i = 0
+
+    while True:
+        at = text.find("@", i)
+        if at == -1:
+            break
+
+        m = re.match(r"@([A-Za-z]+)\s*\{\s*([^,\s]+)\s*,", text[at:])
+        if not m:
+            i = at + 1
+            continue
+
+        entry_type = m.group(1)
+        citekey = m.group(2)
+        start = at + m.end()
+        depth = 1
+        j = start
+
+        while j < len(text) and depth > 0:
+            if text[j] == "{":
+                depth += 1
+            elif text[j] == "}":
+                depth -= 1
+            j += 1
+
+        body = text[start : j - 1]
+        fields = parse_fields(body)
+        fields["entry_type"] = entry_type
+        fields["citekey"] = citekey
+        entries.append(fields)
+        i = j
+
+    return entries
+
+
+def parse_fields(body):
+    fields = {}
+    i = 0
+    n = len(body)
+
+    while i < n:
+        m = re.search(r"([A-Za-z][A-Za-z0-9_-]*)\s*=", body[i:])
+        if not m:
+            break
+
+        key = m.group(1).lower()
+        i += m.end()
+
+        while i < n and body[i].isspace():
+            i += 1
+
+        if i >= n:
+            break
+
+        if body[i] == "{":
+            value, i = read_braced(body, i)
+        elif body[i] == '"':
+            value, i = read_quoted(body, i)
+        else:
+            start = i
+            while i < n and body[i] not in ",\n":
+                i += 1
+            value = body[start:i].strip()
+
+        fields[key] = clean_bib_value(value)
+
+    return fields
+
+
+def read_braced(s, i):
+    i += 1
+    start = i
+    depth = 1
+
+    while i < len(s) and depth > 0:
+        if s[i] == "{":
+            depth += 1
+        elif s[i] == "}":
+            depth -= 1
+        i += 1
+
+    return s[start : i - 1], i
+
+
+def read_quoted(s, i):
+    i += 1
+    start = i
+
+    while i < len(s):
+        if s[i] == '"' and s[i - 1] != "\\":
+            return s[start:i], i + 1
+        i += 1
+
+    return s[start:], i
+
+
+def clean_bib_value(value):
+    value = value.replace("\n", " ")
+    value = re.sub(r"\s+", " ", value).strip()
+    value = value.replace("{", "").replace("}", "")
+    return value
+
+
+def yaml_quote(value):
+    if value is None or value == "":
+        return '""'
+    value = str(value).replace("\\", "\\\\").replace('"', '\\"')
+    return f'"{value}"'
+
+
+def author_list(author_field):
+    if not author_field:
+        return []
+
+    authors = [a.strip() for a in re.split(r"\s+and\s+", author_field)]
+    cleaned = []
+
+    for a in authors:
+        if "," in a:
+            last, first = [x.strip() for x in a.split(",", 1)]
+            cleaned.append(f"{first} {last}".strip())
+        else:
+            cleaned.append(a)
+
+    return cleaned
+
+
+def short_authors(authors):
+    if not authors:
+        return ""
+
+    last_names = []
+    for a in authors:
+        parts = a.split()
+        if parts:
+            last_names.append(parts[-1])
+
+    if len(last_names) == 1:
+        return last_names[0]
+    if len(last_names) == 2:
+        return f"{last_names[0]} & {last_names[1]}"
+    return f"{last_names[0]} et al."
+
+
+def link_title(authors, year, citekey):
+    if not authors:
+        return citekey
+
+    first_author = authors[0].split()
+    if not first_author:
+        return citekey
+
+    surname = first_author[-1]
+    return f"{surname}{year}" if year else surname
+
+
+def extract_pdf_path(file_field):
+    if not file_field:
+        return ""
+
+    candidates = re.findall(
+        r"([~/A-Za-z0-9_\-./ ()\[\]:]+\.pdf)",
+        file_field,
+        re.IGNORECASE,
+    )
+
+    if candidates:
+        return candidates[0].strip()
+
+    return ""
+
+
+def load_entries():
+    if not BIB_FILE.exists():
+        sys.exit(f"Error: bibliography not found: {BIB_FILE}")
+
+    text = BIB_FILE.read_text(encoding="utf-8", errors="replace")
+    entries = parse_bibtex_entries(text)
+
+    if not entries:
+        sys.exit(f"Error: no BibTeX entries found in {BIB_FILE}")
+
+    return entries
+
+
+def public_entry(entry):
+    authors = author_list(entry.get("author", ""))
+    authors_short = short_authors(authors)
+    year = entry.get("year", "")
+    title = entry.get("title", "")
+    citekey = entry.get("citekey", "")
+
+    label_parts = []
+    if authors_short:
+        label_parts.append(authors_short)
+    if year:
+        label_parts.append(year)
+    if title:
+        label_parts.append(title)
+
+    return {
+        "citekey": citekey,
+        "title": title,
+        "year": year,
+        "authors": authors,
+        "authors_short": authors_short,
+        "label": " — ".join(label_parts) or citekey,
+    }
+
+
+def create_note(entry):
+    citekey = entry.get("citekey")
+    title = entry.get("title") or citekey
+    year = entry.get("year", "")
+    authors = author_list(entry.get("author", ""))
+    authors_short = short_authors(authors)
+    minimal_title = link_title(authors, year, citekey)
+    pdf = extract_pdf_path(entry.get("file", ""))
+
+    LIT_DIR.mkdir(parents=True, exist_ok=True)
+    note_path = LIT_DIR / f"{citekey}.md"
+
+    if note_path.exists():
+        ensure_link_title(note_path, minimal_title)
+        print(note_path)
+        return
+
+    if authors_short and year:
+        title_line = f"{authors_short} {year} — {title}"
+    elif year:
+        title_line = f"{year} — {title}"
+    else:
+        title_line = title
+
+    zotero_link = f"zotero://select/items/@{citekey}"
+
+    content = f"""---
+date: {date.today().isoformat()}
+title: {yaml_quote(minimal_title)}
+tags: [literature]
+citekey: {citekey}
+bibliography: ../references.bib
+zotero: {yaml_quote(zotero_link)}
+pdf: {yaml_quote(pdf)}
+---
+
+# {title_line}
+
+Citation: [@{citekey}]
+
+## Summary
+
+
+
+## Key ideas
+
+- 
+
+## Useful equations
+
+$$
+
+$$
+
+## Connections
+
+- 
+
+## Notes
+
+
+
+## Questions
+
+- 
+"""
+
+    note_path.write_text(content, encoding="utf-8")
+    print(note_path)
+
+
+def ensure_link_title(note_path, minimal_title):
+    content = note_path.read_text(encoding="utf-8")
+
+    if not content.startswith("---\n"):
+        return
+
+    frontmatter_end = content.find("\n---", 4)
+    if frontmatter_end == -1:
+        return
+
+    frontmatter = content[4:frontmatter_end]
+    if re.search(r"^title\s*:", frontmatter, re.MULTILINE):
+        return
+
+    content = f"---\ntitle: {yaml_quote(minimal_title)}\n{content[4:]}"
+    note_path.write_text(content, encoding="utf-8")
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--list", action="store_true", help="Print bibliography entries as JSON"
+    )
+    parser.add_argument(
+        "--create", metavar="CITEKEY", help="Create/open literature note for citekey"
+    )
+    args = parser.parse_args()
+
+    entries = load_entries()
+
+    if args.list:
+        print(json.dumps([public_entry(e) for e in entries], ensure_ascii=False))
+        return
+
+    if args.create:
+        for entry in entries:
+            if entry.get("citekey") == args.create:
+                create_note(entry)
+                return
+
+        sys.exit(f"Error: citekey not found: {args.create}")
+
+    sys.exit("Usage: zk-lit --list OR zk-lit --create CITEKEY")
+
+
+if __name__ == "__main__":
+    main()

@@ -5,5 +5,3 @@ vim.cmd([[
 
   syn region markdownLink matchgroup=markdownLinkDelimiter start="(" end=")" contains=markdownUrl keepend contained conceal
 ]])
-
-vim.opt_local.conceallevel = 2
