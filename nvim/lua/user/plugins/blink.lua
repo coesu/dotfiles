@@ -14,7 +14,11 @@ local function build_blink(ev)
 end
 
 vim.api.nvim_create_autocmd('PackChanged', { callback = build_blink })
+-- blink.cmp v2 requires blink.lib as a separate dependency
+vim.pack.add({ "https://github.com/saghen/blink.lib" })
 vim.pack.add({ "https://github.com/saghen/blink.cmp" })
+
+vim.pack.add({ 'https://github.com/jmbuhr/cmp-pandoc-references' })
 
 require("blink.cmp").setup({
     keymap = {
@@ -44,10 +48,17 @@ require("blink.cmp").setup({
             "buffer",
             "99",
         },
+        per_filetype = {
+            markdown = { "references", "lsp", "path", "snippets", "buffer" },
+        },
         providers = {
             ["99"] = {
                 name = "99",
                 module = "99.extensions.blink",
+            },
+            references = {
+                name = "pandoc_references",
+                module = "cmp-pandoc-references.blink",
             },
         },
     },

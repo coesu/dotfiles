@@ -59,7 +59,5 @@ vim.pack.add({
     -- 'https://github.com/nvim-mini/mini.icons',        -- if you use standalone mini plugins
     -- 'https://github.com/nvim-tree/nvim-web-devicons', -- if you prefer nvim-web-devicons
     'https://github.com/jalvesaq/zotcite',
-    'https://github.com/MeanderingProgrammer/render-markdown.nvim',
 })
-require('render-markdown').setup({}) -- only mandatory if you want to set custom options
 require('zotcite').setup({})
