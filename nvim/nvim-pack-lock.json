@@ -41,6 +41,10 @@
       "rev": "b7ace9ddb1640ce266012a45a672dfdaedfa5ec6",
       "src": "https://github.com/ray-x/lsp_signature.nvim"
     },
+    "markdown-preview.nvim": {
+      "rev": "a923f5fc5ba36a3b17e289dc35dc17f66d0548ee",
+      "src": "https://github.com/iamcco/markdown-preview.nvim"
+    },
     "noice.nvim": {
       "rev": "7bfd942445fb63089b59f97ca487d605e715f155",
       "src": "https://github.com/folke/noice.nvim"

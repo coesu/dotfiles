@@ -195,3 +195,5 @@ end
 vim.keymap.set("n", "<leader>op", open_lit_pdf, {
     desc = "Open literature PDF",
 })
+
+vim.pack.add({ 'https://github.com/iamcco/markdown-preview.nvim' })
