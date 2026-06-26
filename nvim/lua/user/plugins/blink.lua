@@ -20,7 +20,9 @@ vim.pack.add({ "https://github.com/saghen/blink.cmp" })
 
 vim.pack.add({ 'https://github.com/jmbuhr/cmp-pandoc-references' })
 
-require("blink.cmp").setup({
+local cmp = require('blink.cmp')
+cmp.build():pwait()
+cmp.setup({
     keymap = {
         preset = "none",
         ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
@@ -67,3 +69,5 @@ require("blink.cmp").setup({
     completion = {
     }
 })
+
+
