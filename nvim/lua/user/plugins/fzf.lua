@@ -5,6 +5,7 @@ vim.pack.add({
 
 local fzf = require("fzf-lua")
 fzf.setup({
+    fzf_bin = "sk",
     files = {
         file_icons = "devicons",
         fd_opts    = [[--color=never --type f --type l]],
