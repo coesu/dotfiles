@@ -25,6 +25,10 @@
       "rev": "130eae4f75029d6495808e0ea4b769fa1ce4c9ac",
       "src": "https://github.com/jmbuhr/cmp-pandoc-references"
     },
+    "conform.nvim": {
+      "rev": "619363c30309d29ffa631e67c8183f2a72caa373",
+      "src": "https://github.com/stevearc/conform.nvim"
+    },
     "fidget.nvim": {
       "rev": "6f793b2bcd2d35e201c09520f698bb763220908a",
       "src": "https://github.com/j-hui/fidget.nvim"

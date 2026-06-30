@@ -39,6 +39,16 @@ return {
             d(2, get_visual),
         })
     ),
+    -- LINK; INSERT URL FROM CLIPBOARD
+    s(
+        { trig = "LP", wordTrig = true, snippetType = "autosnippet" },
+        fmta([[[<>](<>)]], {
+            d(1, get_visual),
+            f(function()
+                return (vim.fn.getreg("+"):gsub("%s+$", ""))
+            end),
+        })
+    ),
     -- BOLDFACE TEXT
     s(
         { trig = "tbb", snippetType = "autosnippet" },
