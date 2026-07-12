@@ -1,4 +1,4 @@
-local terminal = "ghostty"
+local terminal = "foot"
 local menu = "rofi -matching fuzzy -case-smart -show drun"
 local browser = "helium-browser"
 local home = os.getenv("HOME") or "/home/lars"
@@ -277,20 +277,16 @@ hl.layer_rule({
 
 local startup_programs = {
     scripts_dir .. "/monitor_config_office",
-    scripts_dir .. "/xdph",
+    -- scripts_dir .. "/xdph",
     "hyprpaper",
     "hyprsunset",
     "hypridle",
-    "pipewire",
-    "pipewire-pulse",
-    "wireplumber",
     "/usr/lib/hyprpolkitagent/hyprpolkitagent",
     "nm-applet",
     "waybar",
     "blueman-applet",
     "syncthing --no-browser",
     "mako",
-    "elephant &",
     "wl-paste --type text --watch cliphist store",
     "wl-paste --type image --watch cliphist store",
 }
