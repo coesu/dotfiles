@@ -1,1 +1,40 @@
 theme = "gruvbox_dark_hard"
+
+# ---------------------------------------------------------------------------
+# Editor options (ported from ~/.config/nvim/lua/user/set.lua)
+# ---------------------------------------------------------------------------
+[editor]
+line-number = "relative"   # nu + relativenumber
+cursorline = true          # (nvim CursorLine, though highlight is transparent there)
+scrolloff = 8              # scrolloff = 8
+idle-timeout = 1000        # nvim's default timeoutlen for ambiguous mappings
+true-color = true          # termguicolors
+bufferline = "multiple"    # show the buffer/tab line (S-h / S-l navigate it)
+color-modes = true
+completion-trigger-len = 1 # blink: open after the first keyword character
+
+[editor.word-completion]
+enable = true
+trigger-length = 1        # blink buffer source is available immediately
+
+[editor.cursor-shape]
+# guicursor = "" in nvim keeps a block cursor in every mode
+insert = "block"
+normal = "block"
+select = "block"
+
+[editor.statusline]
+# tpipeline in nvim renders the statusline into tmux; here just keep it clean
+left = ["mode", "spinner", "file-name", "file-modification-indicator"]
+right = ["diagnostics", "selections", "position", "file-encoding", "file-type"]
+
+[editor.lsp]
+display-inlay-hints = false
+display-messages = true
+
+[editor.indent-guides]
+render = true
+
+# NOTE: keybindings are defined in init.scm, not here. The Steel plugin's
+# `add-global-keybinding` reinstalls the global keymap from the built-in
+# defaults, which would override anything set in a config.toml [keys] block.
