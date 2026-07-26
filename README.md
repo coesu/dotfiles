@@ -11,7 +11,7 @@ These are my personal dotfiles for a minimal Hyprland setup. The configurations 
 - **Launcher/Search:** [Rofi](https://github.com/davatorium/rofi)
 - **Terminal:** [kitty](https://sw.kovidgoyal.net/kitty/) & [foot](https://codeberg.org/dnkl/foot)
 - **Editor:** [Neovim](https://neovim.io/) & [Helix](https://helix-editor.com/)
-- **Shell:** [Zsh](https://www.zsh.org/) with [Starship](https://starship.rs/) prompt
+- **Shell:** [Zsh](https://www.zsh.org/) or [Fish](https://fishshell.com/) with a [Starship](https://starship.rs/) prompt
 - **Notification Daemon:** [Mako](https://github.com/emersion/mako)
 - **PDF Viewer:** [Zathura](https://pwmt.org/projects/zathura/)
 - **Multiplexer:** [tmux](https://github.com/tmux/tmux/wiki)
@@ -51,6 +51,7 @@ To use these dotfiles, you'll need to have the following software installed:
 - `neovim`
 - `helix`
 - `zsh`
+- `fish`
 - `starship`
 - `mako`
 - `zathura`

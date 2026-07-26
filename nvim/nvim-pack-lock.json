@@ -107,6 +107,10 @@
       "rev": "6fa6b57cda8459e1e4b2ca34df702f55242f4e4d",
       "src": "https://github.com/mbbill/undotree"
     },
+    "vim-slime": {
+      "rev": "2cfdc3b24e7ebaa64f5a1a04b00555600c622b79",
+      "src": "https://github.com/jpalardy/vim-slime.git"
+    },
     "vim-tmux-navigator": {
       "rev": "e41c431a0c7b7388ae7ba341f01a0d217eb3a432",
       "src": "https://github.com/christoomey/vim-tmux-navigator"
