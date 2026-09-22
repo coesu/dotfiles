@@ -1,7 +1,9 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-wlr-randr --output eDP-1 --pos 0,0 --scale 1.0 &
-wlr-randr --output HDMI-A-1 --pos 0,0 --scale 1.0 &
-wlr-randr --output DP-1 --pos 0,0 --scale 1.33 &
+set -euo pipefail
 
-
+hyprctl eval '
+hl.monitor({ output = "eDP-1", mode = "preferred", position = "0x0", scale = 1, disabled = false, transform = 0, mirror = "" })
+hl.monitor({ output = "HDMI-A-1", mode = "preferred", position = "0x0", scale = 1, disabled = false, transform = 0, mirror = "eDP-1" })
+hl.monitor({ output = "DP-1", mode = "preferred", position = "0x0", scale = 1.33, disabled = false, transform = 0, mirror = "eDP-1" })
+'

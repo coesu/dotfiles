@@ -82,6 +82,7 @@ hl.bind(sc({ "ALT", "CTRL", "Y" }), hl.dsp.exec_cmd(terminal .. " -e ttyper -w 9
 hl.bind(sc({ "ALT", "CTRL", "B" }), hl.dsp.exec_cmd("blueman-manager"))
 
 hl.bind(sc({ Mod, "Q" }), hl.dsp.window.close())
+hl.bind(sc({ Mod, "comma" }), hl.dsp.workspace.move({ monitor = "+1" }))
 
 for i = 1, 10 do
     local key = i % 10 -- 10 maps to key 0
@@ -235,6 +236,8 @@ hl.window_rule({
 
 hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })
 hl.workspace_rule({ workspace = "f[1]", gaps_out = 0, gaps_in = 0 })
+hl.workspace_rule({ workspace = 1, monitor = "DP-3" })
+hl.workspace_rule({ workspace = 4, monitor = "DP-3" })
 
 hl.window_rule({
     name = "no gaps wtv1",
@@ -276,7 +279,7 @@ hl.layer_rule({
 })
 
 local startup_programs = {
-    scripts_dir .. "/monitor_config_office",
+    scripts_dir .. "/monitor_config_home",
     -- scripts_dir .. "/xdph",
     "hyprpaper",
     "hyprsunset",
@@ -308,3 +311,6 @@ hl.env("QT_STYLE_OVERRIDE", "kvantum")
 hl.env("MOZ_ENABLE_WAYLAND", 1)
 hl.env("XCURSOR_THEME", "Bibata-Modern-Ice")
 hl.env("XCURSOR_SIZE", 24)
+
+hl.bind("SUPER + Y", hl.dsp.exec_cmd("ohw toggle"), { description = "Dictation: toggle" })
+hl.bind("SUPER + SHIFT + Y", hl.dsp.exec_cmd("ohw cancel"), { description = "Dictation: cancel" })

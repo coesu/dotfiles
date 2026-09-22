@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
-hyprctl keyword monitor eDP-1,disable
-hyprctl keyword monitor HDMI-A-1,preferred,0x0,1
-hyprctl keyword monitor DP-1,preferred,0x0,1
+set -euo pipefail
+
+monitors=$(hyprctl monitors all)
+# Keep the laptop display enabled when no external output is connected.
+if ! printf '%s\n' "$monitors" | grep -Eq '^Monitor (HDMI-A-1|DP-1) '; then
+    exit 0
+fi
+
+hyprctl eval '
+hl.monitor({ output = "HDMI-A-1", mode = "preferred", position = "0x0", scale = 1, disabled = false, transform = 0, mirror = "" })
+hl.monitor({ output = "DP-1", mode = "preferred", position = "auto-right", scale = 1, disabled = false, transform = 0, mirror = "" })
+hl.monitor({ output = "eDP-1", disabled = true })
+'

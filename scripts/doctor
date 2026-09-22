@@ -46,7 +46,7 @@ for command in \
     bash git rg fd nu luac python xmllint \
     hyprland hyprctl rofi ghostty zathura \
     wl-copy wl-paste cliphist pass grim slurp swappy \
-    playerctl wpctl notify-send ydotool hyprpicker zbarimg; do
+    playerctl wpctl notify-send ydotool wtype hyprpicker zbarimg; do
     check_command "$command"
 done
 

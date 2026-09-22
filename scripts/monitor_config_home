@@ -1,14 +1,16 @@
 #!/usr/bin/env bash
-monitors=$(hyprctl monitors)
 
+set -euo pipefail
 
-
-if echo "$monitors" | grep -q "ULTRAGEAR"; then
-    # echo "ULTRAGEAR is connected"
-    hyprctl keyword monitor eDP-1,disable
-    hyprctl keyword monitor HDMI-A-1,preferred,0x0,1
-    hyprctl keyword monitor HDMI-A-1,transform,1
-    hyprctl keyword monitor DP-1,preferred,1080x0,1
-    #
-    # echo "ULTRAGEAR is not connected"
+monitors=$(hyprctl monitors all)
+[[ $monitors == *ULTRAGEAR* ]] || exit 0
+# Keep the laptop display enabled when no external output is connected.
+if ! printf '%s\n' "$monitors" | grep -Eq '^Monitor (HDMI-A-1|DP-1) '; then
+    exit 0
 fi
+
+hyprctl eval '
+hl.monitor({ output = "DP-1", mode = "preferred", position = "0x0", scale = 1, disabled = false, transform = 1, mirror = "" })
+hl.monitor({ output = "DP-3", mode = "preferred", position = "1080x0", scale = 1, disabled = false, transform = 0, mirror = "" })
+hl.monitor({ output = "eDP-1", disabled = true })
+'
