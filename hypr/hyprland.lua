@@ -290,6 +290,7 @@ local startup_programs = {
     "blueman-applet",
     "syncthing --no-browser",
     "mako",
+    "udiskie",
     "wl-paste --type text --watch cliphist store",
     "wl-paste --type image --watch cliphist store",
 }

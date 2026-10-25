@@ -61,6 +61,20 @@ To use these dotfiles, you'll need to have the following software installed:
 - `git`
 - `codex` (optional, for the Rofi "Ask Codex" workflow)
 
+## Console autologin
+
+To log in as `lars` automatically on tty1 after unlocking the encrypted disk:
+
+```sh
+sudo install -D -o root -g root -m 0644 ~/dotfiles/systemd/getty@tty1.service.d/autologin.conf /etc/systemd/system/getty@tty1.service.d/autologin.conf
+sudo systemctl daemon-reload
+```
+
+The existing Zsh login profile starts Hyprland on tty1. This takes effect on the
+next boot; restarting the getty would end the current session. To undo, remove
+`/etc/systemd/system/getty@tty1.service.d/autologin.conf` and run
+`sudo systemctl daemon-reload`.
+
 ## Local Paths
 
 Common script paths can be overridden with environment variables:
